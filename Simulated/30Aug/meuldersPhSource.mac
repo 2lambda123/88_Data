@@ -1,0 +1,44 @@
+/run/initialize
+/random/setSeeds 3 24 
+/control/verbose 1
+/tracking/verbose 0
+/event/verbose 0
+/gps/verbose 0
+/gps/particle neutron
+#/gps/pos/type Point
+/gps/pos/type Beam
+/gps/pos/centre 0 0 2 cm
+#/gps/pos/shape Square
+#/gps/pos/halfx 5 cm
+#/gps/pos/halfy 5 cm
+#/gps/pos/halfz 5 cm 
+/gps/pos/shape Circle
+/gps/pos/radius 2.52 cm
+/gps/pos/rot1 1 0 0
+/gps/pos/rot2 0 1 0
+#/gps/ang/type iso
+
+/gps/ene/type User
+/gps/hist/type energy
+/gps/hist/point 0 0
+/gps/hist/point 1.5 0.1
+/gps/hist/point 2.5311  0.08185176327
+/gps/hist/point 3.507 0.0887613277
+/gps/hist/point 4.5144  0.09620239709
+/gps/hist/point 5.5215  0.1023147041
+/gps/hist/point 6.5282  0.1049722289
+/gps/hist/point 7.5024  0.1001886843
+/gps/hist/point 8.5389  0.0911531
+/gps/hist/point 9.4797  0.07573945627
+/gps/hist/point 10.5152 0.06484360467
+/gps/hist/point 11.488  0.05554226793
+/gps/hist/point 12.5226 0.04411491137
+/gps/hist/point 13.5571 0.03481357464
+/gps/hist/point 14.4965 0.02588429137
+/gps/hist/point 15.4989 0.01947965665
+/gps/hist/point 16.5008 0.01413803184
+/gps/hist/point 18  0.01
+/gps/hist/point 20  0.001
+/gps/direction 0 0 -1
+#/run/beamOn 10000000
+/run/beamOn 100

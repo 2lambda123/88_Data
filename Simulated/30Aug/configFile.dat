@@ -1,0 +1,12 @@
+#adc channel for pulse height psd
+#tdc channel 
+#x loc y loc z loc
+#adc calib a adc calib b
+#target = 1 for target
+//
+0 1
+1
+0 0 -2.5
+0.005381944 0.549166667
+1
+
