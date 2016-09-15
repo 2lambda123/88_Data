@@ -29,3 +29,21 @@ writer.ResponseToHEPROW(n1,"testOut")
 HistogramWriter writer;
 TFile f("meuldersishSpectrum.root")
 simEventTree->Draw("getNetTargetLight()")
+
+// For 3D viewer
+Add spectrumUnfoldingSupport in rootscripts repo to your macropath
+.L SimulationManipulation.cpp++
+SimulationManipulation obj("detectorSimulation.root",1)
+TH2* histo = obj.getNormalizedResponseMatrix();
+histo->Draw("colz")
+
+Go to view->editor
+Click the data on the canvas, which should change the sidebar.
+Under Style, there is a choice, "Plot", that has 2D or 3D option.
+Click the 3D option
+Change Type to Surf1
+Right click off axis and Show Log Z
+
+// To control the binning
+
+TH2* SimulationManipulation::getNormalizedResponseMatrix(double a_energyBinWidth,double a_lightBinWidth,double a_lowerEnergy,double a_upperEnergy)
