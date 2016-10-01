@@ -1,0 +1,26 @@
+### Set options in Records 2-3; All but KG, KA, TIME, & ACNM are placeholders ###   DELETE THIS LINE
+NIF_RUN
+  100    9    1    0    1     <-- KG    KA    IPNT  IACT  KQT  (5I5)
+0.005  9.0  0.03  0.03        <-- ACVX  FCHN  FCVX  FS         (free format)
+0.0   0   0  1.0  1.0  <-- AK1   NORML ILOG  TIME  ACNM (free fmt: R,I,I,R,R)
+ZR902    3.975E-14 0.010                       IFX
+NI582    5.906E-15 0.010                       IFX
+NI58P    2.607E-14 0.010                       IFX
+IN115N   2.785E-15 0.010                       IFX
+IN115G   6.428E-14 0.010                       IFX
+AU197G   6.092E-14 0.010                       IFX
+AU1972   2.436E-13 0.010                       IFX
+AL27A    5.396E-15 0.010                       IFX
+TA181G   4.566E-13 0.010                       IFX
+nnnnnnnnSSSSSSSSSS a.aaa COVR bb.bb SHLD cc.cc IFX  < for fmt. ref. only; DELETE THIS LINE
+Activity Covariance Annotation goes on this line (if ACVX <0)
+Put Activity Covariance Data Matrix here in free format if ACVX <0
+Flux Uncertainty Annotation goes on this line if IACT = 0
+   n                          <-- NGP  (I4)
+Flux Uncertainty Data Matrices go here in free format as either just FCOV or as EIN followed by FCIN
+Flux Covariance Annotation goes on this line if IACT = 1 and FCHN <= 0
+Flux Covariance Matrix goes here in free format if IACT = 1 and FCHN <= 0
+Input Flux Spectrum Annotation goes on this line
+   n   0 1.000E+00 0.0000000 0.0000000   <-- NGP, ITHERM, TNORM, TMPR, ETE  (2I4, 3F10.4)
+Input Flux Spectrum Data Matrices go here in free format as either just F or as EIN followed by FIN
+10 Element array of Number of Groups per bin goes here in free format
