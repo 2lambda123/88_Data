@@ -1,7 +1,15 @@
+##Large Data Structures
+*.root
+
 ##Folders
 *.$$$
 
 ## Executables
 *.exe
 
-
+## UMG/HEPROW
+*.PLO
+*.log
+*.gru
+*.asc
+*.par
