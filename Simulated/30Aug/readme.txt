@@ -49,12 +49,13 @@ Right click off axis and Show Log Z
 
 
 // To generate a response file for UMG/HEPROW  
-.L PositionTimeEdTreeClasses.so.L Por
-.L SimulationManipulation.cpp++
+.L PositionTimeEdTreeClasses.so
+.L rootCompileHelp.cpp++/.L rootCompileHelp_cpp.so/.L SimulationManipulation.cpp++
 .L HistogramWriter.cpp++
 HistogramWriter writer;
-SimulationManipulation sm("uniformDistriubtionSimulation.root",1)
-TH2* hist=sm.getNormalizedResponseMatrix(0.5,0.5,0,40)
+SimulationManipulation sm("uniformDistriubtionSimulation.root",0)
+TH2* hist=sm.getNormalizedResponseMatrix(energyBinWidth, lightBinWidth, lowerEnergy, upperEnergy, lowerLight, upperLight)
+hist->Draw()
 writer.ResponseToHEPROW(hist,"testOut")
 
 
@@ -67,5 +68,8 @@ simEventTree->Draw("getNetTargetLight()>>n1(nbins,Emin,Emax)")
 writer.PhToHEPROW(n1,"test")
 // To get in differential form
 n1->scale(1,"width")
+// To get the input source spectrum
+primary->Draw("nEn>>n1")
+writer.Th1ToAscii(n1,"fname")
 
 
