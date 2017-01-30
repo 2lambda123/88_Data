@@ -1,0 +1,14 @@
+grv.log                                  printer (protocol) file
+0.0,1                                      q-value (see HEPRO report)
+Inputs\stat_10_phs_25.phs                        multichannel input file (HEPRO format)
+0.0,12.25                                 multi-ch. energy range
+1.0                                      energy correction for multi-ch.
+0.0,20,0                                 neutron energy range,linear medium v.
+Inputs\resp_25_1.rsp                         response matrix input file
+0                                        no fluence file available,use const
+1.0,100000,1000,1                         eps,msand,idr,modpl
+m16d_grv_out.flu                         output fluence file
+m16d_grv_out.phs                         output mc-file
+m16d_grv_out.pds                         output mc-difference file
+n                                        no scaling of stand. deviation wanted
+j                                        output in file UNFANA.asc wanted
