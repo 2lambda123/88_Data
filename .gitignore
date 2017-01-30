@@ -4,6 +4,9 @@
 ##Folders
 *.$$$
 *$*
+/Experiments/Joe_AmBe
+/Simulated/PHS/exJoeGravel/*
+/Simulated/PHS/exUMG/*
 
 ## Executables
 *.exe
@@ -11,6 +14,9 @@
 ## UMG/HEPROW
 *.PLO
 *.log
-*.gru
 *.asc
 *.par
+*.MTX
+
+## Python Notebook
+*.ipynb_checkpoints*

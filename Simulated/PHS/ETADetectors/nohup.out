@@ -1,0 +1,1070 @@
+
+*************************************************************
+ Geant4 version Name: geant4-10-02-patch-02    (17-June-2016)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+<<< Geant4 Physics List simulation engine: FTFP_BERT_HP 2.0
+
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Current available graphics systems are:
+ASCIITree (ATree)
+DAWNFILE (DAWNFILE)
+G4HepRep (HepRepXML)
+G4HepRepFile (HepRepFile)
+RayTracer (RayTracer)
+VRML1FILE (VRML1FILE)
+VRML2FILE (VRML2FILE)
+gMocrenFile (gMocrenFile)
+OpenGLImmediateQt (OGLIQt, OGLI)
+OpenGLStoredQt (OGLSQt, OGL, OGLS)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  generic
+  drawByCharge
+  drawByParticleID
+  drawByOriginVolume
+  drawByAttribute
+
+Registered filter factories:
+  chargeFilter
+  particleFilter
+  originVolumeFilter
+  attributeFilter
+
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+
+Some /vis commands (optionally) take a string to specify colour.
+Available colours:
+  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
+
+Checking overlaps for volume Envelope ... OK! 
+/geant/install/share/Geant4-10.2.2/data/G4NDL4.5
+@@@ G4ParticleHPInelastic instantiated for particle neutron data directory variable is G4NEUTRONHPDATA pointing to /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Inelastic
+@@@ G4ParticleHPInelasticData instantiated for particle neutron data directory variable is G4NEUTRONHPDATA pointing to /geant/install/share/Geant4-10.2.2/data/G4NDL4.5
+NeutronHP: /Capture file for Z = 6, A = 12 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Capture/CrossSection/6_nat_Carbon
+NeutronHP: /Elastic file for Z = 6, A = 12 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Elastic/CrossSection/6_nat_Carbon
+NeutronHP: /Inelastic file for Z = 6, A = 12 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Inelastic/CrossSection/6_nat_Carbon
+NeutronHP: /Capture file for Z = 6, A = 13 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Capture/CrossSection/6_nat_Carbon
+NeutronHP: /Elastic file for Z = 6, A = 13 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Elastic/CrossSection/6_nat_Carbon
+NeutronHP: /Inelastic file for Z = 6, A = 13 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Inelastic/CrossSection/6_nat_Carbon
+NeutronHP: /Capture file for Z = 8, A = 18 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Capture/CrossSection/8_17_Oxygen
+NeutronHP: /Elastic file for Z = 8, A = 18 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Elastic/CrossSection/8_17_Oxygen
+NeutronHP: /Inelastic file for Z = 8, A = 18 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Inelastic/CrossSection/8_17_Oxygen
+/tracking/verbose 0
+/event/verbose 0
+/gps/verbose 0
+/gps/particle neutron
+/gps/pos/type Beam
+/gps/pos/centre 0 0 10 cm
+/gps/pos/shape Circle
+/gps/pos/radius 2.54 cm
+/gps/pos/rot1 1 0 0
+/gps/pos/rot2 0 1 0
+/gps/ene/type User
+/gps/hist/type energy
+/gps/hist/point 0 0
+/gps/hist/point 5.00E-01 9.135E-02
+/gps/hist/point 1.00E+00 7.481E-02
+/gps/hist/point 1.50E+00 4.084E-02
+/gps/hist/point 2.00E+00 3.172E-02
+/gps/hist/point 2.50E+00 2.467E-02
+/gps/hist/point 3.00E+00 1.727E-02
+/gps/hist/point 3.50E+00 1.593E-02
+/gps/hist/point 4.00E+00 1.357E-02
+/gps/hist/point 4.50E+00 1.397E-02
+/gps/hist/point 5.00E+00 1.364E-02
+/gps/hist/point 5.50E+00 1.524E-02
+/gps/hist/point 6.00E+00 1.793E-02
+/gps/hist/point 6.50E+00 2.028E-02
+/gps/hist/point 7.00E+00 2.455E-02
+/gps/hist/point 7.50E+00 2.689E-02
+/gps/hist/point 8.00E+00 2.683E-02
+/gps/hist/point 8.50E+00 2.952E-02
+/gps/hist/point 9.00E+00 3.138E-02
+/gps/hist/point 9.50E+00 3.060E-02
+/gps/hist/point 1.00E+01 2.936E-02
+/gps/hist/point 1.05E+01 3.017E-02
+/gps/hist/point 1.10E+01 2.843E-02
+/gps/hist/point 1.15E+01 2.600E-02
+/gps/hist/point 1.20E+01 2.498E-02
+/gps/hist/point 1.25E+01 2.369E-02
+/gps/hist/point 1.30E+01 2.155E-02
+/gps/hist/point 1.35E+01 2.000E-02
+/gps/hist/point 1.40E+01 1.799E-02
+/gps/hist/point 1.45E+01 1.656E-02
+/gps/hist/point 1.50E+01 1.494E-02
+/gps/hist/point 1.55E+01 1.359E-02
+/gps/hist/point 1.60E+01 1.213E-02
+/gps/hist/point 1.65E+01 1.107E-02
+/gps/hist/point 1.70E+01 9.326E-03
+/gps/hist/point 1.75E+01 8.805E-03
+/gps/hist/point 1.80E+01 8.239E-03
+/gps/hist/point 1.85E+01 7.350E-03
+/gps/hist/point 1.90E+01 6.736E-03
+/gps/hist/point 1.95E+01 5.863E-03
+/gps/hist/point 2.00E+01 5.435E-03
+/gps/hist/point 2.05E+01 4.838E-03
+/gps/hist/point 2.10E+01 4.643E-03
+/gps/hist/point 2.15E+01 4.543E-03
+/gps/hist/point 2.20E+01 4.335E-03
+/gps/hist/point 2.25E+01 4.017E-03
+/gps/hist/point 2.30E+01 4.063E-03
+/gps/hist/point 2.35E+01 3.951E-03
+/gps/hist/point 2.40E+01 3.827E-03
+/gps/hist/point 2.45E+01 3.890E-03
+/gps/hist/point 2.50E+01 3.707E-03
+/gps/hist/point 2.55E+01 3.714E-03
+/gps/hist/point 2.60E+01 3.485E-03
+/gps/hist/point 2.65E+01 3.389E-03
+/gps/hist/point 2.70E+01 3.349E-03
+/gps/hist/point 2.75E+01 3.360E-03
+/gps/hist/point 2.80E+01 3.167E-03
+/gps/hist/point 2.85E+01 2.968E-03
+/gps/hist/point 2.90E+01 3.176E-03
+/gps/hist/point 2.95E+01 3.049E-03
+/gps/hist/point 3.00E+01 2.928E-03
+/gps/hist/point 3.05E+01 2.878E-03
+/gps/hist/point 3.10E+01 2.954E-03
+/gps/hist/point 3.15E+01 2.904E-03
+/gps/hist/point 3.20E+01 2.994E-03
+/gps/hist/point 3.25E+01 2.758E-03
+/gps/hist/point 3.30E+01 2.836E-03
+/gps/hist/point 3.35E+01 2.335E-03
+/gps/hist/point 3.40E+01 1.560E-03
+/gps/hist/point 3.45E+01 8.809E-04
+/gps/hist/point 3.50E+01 2.762E-04
+/gps/direction 0 0 -1
+/run/beamOn 50000000
+
+phot:   for  gamma    SubType= 12  BuildTable= 0
+      LambdaPrime table from 200 keV to 10 TeV in 54 bins 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+       PhotoElectric :  Emin=        0 eV    Emax=       10 TeV   AngularGenSauterGavrila  FluoActive
+
+compt:   for  gamma    SubType= 13  BuildTable= 1
+      Lambda table from 100 eV  to 1 MeV, 7 bins per decade, spline: 1
+      LambdaPrime table from 1 MeV to 10 TeV in 49 bins 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+       Klein-Nishina :  Emin=        0 eV    Emax=       10 TeV
+
+conv:   for  gamma    SubType= 14  BuildTable= 1
+      Lambda table from 1.022 MeV to 10 TeV, 20 bins per decade, spline: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        BetheHeitler :  Emin=        0 eV    Emax=       80 GeV
+     BetheHeitlerLPM :  Emin=       80 GeV   Emax=       10 TeV
+
+msc:   for e-    SubType= 10
+      RangeFactor= 0.04, stepLimitType: 1, latDisplacement: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            UrbanMsc :  Emin=        0 eV    Emax=      100 MeV  Table with 42 bins Emin=    100 eV    Emax=    100 MeV
+        WentzelVIUni :  Emin=      100 MeV   Emax=       10 TeV  Table with 35 bins Emin=    100 MeV   Emax=     10 TeV
+
+eIoni:   for  e-    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        MollerBhabha :  Emin=        0 eV    Emax=       10 TeV
+
+eBrem:   for  e-    SubType= 3
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      LPM flag: 1 for E > 1 GeV,  HighEnergyThreshold(GeV)= 10000
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+             eBremSB :  Emin=        0 eV    Emax=        1 GeV   DipBustGen
+            eBremLPM :  Emin=        1 GeV   Emax=       10 TeV   DipBustGen
+
+CoulombScat:   for  e-, integral: 1     SubType= 1  BuildTable= 1
+      Lambda table from 100 MeV to 10 TeV, 7 bins per decade, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=      100 MeV   Emax=       10 TeV
+
+msc:   for e+    SubType= 10
+      RangeFactor= 0.04, stepLimitType: 1, latDisplacement: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            UrbanMsc :  Emin=        0 eV    Emax=      100 MeV  Table with 42 bins Emin=    100 eV    Emax=    100 MeV
+        WentzelVIUni :  Emin=      100 MeV   Emax=       10 TeV  Table with 35 bins Emin=    100 MeV   Emax=     10 TeV
+
+eIoni:   for  e+    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        MollerBhabha :  Emin=        0 eV    Emax=       10 TeV
+
+eBrem:   for  e+    SubType= 3
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      LPM flag: 1 for E > 1 GeV,  HighEnergyThreshold(GeV)= 10000
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+             eBremSB :  Emin=        0 eV    Emax=        1 GeV   DipBustGen
+            eBremLPM :  Emin=        1 GeV   Emax=       10 TeV   DipBustGen
+
+annihil:   for  e+, integral: 1     SubType= 5  BuildTable= 0
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            eplus2gg :  Emin=        0 eV    Emax=       10 TeV
+
+CoulombScat:   for  e+, integral: 1     SubType= 1  BuildTable= 1
+      Lambda table from 100 MeV to 10 TeV, 7 bins per decade, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=      100 MeV   Emax=       10 TeV
+
+msc:   for proton    SubType= 10
+      RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 0, polarAngleLimit(deg)= 180
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        WentzelVIUni :  Emin=        0 eV    Emax=       10 TeV  Table with 77 bins Emin=    100 eV    Emax=     10 TeV
+
+hIoni:   for  proton    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 0.1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+               Bragg :  Emin=        0 eV    Emax=        2 MeV
+          BetheBloch :  Emin=        2 MeV   Emax=       10 TeV
+
+hBrems:   for  proton    SubType= 3
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+               hBrem :  Emin=        0 eV    Emax=       10 TeV
+
+hPairProd:   for  proton    SubType= 4
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      Sampling table 13x1001; from 7.50618 GeV to 10 TeV 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+           hPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+CoulombScat:   for  proton, integral: 1     SubType= 1  BuildTable= 1
+      Used Lambda table of anti_proton
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
+
+msc:   for GenericIon    SubType= 10
+      RangeFactor= 0.2, stepLimitType: 0, latDisplacement: 0
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            UrbanMsc :  Emin=        0 eV    Emax=       10 TeV
+
+ionIoni:   for  GenericIon    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 0.01, dRoverRange= 0.1, integral: 1, fluct: 1, linLossLimit= 0.02
+      Stopping Power data for 17 ion/material pairs 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            BraggIon :  Emin=        0 eV    Emax=        2 MeV
+          BetheBloch :  Emin=        2 MeV   Emax=       10 TeV
+
+msc:   for alpha    SubType= 10
+      RangeFactor= 0.2, stepLimitType: 0, latDisplacement: 0
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            UrbanMsc :  Emin=        0 eV    Emax=       10 TeV  Table with 77 bins Emin=    100 eV    Emax=     10 TeV
+
+ionIoni:   for  alpha    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 0.01, dRoverRange= 0.1, integral: 1, fluct: 1, linLossLimit= 0.02
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            BraggIon :  Emin=        0 eV    Emax=   7.9452 MeV
+          BetheBloch :  Emin=   7.9452 MeV   Emax=       10 TeV
+
+msc:   for anti_proton    SubType= 10
+      RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 0, polarAngleLimit(deg)= 180
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        WentzelVIUni :  Emin=        0 eV    Emax=       10 TeV  Table with 77 bins Emin=    100 eV    Emax=     10 TeV
+
+hIoni:   for  anti_proton    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 0.1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            ICRU73QO :  Emin=        0 eV    Emax=        2 MeV
+          BetheBloch :  Emin=        2 MeV   Emax=       10 TeV
+
+hBrems:   for  anti_proton    SubType= 3
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+               hBrem :  Emin=        0 eV    Emax=       10 TeV
+
+hPairProd:   for  anti_proton    SubType= 4
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      Sampling table 13x1001; from 7.50618 GeV to 10 TeV 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+           hPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+CoulombScat:   for  anti_proton, integral: 1     SubType= 1  BuildTable= 1
+      Lambda table from threshold  to 10 TeV, 7 bins per decade, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
+
+msc:   for kaon+    SubType= 10
+      RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 0, polarAngleLimit(deg)= 180
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        WentzelVIUni :  Emin=        0 eV    Emax=       10 TeV  Table with 77 bins Emin=    100 eV    Emax=     10 TeV
+
+hIoni:   for  kaon+    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 0.1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+               Bragg :  Emin=        0 eV    Emax=  1.05231 MeV
+          BetheBloch :  Emin=  1.05231 MeV   Emax=       10 TeV
+
+hBrems:   for  kaon+    SubType= 3
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+               hBrem :  Emin=        0 eV    Emax=       10 TeV
+
+hPairProd:   for  kaon+    SubType= 4
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      Sampling table 14x1001; from 3.94942 GeV to 10 TeV 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+           hPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+CoulombScat:   for  kaon+, integral: 1     SubType= 1  BuildTable= 1
+      Lambda table from threshold  to 10 TeV, 7 bins per decade, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
+
+msc:   for kaon-    SubType= 10
+      RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 0, polarAngleLimit(deg)= 180
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        WentzelVIUni :  Emin=        0 eV    Emax=       10 TeV  Table with 77 bins Emin=    100 eV    Emax=     10 TeV
+
+hIoni:   for  kaon-    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 0.1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            ICRU73QO :  Emin=        0 eV    Emax=  1.05231 MeV
+          BetheBloch :  Emin=  1.05231 MeV   Emax=       10 TeV
+
+hBrems:   for  kaon-    SubType= 3
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+               hBrem :  Emin=        0 eV    Emax=       10 TeV
+
+hPairProd:   for  kaon-    SubType= 4
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      Sampling table 14x1001; from 3.94942 GeV to 10 TeV 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+           hPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+CoulombScat:   for  kaon-, integral: 1     SubType= 1  BuildTable= 1
+      Used Lambda table of kaon+
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
+
+msc:   for mu+    SubType= 10
+      RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 0, polarAngleLimit(deg)= 180
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        WentzelVIUni :  Emin=        0 eV    Emax=       10 TeV  Table with 77 bins Emin=    100 eV    Emax=     10 TeV
+
+muIoni:   for  mu+    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+               Bragg :  Emin=        0 eV    Emax=      200 keV
+          BetheBloch :  Emin=      200 keV   Emax=        1 GeV
+        MuBetheBloch :  Emin=        1 GeV   Emax=       10 TeV
+
+muBrems:   for  mu+    SubType= 3
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+              MuBrem :  Emin=        0 eV    Emax=       10 TeV
+
+muPairProd:   for  mu+    SubType= 4
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      Sampling table 17x1001; from 1 GeV to 10 TeV 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+          muPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+CoulombScat:   for  mu+, integral: 1     SubType= 1  BuildTable= 1
+      Lambda table from threshold  to 10 TeV, 7 bins per decade, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
+
+msc:   for mu-    SubType= 10
+      RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 0, polarAngleLimit(deg)= 180
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        WentzelVIUni :  Emin=        0 eV    Emax=       10 TeV  Table with 77 bins Emin=    100 eV    Emax=     10 TeV
+
+muIoni:   for  mu-    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            ICRU73QO :  Emin=        0 eV    Emax=      200 keV
+          BetheBloch :  Emin=      200 keV   Emax=        1 GeV
+        MuBetheBloch :  Emin=        1 GeV   Emax=       10 TeV
+
+muBrems:   for  mu-    SubType= 3
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+              MuBrem :  Emin=        0 eV    Emax=       10 TeV
+
+muPairProd:   for  mu-    SubType= 4
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      Sampling table 17x1001; from 1 GeV to 10 TeV 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+          muPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+CoulombScat:   for  mu-, integral: 1     SubType= 1  BuildTable= 1
+      Used Lambda table of mu+
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
+NeutronHP: /Capture file for Z = 6, A = 12 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Capture/CrossSection/6_nat_Carbon
+NeutronHP: /Elastic file for Z = 6, A = 12 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Elastic/CrossSection/6_nat_Carbon
+NeutronHP: /Inelastic file for Z = 6, A = 12 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Inelastic/CrossSection/6_nat_Carbon
+NeutronHP: /Capture file for Z = 6, A = 13 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Capture/CrossSection/6_nat_Carbon
+NeutronHP: /Elastic file for Z = 6, A = 13 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Elastic/CrossSection/6_nat_Carbon
+NeutronHP: /Inelastic file for Z = 6, A = 13 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Inelastic/CrossSection/6_nat_Carbon
+NeutronHP: /Capture file for Z = 8, A = 18 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Capture/CrossSection/8_17_Oxygen
+NeutronHP: /Elastic file for Z = 8, A = 18 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Elastic/CrossSection/8_17_Oxygen
+NeutronHP: /Inelastic file for Z = 8, A = 18 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Inelastic/CrossSection/8_17_Oxygen
+NeutronHP: /Elastic file for Z = 6, A = 12 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Elastic/CrossSection/6_nat_Carbon
+NeutronHP: /Elastic file for Z = 6, A = 13 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Elastic/CrossSection/6_nat_Carbon
+NeutronHP: /Elastic file for Z = 8, A = 18 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Elastic/CrossSection/8_17_Oxygen
+/geant/install/share/Geant4-10.2.2/data/G4NDL4.5
+@@@ G4ParticleHPInelastic instantiated for particle neutron data directory variable is G4NEUTRONHPDATA pointing to /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Inelastic
+NeutronHP: /Capture file for Z = 6, A = 12 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Capture/CrossSection/6_nat_Carbon
+NeutronHP: /Capture file for Z = 6, A = 13 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Capture/CrossSection/6_nat_Carbon
+NeutronHP: /Capture file for Z = 8, A = 18 is not found and NeutronHP will use /geant/install/share/Geant4-10.2.2/data/G4NDL4.5/Capture/CrossSection/8_17_Oxygen
+
+msc:   for pi+    SubType= 10
+      RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 0, polarAngleLimit(deg)= 180
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        WentzelVIUni :  Emin=        0 eV    Emax=       10 TeV  Table with 77 bins Emin=    100 eV    Emax=     10 TeV
+
+hIoni:   for  pi+    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 0.1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+               Bragg :  Emin=        0 eV    Emax=  297.505 keV
+          BetheBloch :  Emin=  297.505 keV   Emax=       10 TeV
+
+hBrems:   for  pi+    SubType= 3
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+               hBrem :  Emin=        0 eV    Emax=       10 TeV
+
+hPairProd:   for  pi+    SubType= 4
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      Sampling table 16x1001; from 1.11656 GeV to 10 TeV 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+           hPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+CoulombScat:   for  pi+, integral: 1     SubType= 1  BuildTable= 1
+      Lambda table from threshold  to 10 TeV, 7 bins per decade, spline: 1
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
+
+msc:   for pi-    SubType= 10
+      RangeFactor= 0.2, step limit type: 0, lateralDisplacement: 0, polarAngleLimit(deg)= 180
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        WentzelVIUni :  Emin=        0 eV    Emax=       10 TeV  Table with 77 bins Emin=    100 eV    Emax=     10 TeV
+
+hIoni:   for  pi-    SubType= 2
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      finalRange(mm)= 0.1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            ICRU73QO :  Emin=        0 eV    Emax=  297.505 keV
+          BetheBloch :  Emin=  297.505 keV   Emax=       10 TeV
+
+hBrems:   for  pi-    SubType= 3
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+               hBrem :  Emin=        0 eV    Emax=       10 TeV
+
+hPairProd:   for  pi-    SubType= 4
+      dE/dx and range tables from 100 eV  to 10 TeV in 77 bins
+      Lambda tables from threshold to 10 TeV, 7 bins per decade, spline: 1
+      Sampling table 16x1001; from 1.11656 GeV to 10 TeV 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+           hPairProd :  Emin=        0 eV    Emax=       10 TeV
+
+CoulombScat:   for  pi-, integral: 1     SubType= 1  BuildTable= 1
+      Used Lambda table of pi+
+      180 < Theta(degree) < 180; pLimit(GeV^1)= 0.139531
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+  eCoulombScattering :  Emin=        0 eV    Emax=       10 TeV
+
+====================================================================
+                  HADRONIC PROCESSES SUMMARY (verbose level 1)
+
+---------------------------------------------------
+                           Hadronic Processes for GenericIon
+
+  Process: ionInelastic
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
+        Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
+     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for He3
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: He3Inelastic
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
+        Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
+     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for alpha
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: alphaInelastic
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
+        Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
+     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for anti_He3
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
+        Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: anti_He3Inelastic
+        Model:                      FTFP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_alpha
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
+        Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: anti_alphaInelastic
+        Model:                      FTFP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_deuteron
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
+        Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: anti_deuteronInelastic
+        Model:                      FTFP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_neutron
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: anti_neutronInelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for anti_proton
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100.1 MeV
+        Model:              AntiAElastic: 100 MeV ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: anti_protonInelastic
+        Model:                      FTFP: 0 eV  ---> 100 TeV
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for anti_triton
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100.1 MeV/n
+        Model:              AntiAElastic: 100 MeV/n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: anti_tritonInelastic
+        Model:                      FTFP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:              AntiAGlauber: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: hFritiofCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for deuteron
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: dInelastic
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
+        Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
+     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for e+
+
+  Process: positronNuclear
+        Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
+     Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for e-
+
+  Process: electronNuclear
+        Model:   G4ElectroVDNuclearModel: 0 eV  ---> 1 PeV
+     Cr_sctns:          ElectroNuclearXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for gamma
+
+  Process: photonNuclear
+        Model:            BertiniCascade: 0 eV  ---> 3.5 GeV
+        Model:           TheoFSGenerator: 3 GeV ---> 100 TeV
+     Cr_sctns:            PhotoNuclearXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for kaon+
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: kaon+Inelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for kaon-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: kaon-Inelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:            Glauber-Gribov: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: hBertiniCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for lambda
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: lambdaInelastic
+        Model:            BertiniCascade: 0 eV  ---> 6 GeV
+        Model:                      FTFP: 2 GeV ---> 100 TeV
+     Cr_sctns:   ChipsHyperonInelasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for mu+
+
+  Process: muonNuclear
+        Model:      G4MuonVDNuclearModel: 0 eV  ---> 1 PeV
+     Cr_sctns:     KokoulinMuonNuclearXS: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for mu-
+
+  Process: muonNuclear
+        Model:      G4MuonVDNuclearModel: 0 eV  ---> 1 PeV
+     Cr_sctns:     KokoulinMuonNuclearXS: 0 eV  ---> 100 TeV
+
+  Process: muMinusCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for neutron
+
+  Process: hadElastic
+        Model:             hElasticCHIPS: 19.5 MeV ---> 100 TeV
+        Model:          NeutronHPElastic: 0 eV  ---> 20 MeV
+     Cr_sctns:        NeutronHPElasticXS: 0 eV  ---> 20 MeV
+     Cr_sctns:        G4NeutronElasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: neutronInelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 19.9 MeV ---> 5 GeV
+        Model:        NeutronHPInelastic: 0 eV  ---> 20 MeV
+     Cr_sctns:      NeutronHPInelasticXS: 0 eV  ---> 20 MeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: nCapture
+        Model:          NeutronHPCapture: 0 eV  ---> 20 MeV
+        Model:               nRadCapture: 19.9 MeV ---> 100 TeV
+     Cr_sctns:        NeutronHPCaptureXS: 0 eV  ---> 20 MeV
+     Cr_sctns:        G4NeutronCaptureXS: 0 eV  ---> 100 TeV
+     Cr_sctns:        NeutronHPCaptureXS: 0 eV  ---> 20 MeV
+     Cr_sctns:          GheishaCaptureXS: 0 eV  ---> 100 TeV
+
+  Process: nFission
+        Model:          NeutronHPFission: 0 eV  ---> 20 MeV
+        Model:                G4LFission: 19.9 MeV ---> 2.88022e+295 J  
+     Cr_sctns:        NeutronHPFissionXS: 0 eV  ---> 20 MeV
+     Cr_sctns:          GheishaFissionXS: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for pi+
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 1.0001 GeV
+        Model:           hElasticGlauber: 1 GeV ---> 100 TeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: pi+Inelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:      G4CrossSectionPairGG: 0 eV  ---> 100 TeV
+                         G4CrossSectionPairGG: G4PiNuclearCrossSection cross sections 
+                           below 91 GeV, Glauber-Gribov above 
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for pi-
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV  ---> 1.0001 GeV
+        Model:           hElasticGlauber: 1 GeV ---> 100 TeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: pi-Inelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:      G4CrossSectionPairGG: 0 eV  ---> 100 TeV
+                         G4CrossSectionPairGG: G4PiNuclearCrossSection cross sections 
+                           below 91 GeV, Glauber-Gribov above 
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+  Process: hBertiniCaptureAtRest
+
+---------------------------------------------------
+                           Hadronic Processes for proton
+
+  Process: hadElastic
+        Model:             hElasticCHIPS: 0 eV  ---> 100 TeV
+     Cr_sctns:      ChipsProtonElasticXS: 0 eV  ---> 100 TeV
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: protonInelastic
+        Model:                      FTFP: 4 GeV ---> 100 TeV
+        Model:            BertiniCascade: 0 eV  ---> 5 GeV
+     Cr_sctns:       Barashenkov-Glauber: 0 eV  ---> 100 TeV
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+---------------------------------------------------
+                           Hadronic Processes for triton
+
+  Process: hadElastic
+        Model:              hElasticLHEP: 0 eV /n ---> 100 TeV/n
+     Cr_sctns:            GheishaElastic: 0 eV  ---> 100 TeV
+
+  Process: tInelastic
+        Model:  Binary Light Ion Cascade: 0 eV /n ---> 4 GeV/n
+        Model:                      FTFP: 2 GeV/n ---> 100 TeV/n
+     Cr_sctns: Glauber-Gribov nucleus nucleus: 0 eV  ---> 2.88022e+295 J  
+     Cr_sctns:          GheishaInelastic: 0 eV  ---> 100 TeV
+
+================================================================
+Creating the BirksTableWrapper
+building table for z=1
+building table for z=2
+building table for z=3
+building table for z=4
+building table for z=5
+building table for z=6
+building table for z=7
+building table for z=8
+Done Creating.
+A Al27 was not tracked for light output. It deposited 0.737033 MeV
+A Al26 was not tracked for light output. It deposited 0.526118 MeV
+A Al26 was not tracked for light output. It deposited 0.140987 MeV
+A Mg26 was not tracked for light output. It deposited 0.389852 MeV
+A Al27 was not tracked for light output. It deposited 0.236087 MeV
+A Na24 was not tracked for light output. It deposited 0.698544 MeV
+A Al27 was not tracked for light output. It deposited 0.0151256 MeV
+A Al27 was not tracked for light output. It deposited 0.055742 MeV
+A Al27 was not tracked for light output. It deposited 0.583038 MeV
+A Al27 was not tracked for light output. It deposited 0.177664 MeV
+A Al27 was not tracked for light output. It deposited 0.0344326 MeV
+A Al27 was not tracked for light output. It deposited 0.0177973 MeV
+A Al27 was not tracked for light output. It deposited 0.0146957 MeV
+A Al27 was not tracked for light output. It deposited 0.61909 MeV
+A Al27 was not tracked for light output. It deposited 0.269773 MeV
+A Al27 was not tracked for light output. It deposited 0.207302 MeV
+A Al27 was not tracked for light output. It deposited 0.139044 MeV
+A Mg25 was not tracked for light output. It deposited 0.42384 MeV
+A Al27 was not tracked for light output. It deposited 0.540386 MeV
+A Al27 was not tracked for light output. It deposited 0.0734119 MeV
+A Al27 was not tracked for light output. It deposited 0.0283618 MeV
+A Al27 was not tracked for light output. It deposited 0.60102 MeV
+A Al27 was not tracked for light output. It deposited 0.929534 MeV
+A Al27 was not tracked for light output. It deposited 0.00688981 MeV
+A Al27 was not tracked for light output. It deposited 3.17145e-07 MeV
+A Al27 was not tracked for light output. It deposited 0.00160386 MeV
+A Al27 was not tracked for light output. It deposited 3.4057e-27 MeV
+A Al27 was not tracked for light output. It deposited 0.000384273 MeV
+A Al27 was not tracked for light output. It deposited 0.0010319 MeV
+A Mg25 was not tracked for light output. It deposited 0.274435 MeV
+A Al27 was not tracked for light output. It deposited 0.442034 MeV
+A Al27 was not tracked for light output. It deposited 0.764161 MeV
+A Al27 was not tracked for light output. It deposited 0.0171168 MeV
+A Al27 was not tracked for light output. It deposited 0.0229582 MeV
+A Al27 was not tracked for light output. It deposited 0.325466 MeV
+A Al27 was not tracked for light output. It deposited 0.00252923 MeV
+A Al27 was not tracked for light output. It deposited 0.00632741 MeV
+A Al27 was not tracked for light output. It deposited 0.000922463 MeV
+A Mg25 was not tracked for light output. It deposited 0.650551 MeV
+A Al27 was not tracked for light output. It deposited 0.436878 MeV
+A Mg25 was not tracked for light output. It deposited 0.218442 MeV
+A Al27 was not tracked for light output. It deposited 0.279025 MeV
+A Na24 was not tracked for light output. It deposited 0.351668 MeV
+A Al27 was not tracked for light output. It deposited 0.0952213 MeV
+A Al27 was not tracked for light output. It deposited 0.159911 MeV
+A Na24 was not tracked for light output. It deposited 0.744493 MeV
+A Al27 was not tracked for light output. It deposited 0.241755 MeV
+A Mg26 was not tracked for light output. It deposited 1.11251 MeV
+A Mg26 was not tracked for light output. It deposited 0.215517 MeV
+A Al26 was not tracked for light output. It deposited 0.0130318 MeV
+A Mg26 was not tracked for light output. It deposited 0.281465 MeV
+A Al27 was not tracked for light output. It deposited 0.209088 MeV
+A Al27 was not tracked for light output. It deposited 0.0384299 MeV
+A Al27 was not tracked for light output. It deposited 0.0439674 MeV
+A Al27 was not tracked for light output. It deposited 0.0570038 MeV
+A Al27 was not tracked for light output. It deposited 0.0489237 MeV
+A Al27 was not tracked for light output. It deposited 0.768354 MeV
+A Al27 was not tracked for light output. It deposited 0.21182 MeV
+A Na23 was not tracked for light output. It deposited 0.432492 MeV
+A Al27 was not tracked for light output. It deposited 0.313104 MeV
+A Al27 was not tracked for light output. It deposited 0.128482 MeV
+A Al27 was not tracked for light output. It deposited 0.077433 MeV
+A Al27 was not tracked for light output. It deposited 0.00930157 MeV
+A Mg26 was not tracked for light output. It deposited 0.388891 MeV
+A Mg26 was not tracked for light output. It deposited 0.114687 MeV
+A Na24 was not tracked for light output. It deposited 1.57136 MeV
+A Mg26 was not tracked for light output. It deposited 1.06715 MeV
+A Al27 was not tracked for light output. It deposited 0.102851 MeV
+A Al27 was not tracked for light output. It deposited 0.216706 MeV
+A Na24 was not tracked for light output. It deposited 0.176453 MeV
+A Al27 was not tracked for light output. It deposited 0.394853 MeV
+A Al27 was not tracked for light output. It deposited 0.00460879 MeV
+A Al27 was not tracked for light output. It deposited 0.000355229 MeV
+A Al27 was not tracked for light output. It deposited 0.00143949 MeV
+A Al27 was not tracked for light output. It deposited 0.000606473 MeV
+A Al27 was not tracked for light output. It deposited 0.339884 MeV
+A Al27 was not tracked for light output. It deposited 0.0134365 MeV
+A Al27 was not tracked for light output. It deposited 0.0272077 MeV
+A Al27 was not tracked for light output. It deposited 0.0763203 MeV
+A Al27 was not tracked for light output. It deposited 0.0156515 MeV
+A Al27 was not tracked for light output. It deposited 0.100868 MeV
+A Al27 was not tracked for light output. It deposited 0.308206 MeV
+A Al27 was not tracked for light output. It deposited 0.069208 MeV
+A Al27 was not tracked for light output. It deposited 0.0278709 MeV
+A neutron was not tracked for light output. It deposited 1.13687e-13 MeV
+A Al27 was not tracked for light output. It deposited 0.298625 MeV
+A Al27 was not tracked for light output. It deposited 0.551063 MeV
+A Mg26 was not tracked for light output. It deposited 0.456387 MeV
+A Al27 was not tracked for light output. It deposited 0.0232938 MeV
+A Al27 was not tracked for light output. It deposited 0.00897458 MeV
+A Al27 was not tracked for light output. It deposited 0.00867354 MeV
+A Al27 was not tracked for light output. It deposited 0.0120957 MeV
+A Al27 was not tracked for light output. It deposited 0.00928876 MeV
+A Al27 was not tracked for light output. It deposited 0.182414 MeV
+A Mg26 was not tracked for light output. It deposited 0.602376 MeV
+A Al27 was not tracked for light output. It deposited 0.625773 MeV
+A Mg27 was not tracked for light output. It deposited 0.409572 MeV
+A Al27 was not tracked for light output. It deposited 0.182347 MeV
+A Mg26 was not tracked for light output. It deposited 0.684334 MeV
+A Al27 was not tracked for light output. It deposited 0.211749 MeV
+A Al27 was not tracked for light output. It deposited 0.155404 MeV
+A Al27 was not tracked for light output. It deposited 0.0119545 MeV
+A Al27 was not tracked for light output. It deposited 0.025345 MeV
+A Al27 was not tracked for light output. It deposited 0.00405068 MeV
+A Al27 was not tracked for light output. It deposited 0.00737954 MeV
+A Al27 was not tracked for light output. It deposited 0.896499 MeV
+A Al27 was not tracked for light output. It deposited 0.164084 MeV
+A Al26 was not tracked for light output. It deposited 3.00792 MeV
+A Al27 was not tracked for light output. It deposited 0.385623 MeV
+A Mg27 was not tracked for light output. It deposited 0.226992 MeV
+A Al27 was not tracked for light output. It deposited 0.975369 MeV
+A Mg27 was not tracked for light output. It deposited 0.286254 MeV
+A Al27 was not tracked for light output. It deposited 0.303804 MeV
+A Al27 was not tracked for light output. It deposited 0.0805755 MeV
+A Al27 was not tracked for light output. It deposited 1.02415 MeV
+A Mg26 was not tracked for light output. It deposited 0.32768 MeV
+A Mg26 was not tracked for light output. It deposited 0.0258992 MeV
+A Mg26 was not tracked for light output. It deposited 0.00656859 MeV
+A Mg26 was not tracked for light output. It deposited 0.035825 MeV
+A Al27 was not tracked for light output. It deposited 0.254055 MeV
+A Al27 was not tracked for light output. It deposited 0.230549 MeV
+A Mg26 was not tracked for light output. It deposited 0.469748 MeV
+A Al27 was not tracked for light output. It deposited 0.129666 MeV
+A Al27 was not tracked for light output. It deposited 0.0328564 MeV
+A Al27 was not tracked for light output. It deposited 0.365807 MeV
+A Al27 was not tracked for light output. It deposited 0.0229115 MeV
+A Al27 was not tracked for light output. It deposited 0.0179247 MeV
+A Al27 was not tracked for light output. It deposited 0.0215057 MeV
+A Al27 was not tracked for light output. It deposited 0.0148918 MeV
+A Al27 was not tracked for light output. It deposited 0.00224587 MeV
+A Al27 was not tracked for light output. It deposited 1.48142e-06 MeV
+A Al27 was not tracked for light output. It deposited 0.00325952 MeV
+A Al27 was not tracked for light output. It deposited 0.00780929 MeV
+A Al27 was not tracked for light output. It deposited 0.115531 MeV
+A Al27 was not tracked for light output. It deposited 0.819124 MeV
+A Al27 was not tracked for light output. It deposited 0.0896947 MeV
+A Al27 was not tracked for light output. It deposited 0.0123087 MeV
+A Al27 was not tracked for light output. It deposited 0.0486928 MeV
+A Al27 was not tracked for light output. It deposited 0.0319382 MeV
+A Al27 was not tracked for light output. It deposited 0.000654254 MeV
+A Al27 was not tracked for light output. It deposited 0.000635509 MeV
+A Al27 was not tracked for light output. It deposited 0.00654661 MeV
+A Al27 was not tracked for light output. It deposited 0.877445 MeV
+A Al27 was not tracked for light output. It deposited 0.296803 MeV
+A Na23 was not tracked for light output. It deposited 1.26289 MeV
+A Al27 was not tracked for light output. It deposited 0.739857 MeV
+A Na24 was not tracked for light output. It deposited 0.181865 MeV
+A Al27 was not tracked for light output. It deposited 0.0958168 MeV
+A Al27 was not tracked for light output. It deposited 0.00549874 MeV
+A Mg26 was not tracked for light output. It deposited 0.57504 MeV
+A Al27 was not tracked for light output. It deposited 0.504186 MeV
+A Mg26 was not tracked for light output. It deposited 1.66146 MeV
+A Mg26 was not tracked for light output. It deposited 0.778818 MeV
+A Al27 was not tracked for light output. It deposited 0.53053 MeV
+A Mg27 was not tracked for light output. It deposited 0.447413 MeV
+A Mg26 was not tracked for light output. It deposited 0.946604 MeV
+A Mg26 was not tracked for light output. It deposited 0.542882 MeV
+A Al27 was not tracked for light output. It deposited 0.097961 MeV
+A Al27 was not tracked for light output. It deposited 0.44909 MeV
+A Al27 was not tracked for light output. It deposited 1.29652 MeV
+A Mg26 was not tracked for light output. It deposited 0.991494 MeV
+A Al27 was not tracked for light output. It deposited 0.311904 MeV
+A Al27 was not tracked for light output. It deposited 0.0565637 MeV
+A Al27 was not tracked for light output. It deposited 0.00701631 MeV
+A Al27 was not tracked for light output. It deposited 0.494887 MeV
+A Mg26 was not tracked for light output. It deposited 0.183361 MeV
+A Mg26 was not tracked for light output. It deposited 0.0744257 MeV
+A Mg26 was not tracked for light output. It deposited 0.0255723 MeV
+A Al27 was not tracked for light output. It deposited 0.1423 MeV
+A Al27 was not tracked for light output. It deposited 0.0463 MeV
+A Al27 was not tracked for light output. It deposited 0.0131281 MeV
+A Al27 was not tracked for light output. It deposited 0.0430314 MeV
+A Al27 was not tracked for light output. It deposited 0.0279314 MeV
+A Al27 was not tracked for light output. It deposited 0.274171 MeV
+A Al27 was not tracked for light output. It deposited 0.0797327 MeV
+A Al27 was not tracked for light output. It deposited 0.0506868 MeV
+A Al27 was not tracked for light output. It deposited 0.249516 MeV
+A Al27 was not tracked for light output. It deposited 0.339662 MeV
+A Al27 was not tracked for light output. It deposited 0.149417 MeV
+A Al27 was not tracked for light output. It deposited 0.384941 MeV
+A Mg27 was not tracked for light output. It deposited 0.0105884 MeV
+A Mg27 was not tracked for light output. It deposited 0.00873237 MeV
+A Mg27 was not tracked for light output. It deposited 0.0115961 MeV
+A Mg27 was not tracked for light output. It deposited 0.000845474 MeV
+A Mg27 was not tracked for light output. It deposited 2.9927e-12 MeV
+A Mg27 was not tracked for light output. It deposited 1.44664e-05 MeV
+A Mg27 was not tracked for light output. It deposited 6.89241e-25 MeV
+A Mg27 was not tracked for light output. It deposited 0.000857904 MeV
+A Mg27 was not tracked for light output. It deposited 0.00244017 MeV
+A Mg26 was not tracked for light output. It deposited 0.708631 MeV
+A Al27 was not tracked for light output. It deposited 0.723183 MeV
+A Al27 was not tracked for light output. It deposited 0.0301502 MeV
+A Al27 was not tracked for light output. It deposited 0.0323329 MeV
+A Al27 was not tracked for light output. It deposited 0.453121 MeV
+A Al27 was not tracked for light output. It deposited 0.407132 MeV
+A Al27 was not tracked for light output. It deposited 0.123633 MeV
+A Na24 was not tracked for light output. It deposited 0.234862 MeV
+A Mg26 was not tracked for light output. It deposited 0.573885 MeV
+A Mg25 was not tracked for light output. It deposited 0.897164 MeV
+A Al27 was not tracked for light output. It deposited 0.667416 MeV
+A Na24 was not tracked for light output. It deposited 1.2216 MeV
+A Al27 was not tracked for light output. It deposited 0.00362343 MeV
+A Al27 was not tracked for light output. It deposited 0.00471103 MeV
+A Al27 was not tracked for light output. It deposited 4.14342e-05 MeV
+A Al27 was not tracked for light output. It deposited 0.000282079 MeV
+A Al27 was not tracked for light output. It deposited 0.00071779 MeV
+A Al27 was not tracked for light output. It deposited 0.000729632 MeV
+A Al27 was not tracked for light output. It deposited 0.00354382 MeV
+Graphics systems deleted.
+Visualization Manager deleting...
