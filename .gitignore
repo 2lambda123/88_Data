@@ -1,5 +1,9 @@
 ##Large Data Structures
 *.root
+*.dat
+
+##Root Junk
+*cpp.d
 
 ##Folders
 *.$$$
