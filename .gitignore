@@ -1,3 +1,9 @@
+## Extra spectrum files
+*.An1
+*.rpt
+*.ufo
+*.Chn
+
 ##Large Data Structures
 *.root
 *.dat
@@ -8,6 +14,7 @@
 ##Folders
 *.$$$
 *$*
+/Experiments/Activation/50MeVTa/CalibrationData/8Feb17TestData
 /Experiments/Joe_AmBe
 /Simulated/PHS/exJoeGravel/*
 /Simulated/PHS/exUMG/*
