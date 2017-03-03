@@ -3,9 +3,10 @@ MultiDataScintCalibration* startSimCalibration()
   HistogramOperations ops;
   vector<TH1*> dataHists = ops.loadHistograms("CalibData_0.root");
   vector<TH1*> simHists = ops.loadHistograms("Simulation/CalibSim.root");
-  TFile background("Background_002_ls_0.root");
-  TH1* backHist = (TH1*) background.Get("ampHist");
-  cout << "Here" << endl;
+  // vector<TH1*> dataHists = ops.loadHistograms("twoSetTest.root");
+  // vector<TH1*> simHists = ops.loadHistograms("Simulation/twoSimSetTest.root");
+  //TFile background("Background_002_ls_0.root");
+  //TH1* backHist = (TH1*) background.Get("ampHist");
   vector<double> parameters;
   parameters.push_back(4.98026e-04); //a
   parameters.push_back(3.28261e-02); //b
@@ -14,33 +15,37 @@ MultiDataScintCalibration* startSimCalibration()
   parameters.push_back(6.68802e-04); //E2
   parameters.push_back(1.44e5); //Calib source 1 scalar
   parameters.push_back(2.51e5); //Calib source 2 scalar
+  parameters.push_back(2.51e5); //Calib source 3 scalar
 
-  // parameters.push_back(0.3); //Calib source 1 power law scalar
-  // parameters.push_back(-4.8); //Calib source 1 power law exp
-  // parameters.push_back(4.8); //Calib source 1 power law const
-  // parameters.push_back(0.0005); //Calib source 2 power law scalar 
-  // parameters.push_back(-1.7); //Calib source 2 power law exp 
-  // parameters.push_back(0.3); //Calib source 2 power law const
+  parameters.push_back(0.3); //Calib source 1 power law scalar
+  parameters.push_back(-4.8); //Calib source 1 power law exp
+  parameters.push_back(4.8); //Calib source 1 power law const
+  parameters.push_back(0.0005); //Calib source 2 power law scalar 
+  parameters.push_back(-1.7); //Calib source 2 power law exp 
+  parameters.push_back(0.3); //Calib source 2 power law const
+  parameters.push_back(0.0005); //Calib source 3 power law scalar 
+  parameters.push_back(-1.7); //Calib source 3 power law exp 
+  parameters.push_back(0.3); //Calib source 3 power law const
 
-  parameters.push_back(0.5); //Calib source 1 background scalar
-  parameters.push_back(0.5); //Calib source 2 background scalar
+  //parameters.push_back(0.5); //Calib source 1 background scalar
+  //parameters.push_back(0.5); //Calib source 2 background scalar
 
   //Standard call without background 
   //MultiDataScintCalibration* calibClass = new MultiDataScintCalibration(dataHists,simHists,parameters,0.5);
   
   //Call to use power law background subtraction; add 3 params each above
-  //MultiDataScintCalibration* calibClass = new MultiDataScintCalibration(dataHists,simHists,parameters,0.5,true);
+  MultiDataScintCalibration* calibClass = new MultiDataScintCalibration(dataHists,simHists,parameters,0.5,true);
   
   // Call to use measured background subtraction; add 1 param each for calib source
-  MultiDataScintCalibration* calibClass = new MultiDataScintCalibration(dataHists,simHists,parameters,0.5,false,backHist);
+  //MultiDataScintCalibration* calibClass = new MultiDataScintCalibration(dataHists,simHists,parameters,0.5,false,backHist);
   return calibClass;
 }
 
 MultiDataScintCalibration* startGuessSimCalib()
 {
   HistogramOperations ops;
-  vector<TH1*> dataHists = ops.loadHistograms("Calibration/CalibData_0.root");
-  vector<TH1*> simHists = ops.loadHistograms("Calibration/Simulation/CalibSim.root");
+  vector<TH1*> dataHists = ops.loadHistograms("CalibData_0.root");
+  vector<TH1*> simHists = ops.loadHistograms("Simulation/CalibSim.root");
 
   MultiDataScintCalibration* calibClass = new MultiDataScintCalibration(dataHists,simHists);
   return calibClass;
