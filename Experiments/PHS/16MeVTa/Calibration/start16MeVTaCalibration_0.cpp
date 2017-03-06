@@ -13,19 +13,19 @@ MultiDataScintCalibration* startSimCalibration()
   parameters.push_back(4.10327e-02); //Ec
   parameters.push_back(8.78963e-02); //E1
   parameters.push_back(6.68802e-04); //E2
-  parameters.push_back(1.44e5); //Calib source 1 scalar
-  parameters.push_back(2.51e5); //Calib source 2 scalar
-  parameters.push_back(2.51e5); //Calib source 3 scalar
+  parameters.push_back(1.32e5); //Calib source 1 scalar
+  parameters.push_back(1.15e5); //Calib source 2 scalar
+  parameters.push_back(9.83e4); //Calib source 3 scalar
 
-  parameters.push_back(0.3); //Calib source 1 power law scalar
-  parameters.push_back(-4.8); //Calib source 1 power law exp
-  parameters.push_back(4.8); //Calib source 1 power law const
-  parameters.push_back(0.0005); //Calib source 2 power law scalar 
-  parameters.push_back(-1.7); //Calib source 2 power law exp 
-  parameters.push_back(0.3); //Calib source 2 power law const
-  parameters.push_back(0.0005); //Calib source 3 power law scalar 
-  parameters.push_back(-1.7); //Calib source 3 power law exp 
-  parameters.push_back(0.3); //Calib source 3 power law const
+  parameters.push_back(0.15); //Calib source 1 power law scalar
+  parameters.push_back(-4.3); //Calib source 1 power law exp
+  parameters.push_back(0); //Calib source 1 power law const
+  parameters.push_back(0.001); //Calib source 2 power law scalar 
+  parameters.push_back(-0.000026); //Calib source 2 power law exp 
+  parameters.push_back(9.9); //Calib source 2 power law const
+  parameters.push_back(0.00057); //Calib source 3 power law scalar 
+  parameters.push_back(-4.1); //Calib source 3 power law exp 
+  parameters.push_back(0.0); //Calib source 3 power law const
 
   //parameters.push_back(0.5); //Calib source 1 background scalar
   //parameters.push_back(0.5); //Calib source 2 background scalar
