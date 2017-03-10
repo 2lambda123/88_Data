@@ -29,6 +29,7 @@ Experiments/Activation/oldExamples
 *.asc
 *.par
 *.MTX
+*.29
 
 ## Python Notebook
 *.ipynb_checkpoints*
