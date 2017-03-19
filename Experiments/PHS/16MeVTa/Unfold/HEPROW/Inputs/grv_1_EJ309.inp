@@ -1,4 +1,4 @@
-EJ309_grv_1.log                          printer (protocol) file
+EJ309_1_grv.log                          printer (protocol) file
 0.0,1                                    q-value (see HEPRO report), ISPUNIT
 Inputs\EJ309_16MeVTa_stat_100_phs_05.phs         multichannel input file (HEPRO format)
 0.20,15.0                                  multi-ch. energy range
