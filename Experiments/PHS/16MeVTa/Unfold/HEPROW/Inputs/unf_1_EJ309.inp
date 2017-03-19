@@ -1,7 +1,5 @@
-EJ309_1_mik.log                                 name of printer file
-EJ309_1_mik_out.flu                        new fluence file with new uncert.
-5000000,2,4,10.0                           trials, loops, thermalizations, delt
-0.065,1                                   temperature parameter,covariance
+EJ309_1_unf.log                         name of printer file
+EJ309_1_unf.flu                         new fluence file with new uncert.
 23
 2.0                                      right boundary of energy interval 1
 3.0                                      right boundary of energy interval 2
@@ -26,5 +24,7 @@ EJ309_1_mik_out.flu                        new fluence file with new uncert.
 22.0                                      right boundary of energy interval 21
 23.0                                      right boundary of energy interval 22
 24.0                                      right boundary of energy interval 23
-EJ309_1_mik.gru                                 name of the file for group integrals
+EJ309_1_unf.gru                         name of the file for group integrals
+0                                       1 additional file for integrating
+1.0                                     CHI**2=1.0 used as model
  

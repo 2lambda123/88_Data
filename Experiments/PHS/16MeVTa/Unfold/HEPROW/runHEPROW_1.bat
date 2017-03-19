@@ -5,7 +5,7 @@ echo     ллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллл
 echo     лллллпппппппппппппппппппппппппппппппппппппппппппппппппппппппппплллллл
 echo     лллллоллллллллллллллллллллллллллллллллллллллллллллллллллллллллнлллллл
 echo     лллллоллллллллллл                                 ллллллллллллнлллллл
-echo     лллллоллллллллллл    ******* HEPRO ***********    Блллллллллллнлллллл
+echo     лллллоллллллллллл    ******* HEPROW ***********   Блллллллллллнлллллл
 echo     лллллоллллллллллл    UMSPH, OPERAW, FALTW,        Блллллллллллнлллллл
 echo     лллллоллллллллллл    GRAVELW, UNFANAW, MIEKEW     Блллллллллллнлллллл
 echo     лллллоллллллллллл    including programs to plot   Блллллллллллнлллллл
@@ -43,13 +43,34 @@ echo ***********************************************************************
 pause
 cls
 echo *********************************************************************
-echo The MIEKEW run is now performed, without additional covariance
+echo The UNFANAW run is now performed
+echo ****************** input file: UNF.inp
+echo ***********************************************************************
+unfanaw Inputs\unf_1_EJ309.inp
+echo ***********************************************************************
+echo +++++++ END of unfanaw run, look at protocol in: unf.log
+echo ***********************************************************************
+pause
+cls
+echo *********************************************************************
+echo The MIEKEW run is now performed, with additional covariance
 echo ****************** input file: MIK.inp
 echo ***********************************************************************
 echo program now starts with :
 MIEKEW Inputs\mik_1_EJ309.inp
 echo ***********************************************************************
 echo +++++++ END of MIEKEW run, look at protocol in: mik.log
+echo ************************************************************************
+pause
+cls
+echo *********************************************************************
+echo The FALTW run is now performed, with additional covariance
+echo ****************** input file: faltw_1.inp
+echo ***********************************************************************
+echo program now starts with :
+faltw Inputs\faltw_1_EJ309.inp
+echo ***********************************************************************
+echo +++++++ END of FALTW run, look at protocol in: faltw.log
 echo ************************************************************************
 pause
 cls
