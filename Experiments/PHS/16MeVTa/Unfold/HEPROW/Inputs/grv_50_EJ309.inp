@@ -1,14 +1,14 @@
-grv_50_EJ309.log                         printer (protocol) file
+EJ309_50_grv.log                         printer (protocol) file
 0.0,1                                    q-value (see HEPRO report)
 Inputs\EJ309_16MeVTa_stat_100_phs_05.phs multichannel input file (HEPRO format)
 0.20,15.0                                multi-ch. energy range
 1.0                                      energy correction for multi-ch.
-1.25,24.25                               neutron energy range,linear medium v.
-Inputs\EJ309_smearedResp_05_50_off.rsp       response matrix input file
+1.1,25                                   neutron energy range,linear medium v.
+Inputs\EJ309_smearedResp_05_50.rsp       response matrix input file
 0                                        no fluence file available,use const
-1.0,30000,1000,1                         eps,msand,idr,modpl
+1.0,50000,1000,1                         eps,msand,idr,modpl
 EJ309_50_grv_out.flu                     output fluence file
 EJ309_50_grv_out.phs                     output mc-file
 EJ309_50_grv_out.pds                     output mc-difference file
-n                                        no scaling of stand. deviation wanted
+j                                        no scaling of stand. deviation wanted
 j                                        output in file UNFANA.asc wanted
