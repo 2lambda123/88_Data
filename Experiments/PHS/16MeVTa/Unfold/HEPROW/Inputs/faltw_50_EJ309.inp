@@ -1,0 +1,16 @@
+EJ309_50_faltw.log                         name of protocol file
+0.0                                       q-value
+1                                         multichannel file available
+0.20,15.0                                 energy range multich. file
+Inputs\EJ309_16MeVTa_stat_100_phs_05.phs  name of multichannel file
+1.00,25,0                                 neutron energy range, mede
+Inputs\EJ309_smearedResp_05_50.rsp         response matrix file
+1                                         1 range for energy calib. correction
+1.0,1.0                                   energy, calibration factor
+EJ309_50_mik_out.flu                       name of fluence file
+2                                         uncertainties from covariance matrix
+MIEKE.mtx                                 covariance matrix of the fluence
+EJ309_50_faltw.flu                         flux output file
+EJ309_50_faltw.phs                         pulse height output
+EJ309_50_faltw.phd                         difference file
+ 
