@@ -74,7 +74,7 @@ echo +++++++ END of FALTW run, look at protocol in: faltw.log
 echo ************************************************************************
 pause
 cls
-RENAME MIEKE.MTX EJ309_1_MIEKE.MTX
-RENAME MIEKE1.MTX EJ309_1_MIEKE1.MTX
-RENAME PROBFlux EJ309_1_PROBFlux
+move /y MIEKE.MTX EJ309_1_MIEKE.MTX
+move /y MIEKE1.MTX EJ309_1_MIEKE1.MTX
+move /y PROBFlux EJ309_1_PROBFlux
 
