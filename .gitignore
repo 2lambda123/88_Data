@@ -28,7 +28,6 @@ Experiments/Activation/oldExamples
 *.log
 *.asc
 *.par
-*.MTX
 *.29
 
 ## Python Notebook

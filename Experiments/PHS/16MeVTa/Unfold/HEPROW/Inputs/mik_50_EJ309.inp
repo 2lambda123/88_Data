@@ -1,7 +1,7 @@
 EJ309_50_mik.log                         name of printer file
 EJ309_50_mik_out.flu                        new fluence file with new uncert.
-5000000,10,4,10                           trials, loops, thermalizations, delt
-0.1,1                                   temperature parameter,no covariance
+5000000,10,4,6                           trials, loops, thermalizations, delt
+0.425,1                                   temperature parameter,no covariance
 47
 1.5                                      right boundary of energy interval 1
 2.0                                      right boundary of energy interval 2
