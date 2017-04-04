@@ -19,6 +19,7 @@ Experiments/Activation/oldExamples
 /Experiments/Joe_AmBe
 /Simulated/PHS/exJoeGravel/*
 /Simulated/PHS/exUMG/*
+Simulated/PHS/33MeVTa/BeamOnly/Model/ADVANTG/*
 
 ## Executables
 *.exe
@@ -39,3 +40,8 @@ meshtal
 *.sh
 *.silo
 *.json
+inp
+inpn.sav
+outmc
+outp
+wwinp
