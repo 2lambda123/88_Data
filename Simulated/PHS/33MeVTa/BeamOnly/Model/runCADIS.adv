@@ -2,9 +2,9 @@ model                     mcnp
 method                    FWCADIS
 outputs                   MCNP silo
 
-mcnp_input                vault_adv.i
-mcnp_input_template       vault.i
-mcnp_tallies              4 14 24 904 914 924
+mcnp_input                33MeVTaBeamOnly_Det_adv.i
+mcnp_input_template       33MeVTaBeamOnly_Det.i
+mcnp_tallies              904 914 924
 mcnp_force_point_source   True
 mcnp_mix_tolerance        0.05
 
