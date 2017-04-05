@@ -8,9 +8,9 @@ c ****************************************************************************
 4 8 -0.001205 -4 20 41              IMP:n=1 ELPT:n 1E-2  $ Cave 0-1
 5 8 -0.001205 -5                    IMP:n=1 ELPT:n 1E-2  $ Cave 0-1
 7 8 -0.001205 -7 64                                      $ Cave 0-2
-              101 102 103 108 
-              111 112 113 118
-              121 122 123 128       IMP:n=1 ELPT:n 1E-2  $ Cave 0-2
+              101 102 103 105 107 
+              111 112 113 115 117
+              121 122 123 125 127   IMP:n=1 ELPT:n 1E-2  $ Cave 0-2
 8 8 -0.001205 -8 20                 IMP:n=1 ELPT:n 1E-2  $ Vault
 9 0           -21                   IMP:n=1 ELPT:n 1E-2  $ Inside beam pipe
 10 3 -7.874   -10 11                IMP:n=1 ELPT:n 1E-2  $ Quad Yoke 1
@@ -30,29 +30,29 @@ c ****************************************************************************
 66 8 -0.001205 -66                  IMP:n=1 ELPT:n 1E-2  $ Cave 0-1/0-2 Hole
 c Detector
 100 10 -0.959 -100                  IMP:n=1 ELPT:n 1E-2  $ scintillator @ 0deg
-101 4 -2.7    (-101 100):(-102 101):(-103 101 104 106 108)
+101 4 -2.7    (-101 100):(-102 101 103 105 107)
                                     IMP:n=1 ELPT:n 1E-2  $ scintillator housing
-102 11 -1.19  -104                  IMP:n=1 ELPT:n 1E-2  $ acryllic window
-103 12 -1.375 -106 105              IMP:n=1 ELPT:n 1E-2  $ pvc clamp
-104 14 -2.23  -107                  IMP:n=1 ELPT:n 1E-2  $ borosilicate glass
-105 13 -8.06  -108 109 107          IMP:n=1 ELPT:n 1E-2  $ PMT
-106 3  -0.39  -109                  IMP:n=1 ELPT:n 1E-2  $ Inside PMT
+102 11 -1.19  -103                  IMP:n=1 ELPT:n 1E-2  $ acryllic window
+103 12 -1.375 -105 104              IMP:n=1 ELPT:n 1E-2  $ pvc clamp
+104 14 -2.23  -106                  IMP:n=1 ELPT:n 1E-2  $ borosilicate glass
+105 13 -8.06  -107 108 106          IMP:n=1 ELPT:n 1E-2  $ PMT
+106 3  -0.39  -108                  IMP:n=1 ELPT:n 1E-2  $ Inside PMT
 110 10 -0.959  -110                 IMP:n=1 ELPT:n 1E-2  $ scintillator @ 45deg
-111 4 -2.7    (-111 110):(-112 111):(-113 111 114 116 118)
+111 4 -2.7    (-111 110):(-112 111 113 115 117)
                                     IMP:n=1 ELPT:n 1E-2  $ scintillator housing
-112 11 -1.19  -114                  IMP:n=1 ELPT:n 1E-2  $ acryllic window
-113 12 -1.375 -116 115              IMP:n=1 ELPT:n 1E-2  $ pvc clamp
-114 14 -2.23  -117                  IMP:n=1 ELPT:n 1E-2  $ borosilicate glass
-115 13 -8.06  -118 119 117          IMP:n=1 ELPT:n 1E-2  $ PMT
-116 3  -0.39  -119                  IMP:n=1 ELPT:n 1E-2  $ Inside PMT
+112 11 -1.19  -113                  IMP:n=1 ELPT:n 1E-2  $ acryllic window
+113 12 -1.375 -115 114              IMP:n=1 ELPT:n 1E-2  $ pvc clamp
+114 14 -2.23  -116                  IMP:n=1 ELPT:n 1E-2  $ borosilicate glass
+115 13 -8.06  -117 118 116          IMP:n=1 ELPT:n 1E-2  $ PMT
+116 3  -0.39  -118                  IMP:n=1 ELPT:n 1E-2  $ Inside PMT
 120 10 -0.959 -120                  IMP:n=1 ELPT:n 1E-2 $ scintillator @ 90deg
-121 4 -2.7    (-121 120):(-122 121):(-123 121 124 126 128)
+121 4 -2.7    (-121 120):(-122 121 123 125 127)
                                     IMP:n=1 ELPT:n 1E-2  $ scintillator housing
-122 11 -1.19  -124                  IMP:n=1 ELPT:n 1E-2  $ acryllic window
-123 12 -1.375 -126 125              IMP:n=1 ELPT:n 1E-2  $ pvc clamp
-124 14 -2.23  -127                  IMP:n=1 ELPT:n 1E-2  $ borosilicate glass
-125 13 -8.06  -128 129 127          IMP:n=1 ELPT:n 1E-2  $ PMT
-126 3  -0.39  -129                  IMP:n=1 ELPT:n 1E-2  $ Inside PMT
+122 11 -1.19  -123                  IMP:n=1 ELPT:n 1E-2  $ acryllic window
+123 12 -1.375 -125 124              IMP:n=1 ELPT:n 1E-2  $ pvc clamp
+124 14 -2.23  -126                  IMP:n=1 ELPT:n 1E-2  $ borosilicate glass
+125 13 -8.06  -127 128 126          IMP:n=1 ELPT:n 1E-2  $ PMT
+126 3  -0.39  -128                  IMP:n=1 ELPT:n 1E-2  $ Inside PMT
 999 0         30 8                  IMP:n=0              $ Cold, Cruel World
 
 c ****************************************************************************
@@ -93,40 +93,37 @@ c ****************************************************************************
 c Detectors
 100 RCC  562 0 0.254  0 0 5.080 2.54  $ Active Volume for det at 0deg
 101 RCC  562 0 0.000  0 0 5.334 2.794 $ Case for active volume
-102 RCC  562 0 3.000  0 0 1.300 3.500 $ Al ring
-103 RCC  562 0 4.300  0 0 3.000 5.000 $ PMT to det flange
-104 RCC  562 0 5.334  0 0 0.635 3.810 $ Acryllic Window
-105 RCC  562 0 5.588  0 0 0.381 3.810 $ PVC Clamp Inner
-106 RCC  562 0 5.588  0 0 0.381 4.699 $ PVC Clamp Outer
-107 RCC  562 0 5.969  0 0 0.200 2.650 $ Borosilicate Glass
-108 RCC  562 0 5.969  0 0 23.50 3.000 $ PMT Case
-109 RCC  562 0 6.169  0 0 23.00 2.650 $ PMT Interior
+102 RCC  562 0 4.064  0 0 1.905 4.699 $ PMT to det flange
+103 RCC  562 0 5.334  0 0 0.635 3.810 $ Acryllic Window
+104 RCC  562 0 5.969  0 0 0.381 3.000 $ PVC Clamp Inner
+105 RCC  562 0 5.969  0 0 0.381 4.699 $ PVC Clamp Outer
+106 RCC  562 0 5.969  0 0 0.200 2.650 $ Borosilicate Glass
+107 RCC  562 0 5.969  0 0 23.50 3.000 $ PMT Case
+108 RCC  562 0 6.169  0 0 23.00 2.650 $ PMT Interior
 110 RCC  554.580 34.880 0  3.592 3.592 0 2.54  $ Active Volume for det @ 45deg
 111 RCC  554.400 34.700 0  3.772 3.772 0 2.794 $ Case for active volume
-112 RCC  556.521 36.821 0  0.919 0.919 0 3.500 $ Al ring
-113 RCC  557.441 37.741 0  2.121 2.121 0 5.000 $ PMT to det flange
-114 RCC  558.172 38.472 0  0.449 0.449 0 3.810 $ Acryllic Window
-115 RCC  558.351 38.651 0  0.269 0.269 0 3.810 $ PVC Clamp Inner
-116 RCC  558.351 38.651 0  0.269 0.269 0 4.699 $ PVC Clamp Outer
-117 RCC  558.621 38.921 0  0.141 0.141 0 2.650 $ Borosilicate Glass
-118 RCC  558.621 38.921 0  16.62 16.62 0 3.000 $ PMT Case
-119 RCC  558.762 39.062 0  16.26 16.26 0 2.650 $ PMT Interior
+112 RCC  557.274 37.574 0  1.347 1.347 0 4.699 $ PMT to det flange
+113 RCC  558.172 38.472 0  0.449 0.449 0 3.810 $ Acryllic Window
+114 RCC  558.621 38.921 0  0.269 0.269 0 3.000 $ PVC Clamp Inner
+115 RCC  558.621 38.921 0  0.269 0.269 0 4.699 $ PVC Clamp Outer
+116 RCC  558.621 38.921 0  0.141 0.141 0 2.650 $ Borosilicate Glass
+117 RCC  558.621 38.921 0  16.62 16.62 0 3.000 $ PMT Case
+118 RCC  558.762 39.062 0  16.26 16.26 0 2.650 $ PMT Interior
 120 RCC  533.4 91.654 0  0 5.080 0 2.54  $ Active Volume for det at 90deg
 121 RCC  533.4 91.400 0  0 5.334 0 2.794 $ Case for active volume
-122 RCC  533.4 94.400 0  0 1.300 0 3.500 $ Al ring
-123 RCC  533.4 95.700 0  0 3.000 0 5.000 $ PMT to det flange
-124 RCC  533.4 96.734 0  0 0.635 0 3.810 $ Acryllic Window
-125 RCC  533.4 96.988 0  0 0.381 0 3.810 $ PVC Clamp Inner
-126 RCC  533.4 96.988 0  0 0.381 0 4.699 $ PVC Clamp Outer
-127 RCC  533.4 97.369 0  0 0.200 0 2.650 $ Borosilicate Glass
-128 RCC  533.4 97.369 0  0 23.50 0 3.000 $ PMT Case
-129 RCC  533.4 97.569 0  0 23.00 0 2.650 $ PMT Interior 
+122 RCC  533.4 95.464 0  0 1.905 0 4.699 $ PMT to det flange
+123 RCC  533.4 96.734 0  0 0.635 0 3.810 $ Acryllic Window
+124 RCC  533.4 97.369 0  0 0.381 0 3.000 $ PVC Clamp Inner
+125 RCC  533.4 97.369 0  0 0.381 0 4.699 $ PVC Clamp Outer
+126 RCC  533.4 97.369 0  0 0.200 0 2.650 $ Borosilicate Glass
+127 RCC  533.4 97.369 0  0 23.50 0 3.000 $ PMT Case
+128 RCC  533.4 97.569 0  0 23.00 0 2.650 $ PMT Interior 
 
 c ****************************************************************************
 c  Data Cards  
 c ****************************************************************************
 MODE n
-NPS 1E7
+NPS 5E7
 RAND GEN=2 STRIDE=15
 c PRINT
 c VOID
