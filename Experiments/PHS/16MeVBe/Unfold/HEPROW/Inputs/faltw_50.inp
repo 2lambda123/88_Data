@@ -1,0 +1,16 @@
+faltw_50.log                              name of protocol file
+0.0                                       q-value
+1                                         multichannel file available
+0.26,11.0                                 energy range multich. file
+Inputs\histo3_stat_100_phs_05.phs         name of multichannel file
+1.00,20,0                                 neutron energy range, mede
+Inputs\smearedResp_05_50.rsp              response matrix file
+1                                         1 range for energy calib. correction
+1.0,1.0                                   energy, calibration factor
+mik_out_50.flu                            name of fluence file
+2                                         uncertainties from covariance matrix
+MIEKE.mtx                                 covariance matrix of the fluence
+faltw_50.flu                              flux output file
+faltw_50.phs                              pulse height output
+faltw_50.phd                              difference file
+ 
