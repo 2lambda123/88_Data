@@ -1,12 +1,12 @@
 grv.log                                  printer (protocol) file
 0.0,1                                    q-value (see HEPRO report)
-Inputs\histo3_stat_100_phs_05.phs        multichannel input file (HEPRO format)
-0.26,11.0                                multi-ch. energy range
+Inputs\histo3_stat_100_phs_01.phs        multichannel input file (HEPRO format)
+0.3,10.5                                 multi-ch. energy range
 1.0                                      energy correction for multi-ch.
 1.01,20,0                                neutron energy range,linear medium v.
-Inputs\smearedResp_05_50.rsp             response matrix input file
+Inputs\smearedResp_01_50.rsp             response matrix input file
 0                                        no fluence file available,use const
-1.0,100000,1000,1                        eps,msand,idr,modpl
+1.0,50000,1000,1                         eps,msand,idr,modpl
 grv_out_50.flu                           output fluence file
 grv_out_50.phs                           output mc-file
 grv_out_50.pds                           output mc-difference file
