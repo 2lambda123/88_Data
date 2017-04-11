@@ -20,6 +20,7 @@ Experiments/Activation/oldExamples
 /Simulated/PHS/exJoeGravel/*
 /Simulated/PHS/exUMG/*
 Simulated/PHS/33MeVTa/BeamOnly/Model/ADVANTG/*
+Simulated/PHS/33MeVTa/ETA/Model/ADVANTG/*
 
 ## Executables
 *.exe
