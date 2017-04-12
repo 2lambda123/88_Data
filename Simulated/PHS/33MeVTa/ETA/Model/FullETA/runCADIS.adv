@@ -2,9 +2,9 @@ model                     mcnp
 method                    FWCADIS
 outputs                   MCNP silo
 
-mcnp_input                vault_eta_IRDFF_adv.i
-mcnp_input_template       vault_eta_IRDFF.i
-mcnp_tallies              4 14 24 904 914 924
+mcnp_input                33MeVTaETA_Det_Ideal_adv.i
+mcnp_input_template       33MeVTaETA_Det_Ideal.i
+mcnp_tallies              904 914 924
 mcnp_force_point_source   True
 mcnp_mix_tolerance        0.05
 
@@ -18,11 +18,11 @@ denovo_quad_num_polar     4
 
 denovo_x_blocks    16
 denovo_y_blocks    10
-mesh_x                    -200   300   500   850  1000
-mesh_x_ints                   10    20    70    6  
+mesh_x                    -200   300   500  525  565  850  1000
+mesh_x_ints                   10    20    5    40   57   6  
 
-mesh_y                    -170   -10   40   290  
-mesh_y_ints                   16     20   25      
+mesh_y                    -170   -20   60   290  
+mesh_y_ints                   15    40   23      
 
 mesh_z                    -225  -15   15   225 
-mesh_z_ints                   21   12   21  
+mesh_z_ints                   21   30   21  
