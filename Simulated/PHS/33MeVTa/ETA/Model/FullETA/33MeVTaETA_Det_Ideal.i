@@ -8,11 +8,13 @@ c ****************************************************************************
 3 2 -1.6      -3 20                 IMP:n=1 ELPT:n 1E-2  $ Right Tunnel (sand)
 4 8 -0.001205 -4 20 41              IMP:n=1 ELPT:n 1E-2  $ Cave 0-1
 5 8 -0.001205 -5                    IMP:n=1 ELPT:n 1E-2  $ Cave 0-1
-7 8 -0.001205 -7 64                                      $ Cave 0-2
+7 8 -0.001205 (-722 505):(-7 64                          $ Cave 0-2
               101 102 103 105 107 
               111 112 113 115 117
               121 122 123 125 127   
-              503 505 506           IMP:n=1 ELPT:n 1E-2  $ Cave 0-2
+              503 505 506           
+              700 710 712 714 715 716 717 720 721)
+                                    IMP:n=1 ELPT:n 1E-2  $ Cave 0-2
 8 8 -0.001205 -8 20                 IMP:n=1 ELPT:n 1E-2  $ Vault
 9 0           -21                   IMP:n=1 ELPT:n 1E-2  $ Inside beam pipe
 10 3 -7.874   -10 11                IMP:n=1 ELPT:n 1E-2  $ Quad Yoke 1
@@ -59,7 +61,7 @@ c ETA
 501 501  -2.70000e+00  502 -503     IMP:n=1 ELPT:n 1E-6  $ Front Cone
 502 501  -2.70000e+00  504 -505     IMP:n=1 ELPT:n 1E-6  $ Main Body
 503 501  -2.70000e+00  -506         IMP:n=1 ELPT:n 1E-6  $ Back cover
-515 9    -0.001205     -519         IMP:n=1 ELPT:n 1E-6  $Foil Slot
+515 8    -0.001205     -519         IMP:n=1 ELPT:n 1E-6  $Foil Slot
 516 510  -1.13400e+01 519 620 -520 627 -628 622 -623
                                     IMP:n=1 ELPT:n 1E-6  $Drawer Filler
 517 501  -2.70000e+00 (519 620 -504 624 -625 626 -629 #516):
@@ -77,9 +79,25 @@ c ETA
 524 514  -9.78000e+00  -530 #519    IMP:n=1 ELPT:n 1E-6  $Bi_4
 525 513  -6.77000e+00  -531 #519    IMP:n=1 ELPT:n 1E-6  $Pr
 526 515  -2.52000e+00  -532 #519    IMP:n=1 ELPT:n 1E-6  $B4C
-527 9    -0.001205     (-502 526 527):(-504 528 529 530 531 532 #516 #517)
+527 8    -0.001205     (-502 526 527):(-504 528 529 530 531 532 #516 #517)
                                     IMP:n=1 ELPT:n 1E-6  $ETA fill
-999 0         30 8                  IMP:n=0              $ Cold, Cruel World
+c ETA Support Structure
+700 4  -2.7      -700 701 702 703 704   
+                                    IMP:n=1 ELPT:n 1E-6  $Table Frame
+701 8  -1.205E-3 -701:-702:-703     IMP:n=1 ELPT:n 1E-6  $Air in Frame
+702 15 -0.65     -704               IMP:n=1 ELPT:n 1E-6  $Wood Table Top
+710 4  -2.7      -710 711           IMP:n=1 ELPT:n 1E-6  $Al Support #1
+711 8  -1.205E-3 -711               IMP:n=1 ELPT:n 1E-6  $Air in Al Support #1
+712 4  -2.7      -712 713           IMP:n=1 ELPT:n 1E-6  $Al Support #1
+713 8  -1.205E-3 -713               IMP:n=1 ELPT:n 1E-6  $Air in Al Support #1
+714 15 -0.65     -714 716 717       IMP:n=1 ELPT:n 1E-6  $Wood Block #1
+715 15 -0.65     -715 716 717       IMP:n=1 ELPT:n 1E-6  $Wood Block #2
+716 8  -1.205E-3 -716:-717          IMP:n=1 ELPT:n 1E-6  $Air in Al Support #1
+720 15 -0.65     -720               IMP:n=1 ELPT:n 1E-6  $Mount Stabalizer
+721 15 -0.65     -721 722 505       IMP:n=1 ELPT:n 1E-6  $Mount 
+c 722 8  -1.205E-3 -722 505           IMP:n=1 ELPT:n 1E-6  $Mount Cutout
+c
+999 0         30 8                  IMP:n=0              $Cold, Cruel World
 
 c ****************************************************************************
 c  Surface Cards  
@@ -196,9 +214,24 @@ c Drawer
 629  PX 543.113
 C ETA Support Structure
 700  RPP 523.1 599.4  -23.0 23.0  -111.3 -30.5  $ Al Frame
-701  RPP 526.9 595.6  -23.0 23.0  -107.5 -26.7  $ Side to side air gap
-702  RPP 523.1 599.4  -19.2 19.2  -107.5 -26.7  $ Front to back air gap
-703  RPP 526.9 595.6  -19.2 19.2  -111.3 -30.5  $ Top to bottom air gap
+701  RPP 526.9 595.6  -23.0 23.0  -107.5 -34.8  $ Side to side air gap
+702  RPP 523.1 599.4  -19.2 19.2  -107.5 -34.8  $ Front to back air gap
+703  RPP 526.9 595.6  -19.2 19.2  -111.3 -32.45 $ Top to bottom air gap
+704  RPP 526.9 595.6  -19.2 19.2  -32.45 -30.5  $ Wood Top
+c
+710  RPP 528.6 549.5  -10.5 -5.3  -30.5 -25.2  $ Al Support #1 Outside
+711  RPP 528.6 549.0  -10.1 -5.7  -30.1 -25.6  $ Al Support #1 Inside
+712  RPP 528.6 549.5   4.7  9.9   -30.5 -25.2  $ Al Support #2 Outside
+713  RPP 528.6 549.0   5.1  9.5   -30.1 -25.6  $ Al Support #2 Inside
+714  RPP 528.8 537.3  -10.5 9.9   -25.2 -16.7  $ Wood Block #1
+715  RPP 539.9 548.4  -10.5 9.9   -25.2 -16.7  $ Wood Block #2
+716  WED 528.8 -0.3 -25.2  0  5.0 0  0 0 4.3  19.6 0 0  $ Wood Block Cutout #1
+717  WED 528.8 -0.3 -25.2  0 -5.0 0  0 0 4.3  19.6 0 0  $ Wood Block Cutout #2
+c
+720  RPP 532.6 544.0  -5.1  3.6   -16.7 -14.0  $ Mount Stabalizer
+721  RPP 544.0 547.6  -19.0 19.0  -16.7 -2.9   $ Mount 
+722  RCC 544.0 0 3.0  3.6 0 0  17             $ Mount Cutout
+
 c ****************************************************************************
 c  Data Cards  
 c ****************************************************************************
@@ -304,6 +337,11 @@ m14   5010 -0.007973
       14030 -0.01166
       19039 -0.003097 
       19041 -0.000224  
+C name: Wood 
+C density = 0.65 (Pine)
+m15   1001  -0.057889    
+      6000  -0.482667
+      8016  -0.459444
 C name: Aluminum alloy 6061-O
 C density = 2.7
 m501
