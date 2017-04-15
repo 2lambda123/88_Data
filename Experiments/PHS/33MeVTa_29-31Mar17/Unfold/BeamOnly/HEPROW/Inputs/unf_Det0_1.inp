@@ -1,0 +1,42 @@
+unf_Det0_1.log                           name of printer file
+unf_Det0_1.flu                           new fluence file with new uncert.
+35
+3.0                                      right boundary of energy interval 1
+4.0                                      right boundary of energy interval 2
+5.0                                      right boundary of energy interval 3
+6.0                                      right boundary of energy interval 4
+7.0                                      right boundary of energy interval 5
+8.0                                      right boundary of energy interval 6
+9.0                                      right boundary of energy interval 7
+10.0                                      right boundary of energy interval 8
+11.0                                      right boundary of energy interval 9
+12.0                                      right boundary of energy interval 10
+13.0                                      right boundary of energy interval 11
+14.0                                      right boundary of energy interval 12
+15.0                                      right boundary of energy interval 13
+16.0                                      right boundary of energy interval 14
+17.0                                      right boundary of energy interval 15
+18.0                                      right boundary of energy interval 16
+19.0                                      right boundary of energy interval 17
+20.0                                      right boundary of energy interval 18
+21.0                                      right boundary of energy interval 19
+22.0                                      right boundary of energy interval 20
+23.0                                      right boundary of energy interval 21
+24.0                                      right boundary of energy interval 22
+25.0                                      right boundary of energy interval 23
+26.0                                      right boundary of energy interval 24
+27.0                                      right boundary of energy interval 25
+28.0                                      right boundary of energy interval 26
+29.0                                      right boundary of energy interval 27
+30.0                                      right boundary of energy interval 28
+31.0                                      right boundary of energy interval 29
+32.0                                      right boundary of energy interval 30
+33.0                                      right boundary of energy interval 31
+34.0                                      right boundary of energy interval 32
+35.0                                      right boundary of energy interval 33
+36.0                                      right boundary of energy interval 34
+37.0                                      right boundary of energy interval 35
+unf_Det0_1.gru                           name of the file for group integrals
+0                                        1 additional file for integrating
+1.0                                      CHI**2=1.0 used as model
+ 
