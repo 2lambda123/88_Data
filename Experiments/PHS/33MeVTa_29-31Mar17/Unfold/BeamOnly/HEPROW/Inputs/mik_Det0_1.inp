@@ -1,7 +1,7 @@
 mik_Det0_1.log                           name of printer file
 mik_out_Det0_1.flu                       new fluence file with new uncert.
-5000000,2,4,5                            trials, loops, thermalizations, delt
-0.25,1                                   temperature parameter,no covariance
+5000000,2,4,10                           trials, loops, thermalizations, delt
+0.05,1                                   temperature parameter,no covariance
 35
 3.0                                      right boundary of energy interval 1
 4.0                                      right boundary of energy interval 2

@@ -1,10 +1,10 @@
 faltw_Det0_1.log                          name of protocol file
 0.0                                       q-value
 1                                         multichannel file available
-0.04,27.0                                 energy range multich. file
-Inputs\Det0_stat_100_phs_01.phs           name of multichannel file
+0.04,27.4                                 energy range multich. file
+Inputs\Det0_stat_100_phs_03.phs           name of multichannel file
 2.00,38,0                                 neutron energy range, mede
-Inputs\smearedResp_01_1.rsp               response matrix file
+Inputs\Det0_smearedResp_03_1.rsp          response matrix file
 1                                         1 range for energy calib. correction
 1.0,1.0                                   energy, calibration factor
 mik_out_Det0_1.flu                        name of fluence file
