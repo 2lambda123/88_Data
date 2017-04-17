@@ -132,7 +132,7 @@ c Detectors
 106 RCC  562 0 5.969  0 0 0.200 2.650 $ Borosilicate Glass
 107 RCC  562 0 5.969  0 0 23.50 3.000 $ PMT Case
 108 RCC  562 0 6.169  0 0 23.00 2.650 $ PMT Interior
-110 RCC  554.580 34.880 0  3.592 3.592 0 2.54  $ Active Volume for det @ 45deg
+110 RCC  554.580 34.880 0  3.59203 3.59203 0 2.54  $ Active Vol for det @ 45deg
 111 RCC  554.400 34.700 0  3.772 3.772 0 2.794 $ Case for active volume
 112 RCC  557.274 37.574 0  1.347 1.347 0 4.699 $ PMT to det flange
 113 RCC  558.172 38.472 0  0.449 0.449 0 3.810 $ Acryllic Window
@@ -141,7 +141,7 @@ c Detectors
 116 RCC  558.621 38.921 0  0.141 0.141 0 2.650 $ Borosilicate Glass
 117 RCC  558.621 38.921 0  16.62 16.62 0 3.000 $ PMT Case
 118 RCC  558.762 39.062 0  16.26 16.26 0 2.650 $ PMT Interior
-120 RCC  533.4 91.654 0  0 5.080 0 2.54  $ Active Volume for det at 90deg
+120 RCC  533.4 91.654 0  0 5.0799 0 2.54  $ Active Volume for det at 90deg
 121 RCC  533.4 91.400 0  0 5.334 0 2.794 $ Case for active volume
 122 RCC  533.4 95.464 0  0 1.905 0 4.699 $ PMT to det flange
 123 RCC  533.4 96.734 0  0 0.635 0 3.810 $ Acryllic Window
@@ -149,7 +149,7 @@ c Detectors
 125 RCC  533.4 97.369 0  0 0.381 0 4.699 $ PVC Clamp Outer
 126 RCC  533.4 97.369 0  0 0.200 0 2.650 $ Borosilicate Glass
 127 RCC  533.4 97.369 0  0 23.50 0 3.000 $ PMT Case
-128 RCC  533.4 97.569 0  0 23.00 0 2.650 $ PMT Interior 
+128 RCC  533.4 97.569 0  0 23.00 0 2.650 $ PMT Interior
 
 c ****************************************************************************
 c  Data Cards  
@@ -261,66 +261,81 @@ SI1 -1 0.9962 1
 SP1  0 0      1
 c Meulders 33MeV on Ta flux in n/uC/MeV/sr (from datathief) @ 0 deg
 c Linear extrapolation to 0 at high and low energy end
-SI2 A  0        2.5      3.5      4.5      5.5      6.5      7.5      8.5           
-       9.5      10.5     11.5     12.5     13.5     14.5     15.5     16.5        
-       17.5     18.5     19.5     20.5     21.5     22.5     23.5     24.5   
-       25.5     26.5     27.5     28.5     29.5     30.5     31.5     32.5
-       37.8
-SP2    0.00E+00 5.82E+08 5.41E+08 9.78E+08 1.46E+09 1.79E+09 2.03E+09 2.06E+09 
-       1.94E+09 1.72E+09 1.52E+09 1.28E+09 1.01E+09 8.15E+08 6.51E+08 4.88E+08 
-       3.87E+08 2.80E+08 2.22E+08 1.96E+08 1.65E+08 1.54E+08 1.41E+08 1.30E+08 
-       1.20E+08 1.09E+08 1.04E+08 9.59E+07 8.61E+07 8.60E+07 8.18E+07 8.18E+07
-       0.00E+00
+SI2 A  0        3.5      4.5      5.5      6.5      7.5      8.5      9.5 
+       10.5     11.5     12.5     13.5     14.5     15.5     16.5     17.5 
+       18.5     19.5     20.5     21.5     22.5     23.5     24.5     25.5   
+       26.5     27.5     28.5     29.5     30.5     31.5     32.5     37.8
+SP2    0.00E+00 6.09E+08 6.97E+08 1.06E+09 1.54E+09 1.82E+09 2.08E+09 2.13E+09
+       1.95E+09 1.78E+09 1.48E+09 1.28E+09 9.89E+08 8.07E+08 6.15E+08 4.80E+08 
+       3.66E+08 2.38E+08 2.11E+08 1.74E+08 1.50E+08 1.23E+08 1.12E+08 1.06E+08 
+       1.00E+08 9.78E+07 9.45E+07 9.35E+07 9.35E+07 8.64E+07 8.54E+07 0.00E+00
 c ****************************************************************************
 c  ADVANTG edits    
 c ****************************************************************************
 c ****************************************************************************
 c  Tallies    
 c ****************************************************************************
-c *** Detectors ***
-FC31 Front Surf Particle Spectra for Det at 0Deg (Number per src neutron)
+FC31 Front Surf Particle Spectrum for Det at 0Deg (Number per src neutron)
 F31:n 100.3
 C31 0 1
-FC131 Side Surf Particle Spectra for Det at 0Deg (Number per src neutron)
+FC131 Side Surf Particle Spectrum for Det at 0Deg (Number per src neutron)
 F131:n 100.1
 C131 0 1
-FC32 Front Surf Flux Spectra for Det at 0Deg (Number per cm^2 per src neutron)
+FC231 Back Surf Particle Spectrum for Det at 0Deg (Number per src neutron)
+F231:n 100.2
+C231 0 1
+FC32 Front Surf Flux Spectrum for Det at 0Deg (Number per cm^2 per src neutron)
 F32:n 100.3
 C32 0 1
-FC132 Side Surf Flux Spectra for Det at 0Deg (Number per cm^2 per src neutron)
+FC132 Side Surf Flux Spectrum for Det at 0Deg (Number per cm^2 per src neutron)
 F132:n 100.1
 C132 0 1
-FC904 Flux Spectra for Det at 0Deg (Number per cm^2 per src neutron)
+FC232 Back Surf Flux Spectrum for Det at 0Deg (Number per cm^2 per src neutron)
+F232:n 100.2
+C232 0 1
+FC904 Flux Spectrum for Det at 0Deg (Number per cm^2 per src neutron)
 F904:n 100
 c
-FC41 Front Surf Particle Spectra for Det at 45Deg (Number per src neutron)
+FC41 Front Surf Particle Spectrum for Det at 45Deg (Number per src neutron)
 F41:n 110.3
 C41 0 1
-FC141 Side Surf Particle Spectra for Det at 45Deg (Number per src neutron)
+FC141 Side Surf Particle Spectrum for Det at 45Deg (Number per src neutron)
 F141:n 110.1
 C141 0 1
-FC42 Front Surf Flux Spectra for Det at 45Deg (Number per cm^2 per src neutron)
+FC241 Back Surf Particle Spectrum for Det at 45Deg (Number per src neutron)
+F241:n 110.2
+C241 0 1
+FC42 Front Surf Flux Spectrum for Det @ 45Deg (Number per cm^2 per src neutron)
 F42:n 110.3
 C42 0 1
-FC142 Side Surf Flux Spectra for Det at 45Deg (Number per cm^2 per src neutron)
+FC142 Side Surf Flux Spectrum for Det @ 45Deg (Number per cm^2 per src neutron)
 F142:n 110.1
 C142 0 1
-FC914 Flux Spectra for Det at 45Deg (Number per cm^2 per src neutron)
+FC242 Back Surf Flux Spectrum for Det @ 45Deg (Number per cm^2 per src neutron)
+F242:n 110.2
+C242 0 1
+FC914 Flux Spectrum for Det at 45Deg (Number per cm^2 per src neutron)
 F914:n 110
 c
-FC51 Front Surf Particle Spectra for Det at 90Deg (Number per src neutron)
+FC51 Front Surf Particle Spectrum for Det at 90Deg (Number per src neutron)
 F51:n 120.3
 C51 0 1
-FC151 Side Surf Particle Spectra for Det at 90Deg (Number per src neutron)
+FC151 Side Surf Particle Spectrum for Det at 90Deg (Number per src neutron)
 F151:n 120.1
 C151 0 1
-FC52 Front Surf Flux Spectra for Det at 90Deg (Number per cm^2 per src neutron)
+FC251 Back Surf Particle Spectrum for Det at 90Deg (Number per src neutron)
+F251:n 120.2
+C251 0 1
+FC52 Front Surf Flux Spectrum for Det @ 90Deg (Number per cm^2 per src neutron)
 F52:n 120.3
 C52 0 1
-FC152 Side Surf Flux Spectra for Det at 90Deg (Number per cm^2 per src neutron)
+FC152 Side Surf Flux Spectrum for Det @ 90Deg (Number per cm^2 per src neutron)
 F152:n 120.1
 C152 0 1
-FC924 Flux Spectra for Det at 90Deg (Number per cm^2 per src neutron)
+FC252 Back Surf Flux Spectrum for Det @ 90Deg (Number per cm^2 per src neutron)
+F252:n 120.2
+C252 0 1
+FC924 Flux Spectrum for Det at 90Deg (Number per cm^2 per src neutron)
 F924:n 120
 c
 E0 
