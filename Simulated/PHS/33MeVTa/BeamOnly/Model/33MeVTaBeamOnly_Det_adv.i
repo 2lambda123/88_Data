@@ -132,7 +132,7 @@ c Detectors
 106 RCC  562 0 5.969  0 0 0.200 2.650 $ Borosilicate Glass
 107 RCC  562 0 5.969  0 0 23.50 3.000 $ PMT Case
 108 RCC  562 0 6.169  0 0 23.00 2.650 $ PMT Interior
-110 RCC  554.580 34.880 0  3.59203 3.59203 0 2.54  $ Active Vol for det @ 45deg
+110 RCC  554.580 34.880 0  3.5919 3.5919 0 2.54  $ Active Vol for det @ 45deg
 111 RCC  554.400 34.700 0  3.772 3.772 0 2.794 $ Case for active volume
 112 RCC  557.274 37.574 0  1.347 1.347 0 4.699 $ PMT to det flange
 113 RCC  558.172 38.472 0  0.449 0.449 0 3.810 $ Acryllic Window
