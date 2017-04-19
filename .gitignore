@@ -16,7 +16,8 @@
 *$*
 Experiments/Activation/oldExamples
 /Experiments/Activation/50MeVTa/CalibrationData/8Feb17TestData
-/Experiments/Joe_AmBe
+/Experiments/PHS/AmBeResponse
+/Experiments/PHS/Joe_AmBe
 /Simulated/PHS/exJoeGravel/*
 /Simulated/PHS/exUMG/*
 Simulated/PHS/33MeVTa/BeamOnly/Model/ADVANTG/*
