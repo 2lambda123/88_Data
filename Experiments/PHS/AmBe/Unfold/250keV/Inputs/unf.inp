@@ -1,0 +1,36 @@
+unf.log                                 name of printer file
+unf.flu                                 new fluence file with new uncert.
+29
+0.75                                      right boundary of energy interval 2
+1.0                                      right boundary of energy interval 3
+1.25                                      right boundary of energy interval 4
+1.5                                      right boundary of energy interval 5
+1.75                                      right boundary of energy interval 6
+2.0                                      right boundary of energy interval 7
+2.25                                      right boundary of energy interval 8
+2.5                                      right boundary of energy interval 9
+2.75                                      right boundary of energy interval 10
+3.0                                      right boundary of energy interval 11
+3.25                                      right boundary of energy interval 12
+3.5                                      right boundary of energy interval 13
+3.75                                      right boundary of energy interval 14
+4.0                                      right boundary of energy interval 15
+4.25                                      right boundary of energy interval 16
+4.5                                      right boundary of energy interval 17
+4.75                                      right boundary of energy interval 18
+5.0                                      right boundary of energy interval 19
+5.25                                      right boundary of energy interval 20
+5.5                                      right boundary of energy interval 21
+5.75                                      right boundary of energy interval 22
+6.0                                      right boundary of energy interval 23
+6.25                                      right boundary of energy interval 24
+6.5                                      right boundary of energy interval 25
+6.75                                      right boundary of energy interval 26
+7.0                                      right boundary of energy interval 27
+7.25                                      right boundary of energy interval 28
+7.5                                      right boundary of energy interval 29
+7.75                                      right boundary of energy interval 30
+unf.gru                                 name of the file for group integrals
+0                                       1 additional file for integrating
+1.0                                     CHI**2=1.0 used as model
+ 
