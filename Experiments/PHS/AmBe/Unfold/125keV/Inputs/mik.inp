@@ -1,0 +1,65 @@
+mik.log                                  name of printer file
+mik_out.flu                              new fluence file with new uncert.
+5000000,10,4,5                           trials, loops, thermalizations, delt
+0.25,1                                   temperature parameter,no covariance
+58
+0.625                                      right boundary of energy interval 1
+0.75                                      right boundary of energy interval 2
+0.875                                      right boundary of energy interval 3
+1.0                                      right boundary of energy interval 4
+1.125                                      right boundary of energy interval 5
+1.25                                      right boundary of energy interval 6
+1.375                                      right boundary of energy interval 7
+1.5                                      right boundary of energy interval 8
+1.625                                      right boundary of energy interval 9
+1.75                                      right boundary of energy interval 10
+1.875                                      right boundary of energy interval 11
+2.0                                      right boundary of energy interval 12
+2.125                                      right boundary of energy interval 13
+2.25                                      right boundary of energy interval 14
+2.375                                      right boundary of energy interval 15
+2.5                                      right boundary of energy interval 16
+2.625                                      right boundary of energy interval 17
+2.75                                      right boundary of energy interval 18
+2.875                                      right boundary of energy interval 19
+3.0                                      right boundary of energy interval 20
+3.125                                      right boundary of energy interval 21
+3.25                                      right boundary of energy interval 22
+3.375                                      right boundary of energy interval 23
+3.5                                      right boundary of energy interval 24
+3.625                                      right boundary of energy interval 25
+3.75                                      right boundary of energy interval 26
+3.875                                      right boundary of energy interval 27
+4.0                                      right boundary of energy interval 28
+4.125                                      right boundary of energy interval 29
+4.25                                      right boundary of energy interval 30
+4.375                                      right boundary of energy interval 31
+4.5                                      right boundary of energy interval 32
+4.625                                      right boundary of energy interval 33
+4.75                                      right boundary of energy interval 34
+4.875                                      right boundary of energy interval 35
+5.0                                      right boundary of energy interval 36
+5.125                                      right boundary of energy interval 37
+5.25                                      right boundary of energy interval 38
+5.375                                      right boundary of energy interval 39
+5.5                                      right boundary of energy interval 40
+5.625                                      right boundary of energy interval 41
+5.75                                      right boundary of energy interval 42
+5.875                                      right boundary of energy interval 43
+6.0                                      right boundary of energy interval 44
+6.125                                      right boundary of energy interval 45
+6.25                                      right boundary of energy interval 46
+6.375                                      right boundary of energy interval 47
+6.5                                      right boundary of energy interval 48
+6.625                                      right boundary of energy interval 49
+6.75                                      right boundary of energy interval 50
+6.875                                      right boundary of energy interval 51
+7.0                                      right boundary of energy interval 52
+7.125                                      right boundary of energy interval 53
+7.25                                      right boundary of energy interval 54
+7.375                                      right boundary of energy interval 55
+7.5                                      right boundary of energy interval 56
+7.625                                      right boundary of energy interval 57
+7.75                                      right boundary of energy interval 58
+mik.gru                                  name of the file for group integrals
+ 
