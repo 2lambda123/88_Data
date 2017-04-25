@@ -22,6 +22,9 @@ Experiments/Activation/oldExamples
 /Simulated/PHS/exUMG/*
 Simulated/PHS/33MeVTa/BeamOnly/Model/ADVANTG/*
 Simulated/PHS/33MeVTa/ETA/Model/ADVANTG/*
+Simulated/Activation/33MeVTa/BeamOnly/Model/ADVANTG/*
+Simulated/Activation/33MeVTa/ETA/Model/ADVANTG/*
+Simulated/Activation/33MeVTa/BeamOnly/NormFoils/ADVANTG/*
 
 ## Executables
 *.exe
