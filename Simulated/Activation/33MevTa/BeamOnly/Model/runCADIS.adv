@@ -1,0 +1,29 @@
+model                     mcnp
+method                    FWCADIS
+outputs                   MCNP silo
+
+mcnp_input                33MeVTaBeamOnly_Foil_adv.i
+mcnp_input_template       33MeVTaBeamOnly_Foil.i
+mcnp_tallies              34 104
+mcnp_force_point_source   True
+mcnp_mix_tolerance        0.05
+
+anisn_library             dplus
+
+denovo_pn_order           3
+denovo_quadrature         qr
+denovo_quad_polar_axis    z
+denovo_quad_num_azi       8
+denovo_quad_num_polar     4
+
+denovo_x_blocks    16
+denovo_y_blocks    10
+
+mesh_x                    -200   300   500   850  1000
+mesh_x_ints                   10    20    70    6  
+
+mesh_y                    -170   -10   40   290  
+mesh_y_ints                   16     20   25      
+
+mesh_z                    -225  -15   15   225 
+mesh_z_ints                   21   12   21  
