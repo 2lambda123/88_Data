@@ -1,8 +1,8 @@
-mik_1.log                                 name of printer file
+mik_1.log                               name of printer file
 mik_out_1.flu                           new fluence file with new uncert.
-5000000,10,4,5                          trials, loops, thermalizations, delt
-0.25,1                                   temperature parameter,no covariance
-18
+5000000,10,4,1.5                         trials, loops, thermalizations, delt
+3.0,1                                   temperature parameter, covariance
+19
 2.0                                      right boundary of energy interval 1
 3.0                                      right boundary of energy interval 2
 4.0                                      right boundary of energy interval 3
@@ -21,5 +21,6 @@ mik_out_1.flu                           new fluence file with new uncert.
 17.0                                      right boundary of energy interval 16
 18.0                                      right boundary of energy interval 17
 19.0                                      right boundary of energy interval 18
+20.0                                      right boundary of energy interval 19
 mik_1.gru                                 name of the file for group integrals
  

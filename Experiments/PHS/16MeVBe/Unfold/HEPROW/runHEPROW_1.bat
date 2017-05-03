@@ -77,4 +77,6 @@ cls
 move /y MIEKE.MTX MIEKE_1.MTX
 move /y MIEKE1.MTX MIEKE1_1.MTX
 move /y PROBFlux PROBFlux_1
+del *.$$$
+del Inputs\*.$$$
 
