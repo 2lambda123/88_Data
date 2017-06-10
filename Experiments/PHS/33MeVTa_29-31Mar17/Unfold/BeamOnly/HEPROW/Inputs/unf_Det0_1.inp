@@ -1,6 +1,7 @@
 unf_Det0_1.log                           name of printer file
 unf_Det0_1.flu                           new fluence file with new uncert.
-35
+36
+2.0                                      right boundary of energy interval 1
 3.0                                      right boundary of energy interval 1
 4.0                                      right boundary of energy interval 2
 5.0                                      right boundary of energy interval 3

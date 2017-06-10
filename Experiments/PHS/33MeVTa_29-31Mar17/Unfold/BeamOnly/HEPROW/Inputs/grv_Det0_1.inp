@@ -1,9 +1,9 @@
 grv_Det0_1.log                           printer (protocol) file
 0.0,1                                    q-value (see HEPRO report)
-Inputs\Det0_stat_100_phs_03_t.phs        multichannel input file (HEPRO format)
-0.6,27.4                                 multi-ch. energy range
+Inputs\Det0_stat_100_phs_03.phs          multichannel input file (HEPRO format)
+0.25,27.4                                 multi-ch. energy range
 1.0                                      energy correction for multi-ch.
-2.0,38,0                                 neutron energy range,linear medium v.
+1.0,38,0                                 neutron energy range,linear medium v.
 Inputs\Det0_smearedResp_03_1.rsp         response matrix input file
 0                                        no fluence file available,use const
 1.0,10000,1000,1                         eps,msand,idr,modpl
