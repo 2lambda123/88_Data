@@ -1,0 +1,15 @@
+rsg_1.log                                printer file
+0.0                                      q-value (see HEPRO report)
+tEJ309_smearedResp_05_1.rsp                                name of output resp. functions
+1                                        gauss-folding wanted
+EJ309_resp_05_1.rsp                             input (ideal resp. functions)
+1                                        neutron energies from resp. file
+1                                        proton energies from resp. file
+1.0,25                                  wanted neutron energy range (MeV)
+-1.62957e-01, 2.459E-3                       parameter a (E2/gamma) 
+0.04, 1.335E-5                           parameter b (E1/beta)
+8.38129e-02, 1.622E-3                        parameter c (Ec/alpha)  
+0                                        no asymmetry correction
+norm_1                                   name of file for output norm
+0                                        no multiplication of resp with factor
+ 
