@@ -2,9 +2,9 @@
 int runMCUnfold()
 {
   HistogramOperations ops;
-  TFile* file = new TFile("/home/pyne-user/Dropbox/UCB/Research/ETAs/88Inch/Data/Experiments/PHS/16MeVTa/Data/psdCutTgt0.root");  
-  TH1D* PulseHeightSpectrum = (TH1D*) file->Get("EJ309Neutron");
-  PulseHeightSpectrum = (TH1D*) ops.truncateHist(PulseHeightSpectrum,400,35000);
+  TFile* file = new TFile("/home/pyne-user/Dropbox/UCB/Research/ETAs/88Inch/Data/Experiments/PHS/16MeVTa/Data/allRunData_0_fittedPSDCut.root");  
+  TH1D* PulseHeightSpectrum = (TH1D*) file->Get("PHNeuWithCut_0");
+  PulseHeightSpectrum = (TH1D*) ops.truncateHist(PulseHeightSpectrum,500,35000);
   PulseHeightSpectrum->Rebin(1);
 
   if(PulseHeightSpectrum==NULL)
@@ -18,18 +18,18 @@ int runMCUnfold()
    //correlation 0.97813 deltaS =0.07256  deltakB =1.19603 
   double birksCov[4] = {0.0052649536,0.0848859721,0.0848859721,1.4304877609};
 
-  double calibCov[25] ={2.512e-14, 3.109e-13, 2.757e-11, 1.194e-09, 1.713e-10,
-                        3.109e-13, 7.969e-11, -4.391e-09, 2.300e-07, 4.077e-08,
-                        2.757e-11, -4.391e-09, 3.491e-06, -3.323e-05, -1.840e-06,
-                        1.194e-09, 2.300e-07, -3.323e-05, 1.486e-03, 7.653e-05,
-                        1.713e-10, 4.077e-08, -1.840e-06, 7.653e-05, 2.958e-05};
+  double calibCov[25] ={6.830e-14, -1.186e-10,  2.980e-10,  6.584e-14, -2.401e-10,
+                       -1.186e-10,  4.652e-07, -3.792e-07, -1.737e-10,  1.220e-06,
+                        2.980e-10, -3.792e-07,  6.046e-06, -5.924e-09, -2.584e-06,  
+                        6.584e-14, -1.737e-10, -5.924e-09,  1.781e-10, -2.233e-08,
+                       -2.401e-10,  1.220e-06, -2.584e-06, -2.233e-08,  2.631e-05 };
   //params from above cov mat
-  vector<double> params = {0.8394, 6.994, 4.97604e-04, 3.60000e-02, 1.19007e-01, 8.12814e-03, 1.04545e-01};
+  vector<double> params = {0.8394, 6.994, 4.99392e-04, 3.44937e-02, 1.62957e-01, 4.00000e-02, 8.38129e-02};
 
-  TH1D* flux = new TH1D("blank","Trial Spectrum",24,1,25);
+  TH1D* flux = new TH1D("blank","Trial Spectrum",28,1,29);
   // Calculate qunatile function separately!
   MonteCarloUnfolding obj(params,flux,PulseHeightSpectrum,birksCov,calibCov,
-                          pathToNeuSim,26.67,true,pathToEdepTable);
+                          pathToNeuSim,1,true,pathToEdepTable);
 
   // obj.fixParameter(0);
   // obj.fixParameter(1);
@@ -49,7 +49,7 @@ int runMCUnfold()
 
   //Writing
   obj.findFlux();
-  obj.runTrials(30);
+  obj.runTrials(2);
   obj.calculateCovariance();
   obj.write("/home/pyne-user/Dropbox/UCB/Research/ETAs/88Inch/Data/Experiments/PHS/16MeVTa/Unfold/NSD/16MeVTa_NSDUnfold_1");
   obj.drawOutputs(100);
