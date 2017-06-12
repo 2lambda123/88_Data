@@ -1,0 +1,6 @@
+c Meulders 16MeV on Au flux in n/uC/MeV/sr (from datathief) @ 0 deg
+c No extrapolation at high and low energy end
+SI2 H  2        3        4        5        6        7        8        9
+       10       11       12       13       14       15       16       17
+SP2    0.00E+00 1.81E+08 1.30E+08 1.01E+08 6.61E+07 4.50E+07 2.58E+07 1.72E+07
+       1.26E+07 9.84E+06 8.19E+06 6.45E+06 5.03E+06 3.42E+06 2.60E+06 2.09E+06
