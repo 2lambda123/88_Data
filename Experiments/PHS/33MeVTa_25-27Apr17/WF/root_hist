@@ -1,0 +1,2022 @@
+//Take a look at some traces
+SCDigitalDaqPostProcessing postProc;
+postProc.loadFile("AmBe_001.0.root")
+postProc.drawEvent(0,0,1)
+int i=1;
+postProc.drawEvent(i,0,1);i++;
+postProc.drawEvents(0,1000,0,1)
+
+// Find PU Rejection parameters
+SCDigitalDaqPostProcessing postProc;
+postProc.loadFile("AmBe_001.0.root")
+postProc.developPileUpRejectionParameters(0,100000,0,11,4)
+// -> Settled on 15 & 4 for this case.
+
+// Review traces that contribute to PSD
+SCDigitalDaqPostProcessing postProc;
+postProc.loadFile("AmBe_001.0.root")
+postProc.drawPSDEvents(0,15,100,1)
+
+// Draw Tail to Peak PSD Plots
+SCDigitalDaqPostProcessing postProc;
+postProc.loadFile("AmBe_002.1.root")  //- NOTE: "AmBe_002.0.root" causes a seg fault on next step
+postProc.processTreesForTailToPeakAnalysis("testPSDanalysis.root")
+DigPSDAnalysis a;
+a.loadFile("testPSDanalysis.root")
+TH2* psdHist = a.getTailToPeakHist(0,12,100,0,100)
+
+// Draw Tail to Total PSD Plots
+SCDigitalDaqPostProcessing postProc;
+postProc.loadFile("AmBe_002.1.root")
+postProc.processTreesForPSDAnalysis("testPSDanalysis.root")
+DigPSDAnalysis a;
+a.loadFile("testPSDanalysis.root")
+TH2* psdHist = a.getTailToPeakHist(0,12,100,0,100)
+
+// Find Tail to Total PSD parameters
+SCDigitalDaqPostProcessing postProc;
+postProc.loadFile("ETA_33MeVTa_BeamOnly_001.1.root")
+postProc.processTreesForPSDAnalysis("testTTTproc.root")  //Needed?
+DigPSDAnalysis a;
+a.loadFile("testTTPproc.root")
+a.makePSDHists(4,0,50,24,24,200,4,4,25,0,50) //Doesn't work
+TBrowser b
+
+// Find Tail to Peak PSD parameters
+SCDigitalDaqPostProcessing postProc;
+postProc.loadFile("ETA_33MeVTa_BeamOnly_001.1.root")
+postProc.processTreesForTailToPeakAnalysis("testTTPproc.root")
+DigPSDAnalysis a;
+a.loadFile("testTTPproc.root")
+a.makeTtoPPSDHists(4,100,0,250,24,250,40,4,25,4,0)
+TBrowser b
+
+// 90-10
+DigPSDAnalysis a;
+a.loadFile("testTTPproc.root")
+a.getDeltaTHist(0,8,50,50,0.9,0.1,1000000)
+
+// Process all of the channels for PSD params
+SCDigitalDaqPostProcessing postProc;
+postProc.loadFile("AmBe_001.0.root")
+DSPParam test = postProc.calibrateDSP()
+
+// To do skewed gauss fitting
+// Must have open PSD plot with projection
+RootTF1Wrappers b
+TF1* fom =b.getSkewNormTF1() //For 1 gaussian
+TF1* fom =b.getSkewFOMTF1() //For 2 gaussian
+// Open Tools, fit panel, and select user defined type of fit function
+
+// Open questions
+//1) Use gaussian fit parameters as a function of ph to assign probabilities to each 2D bin - integrate into psdFitter?
+//2) Start and stop range on makeTtoPPSDHists
+//3) Account for data loss due to swamping transfer rate
+//4) PSD parameters...
+
+//Process 
+To run it in ROOT  type 
+.L processFile.cpp
+testWaveformProcessor()
+
+you can the type .ls to see that there is 
+ampCh and psdCh in memory
+you can draw the psd using
+psdCh->Draw("colz");
+
+
+
+SCDigitalDaqPostProcessing a;
+a.loadFile("firstTestSeeminglyGoodTriggers_021.0.root")
+a.getPulseAmplitude(0,0,600)
+psdCh->Draw("colz")
+
+SCDigitalDaqPostProcessing a;
+a.loadFile("firstTestSeeminglyGoodTriggers_021.0.root")
+a.getDeltaTPSD(0)
+psdCh->Draw("colz")
+
+
+
+DigPSDAnalysis a;
+a.loadFile("testPSDanalysis.root")
+a.makeFOMhist(0,50,8,20,80,100,100000)
+SCDigitalDaqPostProcessing a
+a.loadFile("unfolding16MeVTa_001.4.root")
+
+
+
+SCDigitalDaqPostProcessing a
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.getPulseAmplitude(0,50,24)
+.ls
+psdCh->Draw("colz")
+a.drawOneEventWithCFD(0,100)
+a.drawOneEventWithCFD(0,0,100)
+a.drawOneEventWithCFD(0,0,100)
+int i = 0; 
+a.drawOneEventWithCFD(i,0,100); i++;
+.q
+DPPBinaryParser a
+a.readDatFile("33MeVTa_002_ls_0.dat","testOut.root")
+TFile f("testOut.root")
+.ls
+eventTree->Draw("(m_amplitude-m_shape)/m_amplitude:m_amplitude")
+eventTree->Draw("(m_amplitude-m_shape)/m_amplitude:m_amplitude","m_shape<m_amplitude")
+eventTree->Draw("(m_amplitude-m_shape)/m_amplitude:m_amplitude","m_shape<m_amplitude","colz")
+eventTree->Draw("(m_amplitude-m_shape)/m_amplitude:m_amplitude>>(10000,0,40000,1000,0,1)","m_shape<m_amplitude","colz")
+eventTree->Draw("(m_amplitude-m_shape)/m_amplitude:m_amplitude>>(10000,0,40000,1000,0,1)","m_shape<m_amplitude&&m_extras==0","colz")
+eventTree->Draw("(m_amplitude-m_shape)/m_amplitude:m_amplitude>>(10000,0,40000,1000,0,1)","m_shape<m_amplitude&&m_extra==0","colz")
+eventTree->Draw("(m_amplitude-m_shape)/m_amplitude:m_amplitude>>(10000,0,40000,1000,0,1)","m_shape<m_amplitude&&m_extra!=0","colz")
+eventTree->Draw("(m_amplitude-m_shape)/m_amplitude:m_amplitude>>(10000,0,40000,1000,0,1)","m_shape<m_amplitude&&m_extra==0","colz")
+eventTree->Draw("(m_amplitude-m_shape)/m_amplitude:m_amplitude>>(10000,0,40000,1000,0,1)","m_shape<m_amplitude&&m_extra==0","colz")
+.q
+a.drawOneEventWithCFD(i,0,100,1); i++;
+.q
+SCDigitalDaqPostProcessing a 
+.q
+SCDigitalDaqPostProcessing a 
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.getPulseAmplitude(0,40,20)
+psdCh->Draw("colz")
+a.drawEvent(100,0,0)
+.q
+a.getPulseAmplitude(0,57,20)
+SCDigitalDaqPostProcessing a 
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.getPulseAmplitude(0,57,20)
+psdCh->Draw("colz")
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDanalysis.root")
+.ls
+channel_0_events->Draw("getPSDMetric(58,72,72,300):getAmplitude(58,300)")
+channel_0_events->Draw("getPSDMetric(58,78,72,300):getAmplitude(50,300)","","colz")
+channel_0_events->Draw("getPSDMetric(54,74,72,300):getAmplitude(50,300)","","colz",100000)
+channel_0_events->Draw("getPSDMetric(54,74,72,100):getAmplitude(50,300)","","colz",100000)
+channel_0_events->Draw("getPSDMetric(58,74,72,100):getAmplitude(50,300)","","colz",100000)
+channel_0_events->Draw("getPSDMetric(58,74,72,100):getAmplitude(50,300)>>(10000,0,120e3,1000,0,1)","","colz")
+channel_0_events->Draw("getPSDMetric(58,74,74,84):getAmplitude(50,300)>>(10000,0,120e3,1000,0,1)","","colz")
+channel_0_events->Draw("getPSDMetric(58,68,74,100):getAmplitude(50,300)>>(10000,0,120e3,1000,0,1)","","colz")
+channel_0_events->Draw("getPSDMetric(58,68,68,100):getAmplitude(50,300)>>(10000,0,120e3,1000,0,1)","","colz")
+channel_0_events->Draw("getPSDMetric(58,70,90,100):getAmplitude(50,300)>>(10000,0,120e3,1000,0,1)","","colz")
+channel_0_events->Draw("getPSDMetric(58,72,76,100):getAmplitude(50,300)>>(10000,0,120e3,1000,0,1)","","colz")
+channel_0_events->Draw("getPSDMetric(58,72,72,100):getAmplitude(50,300)>>(10000,0,120e3,1000,0,1)","","colz")
+TFile f("testOut.root")
+.ls
+psdHist->Draw()
+eventTree->Draw("(m_amplitude-m_shape)/m_amplitude:m_amplitude")
+eventTree->Draw("(m_amplitude-m_shape)/m_amplitude:m_amplitude","m_amplitude>m_shape","colz")
+eventTree->Draw("(m_amplitude-m_shape)/m_amplitude:m_amplitude>>n1(10000,0,60000,1000,0,1)","m_amplitude>m_shape","colz")
+eventTree->Draw("(m_amplitude-m_shape)/m_shape:m_amplitude>>n2(10000,0,60000,1000,0,1)","m_amplitude>m_shape","colz")
+TCanvas c2;
+n1->Draw("colz")
+ls
+SCDigitalDaqPostProcessing a
+a.loadFile("firstTestSeeminglyGoodTriggers_021.0.root")
+a.drawPSDEvents(0,40,30,0.6)
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.developPileUpRejectionParameters(0,1000,0,5,150)
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.developPileUpRejectionParameters(0,1000,0,5,150)
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.developPileUpRejectionParameters(0,1000,0,5,150)
+a.developPileUpRejectionParameters(0,1000000,0,5,150)
+n1->Draw("colz")
+.q
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.developPileUpRejectionParameters(0,1000000,0,5,150)
+SCDigitalDaqPostProcessing a;
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.developPileUpRejectionParameters(0,10000,0,5,150)
+a.developPileUpRejectionParameters(0,10000,0,5,15)
+SCDigitalDaqPostProcessing a;
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.developPileUpRejectionParameters(0,10000,0,5,15)
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.developPileUpRejectionParameters(0,10000,0,5,15)
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.developPileUpRejectionParameters(0,10000,0,5,15)
+.q
+.q
+a.loadFile("unfolding16MeVTa_001.4.root")
+SCDigitalDaqPostProcessing a;
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.developPileUpRejectionParameters(0,10000,0,5,15)
+SCDigitalDaqPostProcessing a;
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.developPileUpRejectionParameters(0,10000,0,5,15)
+2
+22
+2
+2
+2
+2
+2
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.developPileUpRejectionParameters(0,10000,0,5,15)
+.q
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.developPileUpRejectionParameters(0,10000,0,5,15)
+a.developPileUpRejectionParameters(0,10000,0,21,5)
+a.developPileUpRejectionParameters(0,10000,0,21,5)
+a.developPileUpRejectionParameters(0,10000,0,21,5)
+a.developPileUpRejectionParameters(0,10000,0,21,5)
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.developPileUpRejectionParameters(0,10000,0,21,5)
+.q
+SCDigitalDaqPostProcessing a;
+a.processTreesForTailToPeakAnalysis("testPSDanalysis.root",100,3)
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("unfolding16MeVTa_001.4.root")
+a.processTreesForTailToPeakAnalysis("testPSDanalysis.root",100,3)
+.q
+.q
+.q
+ScatterPostProcessing a;
+ScatterPostProcessing a(
+.q
+ScatterPostProcessing a("fileList.txt")
+.q
+ScatterPostProcessing a("fileList.txt",1)
+.q
+SCDigitalDaqPostProcessing a
+.q
+SCDigitalDaqPostProcessing a
+a.loadChain("fileList.txt",{0,1})
+a.processTreesForTailToPeakAnalysis("testTailToPeakAnalysis.root")
+SCDigitalDaqPostProcessing a
+a.loadChain("fileList.txt",{0,1})
+a.processTreesForTailToPeakAnalysis("testTailToPeakAnalysis.root",50,2)
+SCDigitalDaqPostProcessing a
+a.loadChain("fileList.txt",{0,1})
+a.processTreesForTailToPeakAnalysis("testTailToPeakAnalysis.root",50,2)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTailToPeakAnalysis.root")
+a.getTailToPeakHist(0,4,20,20,200,100000)
+.ls
+psdHist_0->Draw("colz")
+a.getTailToPeakHist(0,20,30,20,200,100000)->Draw("colz")
+a.getTailToPeakHist(0,10,30,40,200,100000)->Draw("colz")
+a.getTailToPeakHist(0,15,30,80,400,100000)->Draw("colz")
+a.drawCDF(100,0,1)
+a.drawCDF(i,0,1)
+int i = 100;
+a.drawCDF(i,0,1);i++;
+a.getTailToPeakHist(0,8,20,10,400,100000)->Draw("colz")
+.q
+SCDigitalDaqPostProcessing a
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.processTreesForTailToPeakAnalysis("testTail.root",40,3)
+.ls
+DigPSDAnalysis a
+DigPSDAnalysis b
+b.loadFile("testTail.root")
+b.getTailToPeakHist(0,12,30,16,100)->Draw("colz")
+b.getTailToPeakHist(0,10,30,16,100)->Draw("colz")
+b.getTailToPeakHist(0,10,100,16,100)->Draw("colz")
+b.getTailToPeakHist(0,10,100,10,100)->Draw("colz")
+int i = 0;
+a.drawCDF(i,0,1);i++;
+b.drawCDF(i,0,1);i++;
+b.drawCDF(i,0,1);i++;
+b.drawCDF(i,0,1);i++;
+b.drawCDF(i,0,1);i++;
+b.drawCDF(i,0,1);i++;
+b.drawCDF(i,0,1);i++;
+b.drawCDF(i,0,1);i++;
+.q
+SCDigitalDaqPostProcessing a
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.processTreesForTailToPeakAnalysis("testTail.root",40,3)
+DigPSDAnalysis b
+b.loadFile("testTail.root")
+b.getTailToPeakHist(0,10,100,16,100)->Draw("colz")
+.ls
+.q
+TFile f("testTail.root")
+.ls
+channel_0_events->Draw("getPSDMetric(0,10,12,40):getAmplitude(0,100)")
+channel_0_events->Draw("getPSDMetric(0,20,20,500):getAmplitude(0,100)")
+channel_0_events->Draw("getPSDMetric(0,10,20,500):getAmplitude(0,100)")
+channel_0_events->Draw("getPSDMetric(0,10,10,100):getAmplitude(0,100)")
+.q
+SCDigitalDaqPostProcessing a
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.processTreesForTailToPeakAnalysis("testTail.root",40,3)
+DigPSDAnalysis b
+b.loadFile("testTail.root")
+channel_0_events->Draw("getPSDMetric(0,20,20,500):getAmplitude(0,100)")
+channel_0_events->Draw("getPSDMetric(0,20,20,500):getAmplitude(0,400)")
+b.getTailToPeakHist(0,10,100,16,100)->Draw("colz")
+a.drawEvent(100,0,10
+)
+a.drawEvent(2,0,10)
+.q
+SCDigitalDaqPostProcessing a
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.processTreesForTailToPeakAnalysis("testTail.root",40,3)
+DigPSDAnalysis b
+b.loadFile("testTail.root")
+b.loadFile("testTail.root")
+b.getTailToPeakHist(0,10,100,16,100)->Draw("colz")
+channel_0_events->Draw("getPSDMetric(0,20,20,500):getAmplitude(0,400)")
+channel_0_events->Draw("getPSDMetric(0,20,20,500):getAmplitude(0,400)","","colz")
+channel_0_events->Draw("getPSDMetric(0,20,20,500):getAmplitude(0,200)","","colz")
+channel_0_events->Draw("getPSDMetric(0,20,20,500):getAmplitude(0,200)","getAmplitude>0","colz")
+channel_0_events->Draw("getPSDMetric(0,20,20,500):getAmplitude(0,200)","getAmplitude()>0","colz")
+channel_0_events->Draw("getPSDMetric(0,20,20,500):getAmplitude(0,200)","getAmplitude(0,200)>0","colz")
+channel_0_events->Draw("getPSDMetric(0,20,20,500):getAmplitude(0,200)>>(4096,0,1180e3,4096,0,1)","getAmplitude(0,200)>0","colz")
+channel_0_events->Draw("getPSDMetric(0,20,20,500):getAmplitude(0,200)>>(4096,0,180e3,4096,0,1)","getAmplitude(0,200)>0","colz")
+channel_0_events->Draw("getPSDMetric(0,20,20,100):getAmplitude(0,200)>>(4096,0,180e3,4096,0,1)","getAmplitude(0,200)>0","colz")
+channel_0_events->Draw("getPSDMetric(0,10,10,30):getAmplitude(0,200)>>(4096,0,180e3,4096,0,1)","getAmplitude(0,200)>0","colz")
+channel_0_events->Draw("getPSDMetric(0,10,10,30):getAmplitude(0,200)","getAmplitude(0,200)>0","colz")
+channel_0_events->Draw("getPSDMetric(0,10,10,30):getAmplitude(0,200)","getAmplitude(0,200)>0","colz")
+channel_0_events->Draw("getPSDMetric(0,10,10,30):getAmplitude(0,200)>>(4096,0,180e3,4096,0,20)","getAmplitude(0,200)>0","colz")
+channel_0_events->Draw("getPSDMetric(0,20,20,40):getAmplitude(0,200)","getAmplitude(0,200)>0","colz")
+channel_0_events->Draw("getPSDMetric(0,15,20,30):getAmplitude(0,200)>>(4096,0,180e3,4096,0,20)","getAmplitude(0,200)>0","colz")
+channel_0_events->Draw("getPSDMetric(0,15,20,60):getAmplitude(0,200)>>(4096,0,180e3,4096,0,20)","getAmplitude(0,200)>0","colz")
+.q
+SCDigitalDaqPostProcessing a;
+a.loadChain("shortFileList.txt")
+a.loadChain("shortFileList.txt",{0,1})
+a.processTreesForTailToPeakAnalysis("testTail.root",40,2)
+.q
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.processTreesForTailToPeakAnalysis("testTail.root",40,2)
+.q
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+uint32_t* a;
+uint32_t* b;
+sizeof(b)
+8*10000000
+8*10000000/1024
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.processTreesForTailToPeakAnalysis("testTail.root",40,2)
+.q
+.QQQQQQ
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.processTreesForTailToPeakAnalysis("testTail.root",40,2)
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.developPileUpRejectionParameters(0,1000,0,5,50)
+3
+3
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.processTreesForTailToPeakAnalysis("testTail.root",12,2)
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.processTreesForTailToPeakAnalysis("testTail.root",12,2)
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.processTreesForTailToPeakAnalysis("testTail.root",12,2)
+.q
+SCDigitalDaqPostProcessing a;
+a.processTreesForTailToPeakAnalysis("testTail.root",10,2)
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.processTreesForTailToPeakAnalysis("testTail.root",10,2)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.getTailToPeakHist(0,10,40,20,200)->Draw("colz")
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.getTailToPeakHist(0,4,400,4,400)->Draw("colz")
+a.getTailToTotalHist(0,0,20,400)
+a.getTailToTotalHist(0,0,20,400)->Draw("colz"
+)
+a.getTailToTotalHist(0,0,15,400)->Draw("colz"
+)
+a.getTailToTotalHist(0,0,15,300)->Draw("colz")
+a.getTailToPeakHist(0,20,500,20,400)->Draw("colz")
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(2,20,0,300,40,300,60,2,5,5,0)
+TBrowser d;
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(2,20,0,300,40,300,60,2,5,5,0)
+.q
+a.makeTtoPPSDHists(2,20,0,300,40,300,60,2,10,10,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(2,20,0,300,40,300,60,2,10,10,0)
+TBrowser d;
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(2,20,0,300,30,200,40,2,15,10,0)
+TBrowser d;
+a.drawCDF(100,0,1)
+a.drawCDF(101,0,1)
+.1
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.processTreesForTailToPeakAnalysis("testTail.root",10)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.drawCDF(101,0,1)
+a.makeTtoPPSDHists(2,20,0,300,30,200,40,2,15,10,0)
+TBrowser d;
+.q
+a.makeTtoPPSDHists(6,20,0,400,30,300,40,2,15,10,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,20,0,400,30,300,40,2,15,10,0)
+TBrowser d;
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,20,0,400,30,300,40,2,15,10,0)
+.q
+.q
+a.makeTtoPPSDHists(6,20,0,400,30,300,40,2,15,10,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,20,0,400,30,300,40,2,15,10,0)
+TBrowser d;
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.drawEventWithLeadingEdge(100,0,10)
+a.drawEventWithLeadingEdge(100,0,10,0)
+int i = 101;
+a.drawEventWithLeadingEdge(i,0,10,0);i++;
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.processTreesForTailToPeakAnalysis("testTail.root",12)
+.q
+.q
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.processTreesForTailToPeakAnalysis("testTail.root",12)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.drawCDF(100,0,1)
+a.drawCDF(102,0,1)
+a.drawCDF(103,0,1)
+a.makeTtoPPSDHists(2,20,0,300,40,300,30,2,10,2,0)
+.QQQQQQ
+DigPSDAnalysis a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(2,20,-2,300,30,300,20,2,15,2,0)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(2,60,-2,300,30,300,20,2,20,2,0)
+TBrowser d;
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+.ls
+channel_0_events->GetMaximum("getAmplitude(0,200)")
+channel_1_events->GetMaximum("getAmplitude(0,200)")
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,20,2,0)
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,20,2,2,0)
+/q
+.q
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400)
+.ls
+psdHist_0->Draw("colz")
+psdProj_0->Draw()
+psdProj_0->Smooth(10)
+psdProj_0->Smooth(100)
+psdProj_0->Smooth(100)
+psdProj_0->Smooth(100)
+psdProj_0->Smooth(100)
+psdProj_0->Smooth(100)
+psdProj_0->Smooth(100)
+psdProj_0->Smooth(200)
+psdProj_0->Draw()
+psdProj_0->ShowPeaks(2,"",1)
+double* test = psdProj_0->GetBuff
+.q
+a.loadFile("testTail.root")
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400)
+double* bins = 
+bins
+HistogramOperations ops
+double* bins = ops.getBinContents(psdProj_0)
+DSPAlgortihms<double> dsp;
+DSPAlgorithms<double> dsp;
+double* smoothedHist = dsp.centeredMovingAverage(bins,31)
+double* smoothedHist = dsp.centeredMovingAverage(bins,1024,31)
+double* smoothedHist = dsp.centeredMovingAverage(bins,1024,31)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+TH1D* proj = psdHist->GetProjectionY();
+double* bins = ops.getBinContents(proj);
+double* smoothedHist = dsp.centeredMovingAverage(bins,psdHist->GetNbinsY(),31);.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+TH1D* proj = psdHist->GetProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(proj);
+double* smoothedHist = dsp.centeredMovingAverage(bins,psdHist->GetNbinsY(),31);
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+TH1D* proj = (TH1D*)psdHist->GetProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(proj);
+double* smoothedHist = dsp.centeredMovingAverage(bins,psdHist->GetNbinsY(),31);.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+TH1D* proj = (TH1D*)psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(proj);
+double* smoothedHist = dsp.centeredMovingAverage(bins,psdHist->GetNbinsY(),31);
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+TH1D* projPsd = (TH1D*)psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,psdHist->GetNbinsY(),31);
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+TH1D* projPsd = (TH1D*)psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,psdHist->GetNbinsY(),31);
+vector<double> x;
+for(int i = 0; i < psdHist->GetNbinsY();i++)
+{
+  x.push_back(i+1);
+}
+TGraph f(x.size(),&x[0],smoothedHist);
+f.Draw("APL");.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+TH1D* projPsd = (TH1D*)psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,psdHist->GetNbinsY(),31);
+vector<double> x;
+for(int i = 0; i < psdHist->GetNbinsY();i++){x.push_back(i+1);}
+TGraph f(x.size(),&x[0],smoothedHist);
+f.Draw("APL");
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+TH1D* projPsd = (TH1D*)psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,psdHist->GetNbinsY(),31);
+vector<double> x;
+for(int i = 0; i < psdHist->GetNbinsY();i++){x.push_back(i+1);}
+TGraph f(x.size(),&x[0],bins);
+f.Draw("APL");
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,psdHist->GetNbinsY(),31);
+vector<double> x;
+for(int i = 0; i < psdHist->GetNbinsY();i++){x.push_back(i+1);}
+TGraph f(x.size(),&x[0],bins);
+f.Draw("APL");
+projPSD
+projPsd
+double* binContent = projPsd->GetArray()
+TGraph g(x.size(),&x[0],binContent);
+g.Draw("APL")
+projPsd->Draw()
+for(int i =0; i < 1024; i++) { cout << binContent[i] << endl;}
+psdHist->GetNbinsY()
+projPsd->GetNBins()
+projPsd->GetNbins()
+projPsd->GetNbinsX()
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,projPsd->GetNbinsX(),31);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+TGraph f(x.size(),&x[0],bins);
+f.Draw("APL");
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,projPsd->GetNbinsX(),31);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+TGraph f(x.size(),&x[0],smoothedHist);
+f.Draw("APL");
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,projPsd->GetNbinsX(),31);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+double* derivative = dsp.firstDifferential(smoothedHist,projPsd->GetNbinsX());
+TGraph f(x.size(),&x[0],derivative);
+f.Draw("APL");
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,projPsd->GetNbinsX(),31);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+double* derivative = dsp.firstDifferential(smoothedHist,projPsd->GetNbinsX());
+TGraph f(x.size(),&x[0],derivative);
+f.Draw("APL");
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,projPsd->GetNbinsX(),31);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+double* derivative = dsp.firstDifferential(smoothedHist,projPsd->GetNbinsX());
+cout << x.size() << endl;
+TGraph f(x.size(),&x[0],derivative);
+f.Draw("APL");
+for(int i = 0; i< 273; i ++ ) { cout << derivative[i] << endl; }
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,projPsd->GetNbinsX(),31);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+double* derivative = dsp.firstDifferential(smoothedHist,projPsd->GetNbinsX());
+cout << x.size() << endl;
+TGraph f(x.size(),&x[0],derivative);
+f.Draw("APL");
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,projPsd->GetNbinsX(),31);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+double* derivative = dsp.firstDifferential(smoothedHist,projPsd->GetNbinsX());
+cout << x.size() << endl;
+TGraph f(x.size(),&x[0],derivative);
+TGraph g(x.size(),&x[0],smoothedHist);
+TMultigraph mg;
+mg.Add(&f);
+mg.Add(&g);
+mg.Draw("APL");.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,projPsd->GetNbinsX(),31);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+double* derivative = dsp.firstDifferential(smoothedHist,projPsd->GetNbinsX());
+cout << x.size() << endl;
+TGraph f(x.size(),&x[0],derivative);
+TGraph g(x.size(),&x[0],smoothedHist);
+TMultiGraph mg;
+mg.Add(&f);
+mg.Add(&g);
+mg.Draw("APL");
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,projPsd->GetNbinsX(),31);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+double* derivative = dsp.firstDifferential(smoothedHist,projPsd->GetNbinsX());
+double* smoothedDx = dsp.centeredMovingAverage(derivative,projPsd->GetNbinsX(),5);
+cout << x.size() << endl;
+TGraph f(x.size(),&x[0],smoothedDx);
+TGraph g(x.size(),&x[0],smoothedHist);
+TMultiGraph mg;
+mg.Add(&f);
+mg.Add(&g);
+mg.Draw("APL");
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,projPsd->GetNbinsX(),31);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+double* derivative = dsp.firstDifferential(smoothedHist,projPsd->GetNbinsX());
+double* smoothedDx = dsp.centeredMovingAverage(derivative,projPsd->GetNbinsX(),21);
+cout << x.size() << endl;
+TGraph f(x.size(),&x[0],smoothedDx);
+TGraph g(x.size(),&x[0],smoothedHist);
+TMultiGraph mg;
+mg.Add(&f);
+mg.Add(&g);
+mg.Draw("APL");
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,projPsd->GetNbinsX(),31);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+double* derivative = dsp.firstDifferential(smoothedHist,projPsd->GetNbinsX());
+double* smoothedDx = dsp.centeredMovingAverage(derivative,projPsd->GetNbinsX(),21);
+vector<double> peaks = dsp.getNegMagCross(smoothedDx,projPsd->GetNbinsX(),0.2,0);
+vector<double> valley = dsp.getPosMagCross(smoothedDx,projPsd->GetNbinsX(),0.2,0);
+// cout << x.size() << endl;
+TGraph f(x.size(),&x[0],smoothedDx);
+TGraph g(x.size(),&x[0],smoothedHist);
+TMultiGraph mg;
+mg.Add(&f);
+mg.Add(&g);
+mg.Draw("APL");
+for(int igh = 0; igh < peaks.size();igh++)
+{
+  TLine* crossOver = new TLine(peaks[igh],-20000, peaks[igh],20000);
+  TLine->SetColor(kRed);
+  crossOver->Draw("same");
+}
+for(int igh = 0for(int igh = 0for(int igh = 0for(Line* crossOver = new TLine(valley[igh],-20000, valley[igh],20000);
+  // TLine->SetColor(kRed);
+  crossOver->Draw("same");
+}
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,projPsd->GetNbinsX(),31);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+double* derivative = dsp.firstDifferential(smoothedHist,projPsd->GetNbinsX());
+double* smoothedDx = dsp.centeredMovingAverage(derivative,projPsd->GetNbinsX(),21);
+vector<double> peaks = dsp.getNegMagCross(smoothedDx,projPsd->GetNbinsX(),0.2,0);
+vector<double> valley = dsp.getPosMagCross(smoothedDx,projPsd->GetNbinsX(),0.2,0);
+// cout << x.size() << endl;
+TGraph f(x.size(),&x[0],smoothedDx);
+TGraph g(x.size(),&x[0],smoothedHist);
+TMultiGraph mg;
+mg.Add(&f);
+mg.Add(&g);
+mg.Draw("APL");
+for(int igh = 0; igh < peaks.size();igh++){TLine* crossOver = new TLine(peaks[igh],-20000, peaks[igh],20000);TLine->SetColor(kRed);crossOver->Draw("same");}
+for(int igh = 0; igh < valfor(int igh = 0; igh < valfor(int igh =  TLine(valley[igh],-20000, valley[igh],20000);crossOver->Draw("same");}
+for(int igh = 0; igh < valley.size();igh++){TLine* crossOver = new TLine(valley[igh],-20000, valley[igh],20000);crossOver->Draw("same");}
+for(int igh = 0; igh < peaks.size();igh++){TLine* crossOver = new TLine(peaks[igh],-20000, peaks[igh],20000);crossOver->SetColor(kRed);crossOver->Draw("same");}
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+double* smoothedHist = dsp.centeredMovingAverage(bins,projPsd->GetNbinsX(),31);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+double* derivative = dsp.firstDifferential(smoothedHist,projPsd->GetNbinsX());
+double* smoothedDx = dsp.centeredMovingAverage(derivative,projPsd->GetNbinsX(),21);
+vector<double> peaks = dsp.getNegMagCross(smoothedDx,projPsd->GetNbinsX(),0.2,0);
+vector<double> valley = dsp.getPosMagCross(smoothedDx,projPsd->GetNbinsX(),0.2,0);
+// cout << x.size() << endl;
+TGraph f(x.size(),&x[0],smoothedDx);
+TGraph g(x.size(),&x[0],smoothedHist);
+TMultiGraph mg;
+mg.Add(&f);
+mg.Add(&g);
+mg.Draw("APL");
+for(int igh = 0; igh < peaks.size();igh++){TLine* crossOver = new TLine(peaks[igh],-20000, peaks[igh],20000);crossOver->SetLineColor(kRed);crossOver->Draw("same");}
+for(int igh = 0; igh < valley.size();igh++){TLine* crossOver = new TLine(valley[igh],-20000, valley[igh],20000);crossOver->Draw("same");}
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+vector<double> peaks = dsp.getExtrema(bins,projPsd->GetNbinsX(),31,0.2);
+for(int igh = 0; igh < peaks.size();igh++){TLine* crossOver = new TLine(peaks[igh],-20000, peaks[igh],20000);crossOver->SetLineColor(kRed);crossOver->Draw("same");}
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+vector<double> peaks = dsp.getExtrema(bins,projPsd->GetNbinsX(),31,0.2);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+TGraph f(x.size(),&x[0],bins);
+for(int igh = 0; igh < peaks.size();igh++){TLine* crossOver = new TLine(peaks[igh],-20000, peaks[igh],20000);crossOver->SetLineColor(kRed);crossOver->Draw("same");}
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+vector<double> peaks = dsp.getExtrema(bins,projPsd->GetNbinsX(),31,0.2);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+TGraph f(x.size(),&x[0],bins);
+for(int igh = 0; igh < peaks.size();igh++){TLine* crossOver = new TLine(peaks[igh],-20000, peaks[igh],20000);crossOver->SetLineColor(kRed);crossOver->Draw("same");}
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+vector<double> peaks = dsp.getExtrema(bins,projPsd->GetNbinsX(),31,0.2);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+TGraph f(x.size(),&x[0],bins);
+f.Draw("APL");
+for(int igh = 0; igh < peaks.size();igh++){TLine* crossOver = new TLine(peaks[igh],-20000, peaks[igh],20000);crossOver->SetLineColor(kRed);crossOver->Draw("same");}
+ScatterPostProcessing a;
+ScatterPostProcessing a(.q
+.q
+ScatterPostProcessing a("scatterData.root")
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root");
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,180);
+DSPAlgorithms<double> dsp;
+auto projPsd = psdHist->ProjectionY();
+HistogramOperations ops;
+double* bins = ops.getBinContents(projPsd);
+vector<double> peaks = dsp.getExtrema(bins,projPsd->GetNbinsX(),31,0.2);
+vector<double> x;
+for(int i = 0; i < projPsd->GetNbinsX();i++){x.push_back(i+1);}
+TGraph f(x.size(),&x[0],bins);
+f.Draw("APL");
+for(int igh = 0; igh < peaks.size();igh++){TLine* crossOver = new TLine(peaks[igh],-20000, peaks[igh],20000);crossOver->SetLineColor(kRed);crossOver->Draw("same");}
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+.ls
+TH2* psdHist = a.getTailToPeakHist(0,12,400,4,400)
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+TBrowser d;
+.q
+.q
+a.loadFile("testTail.root")
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+.q
+a.loadFile("testTail.root")
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+TBrowser d
+.q
+DigPSDAnalysis a;
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+r
+r
+r
+TBrowser d;
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+TBrowser d;
+fomHist
+.ls
+fomResult
+fomResult->GetMaximum()
+fomResult->Draw("iso")
+fomResult->Draw("box2")
+fomResult->Draw("box3")
+fomResult->Draw("box3")
+fomResult->Draw("box1")
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+fomResult->Draw()
+fomResult->Draw("box2")
+fomResult->Draw("box2:colz")
+fomResult->Draw("BOX2")
+fomResult->Draw("BOX2")
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+fomResult->Draw("BOX2")
+fomResult->Draw("BOX2")
+fomResult->Draw()
+.q
+a.loadFile("testTail.root")
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+fomResult->Draw("BOX2")
+.q
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+fomResult->Draw("BOX2")
+fomResult->Draw("openGl")
+fomResult->Draw("openGL")
+fomResult->Draw("glbox1")
+fomResult->Draw("glbox2")
+fomResult->Draw("glbox3")
+fomResult->Draw("glcol")
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+.L glvox1.C 
+.q
+fomResult->Draw("glcol")
+gStyle->SetCanvasPreferGL(1);
+fomResult->Draw("glcol")
+fomResult->Draw("glbox2")
+fomResult->Draw("glbox3")
+fomResult->Draw("openGL")
+fomResult->Draw("ogl")
+fomResult->Draw("glcol")
+fomResult->Draw("glbox")
+fomResult->Draw("glbox")
+.L glvox1.C 
+glvox1()
+.q
+.q
+.L glvox2.C 
+glvox2()
+.x gldemos.C 
+fomResult->Draw("glbox1")
+.x viewer3DLocal.C 
+gStyle->SetNumberContours(100)
+fomResult->Draw("glbox")
+gStyle->SetPalette(51)
+fomResult->Draw("glbox")
+gStyle->SetNumberContours(1000)
+gStyle->SetNumberContours(999)
+fomResult->Draw("glbox")
+fomResult->Draw("glbox2")
+fomResult->Draw("glbox3")
+fomResult->Draw("glbox2")
+fomResult->Draw("glcol")
+fomResult->SetMinimum(0.4)
+fomResult->Draw("glcol")
+fomResult->Draw("glbox2")
+fomResult->Draw("glbox1")
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+gStyle->SetCanvasPreferGL(1);
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+fomResult->Draw("glbox2")
+fomResult->Draw("glbox")
+fomResult->Draw("glbox1")
+gStyle->SetNumberContours(999)
+TBrowser d;
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+gStyle->SetCanvasPreferGL(1);
+fomResult->Draw("glbox2")
+fomResult->Draw("glbox2")
+fomResult->Draw("glcol")
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,300,20,2,30,2,0)
+gStyle->SetCanvasPreferGL(1);
+fomResult->Draw("glbox2")
+fomResult->Draw("glbox2")
+fomResult->Draw("glbox2")
+gStyle->SetNumberContours(999)
+fomResult->Draw("iso")
+fomResult->Draw("gl")
+fomResult->Draw("glCol")
+.x glvox2.C 
+fomResult->Draw("glbox1")
+fomResult->Draw("gl")
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+             a.makePSDHists(0,8,120,2,26,400,1,2,20,0);
+-1
+a.loadFile("testTail.root")
+DigPSDAnalysis a;
+.q
+TBrowser d;
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makePSDHists(0,8,120,2,26,400,1,2,20,0);
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makePSDHists(0,8,120,2,26,400,1,2,20,0);
+l
+l
+l
+l
+l
+.ls
+TBrowser d;
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makePSDHists(0,8,120,2,26,400,1,2,20,0);
+.ls
+HistogramOperations ops;
+ops.findPercentIntegral(psd_0_1_24_380_py,0.9)
+ops.findPercentIntegral(psd_0_1_24_380_py,0.1)
+psd_0_1_24_380_py->SetRange(25,123)
+psd_0_1_24_380_py->GetXAxis()->SetRange(25,123)
+psd_0_1_24_380_py->GetXaxis()->SetRange(25,123)
+psd_0_1_24_380_py->Draw()
+ops.findPercentIntegral(psd_0_1_24_380_py,10)
+ops.findPercentIntegral(psd_0_1_24_380_py,90)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makePSDHists(0,8,120,2,26,400,1,2,20,0);
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makePSDHists(0,8,120,2,26,400,1,2,20,0);
+TBrowser d;
+gStyle->SetNumberContours(999)
+gStyle->SetCanvasPreferGL(1);
+fomResult->Draw("glbox1")
+fomResult->Draw("glbox2")
+fomResult->Draw("glbox2")
+fomResult->Draw("glcol")
+gStyle->SetCanvasPreferGL(1);
+fomResult->Draw("glcol")
+fomResult->GetMaximumBin()
+fomResult->Draw("glbox1")
+fomResult->Draw("glbox3")
+fomResult->GetMaximumBin()
+fomResult->GetBinContent(321)
+fomResult->GetBinXYZ()
+fomResult->GetBinXYZ(321)
+int x,y,z;
+fomResult->GetBinXYZ(321,x,y,z)
+x
+y
+z
+fomResult->GetYaxis()->GetBinCenter(3)
+fomResult->GetZaxis()->GetBinCenter(7)
+TBrowser d;
+TBrowser a;
+TBrowser g;
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,60,-2,400,20,400,20,2,30,2,0)
+fomResult->GetMaximumBin()
+fomResult->GetBinContent(321)
+int x,y,z;
+fomResult->GetBinXYZ(248)
+fomResult->GetBinContent(248)
+gStyle->SetCanvasPreferGL(1);
+fomResult->Draw("glbox2")
+fomResult->Draw("glbox2")
+TBrowser d;
+int x,y,z;
+fomResult->GetBinXYZ(248,x,y,z)
+.ls
+x
+y
+z
+fomResult->GetBinXYZ(248,x,y,z)
+fomResult->Draw("glbox2")
+.q
+DigPSDAnalysis a;
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(6,40,0,400,20,400,20,2,30,2,0)
+fomResult->GetMaximumBin()
+fomResult->GetBinContent(195)
+int x,y,z;
+fomResult->GetBinXYZ(195,x,y,z)
+fomResult->GetXaxis()->GetBinCenter(x)
+fomResult->GetYaxis()->GetBinCenter(y)
+fomResult->GetZaxis()->GetBinCenter(z)
+TBrowser d;
+gStyle->SetCanvasPreferGL(1);
+fomResult->Draw("glbox2")
+fomResult->Draw("glbox2")
+TCanvas cq
+fomResult->Draw("glbox2")
+TCanvas c("gl")
+fomResult->Draw("glbox2")
+fomResult->Draw("glcol")
+fomResult->Draw("glbox3")
+fomResult->Draw("glbox4")
+fomResult->Draw("glbox")
+fomResult->Draw("col")
+fomResult->Draw("gl")
+fomResult->Draw("")
+fomResult->Draw()
+delete d
+delete[] d
+.q
+,q
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+.ls
+a.getDeltaTPSD(0)
+.ls
+psdCh->Draw("colz")
+.q
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(8,200,0,400,10,400,20,1,20,1,0)
+fomResult->GetMaximum()
+fomResult->GetMaximumBin()
+int x,y,z
+fomResult->GetBinXYZ(350,x,y,z)
+fomResult->GetXaxis()->GetBinLowEdge(x)
+fomResult->GetYaxis()->GetBinLowEdge(y)
+fomResult->GetZaxis()->GetBinLowEdge(z)
+TBrowser d;
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(8,200,0,400,20,400,10,1,20,1,0)
+fomResult->GetMaximum()
+fomResult->GetMaximumBin()
+int x,y,z
+fomResult->GetBinXYZ(205,x,y,z)
+fomResult->GetXaxis()->GetBinLowEdge(x)
+fomResult->GetYaxis()->GetBinLowEdge(y)
+fomResult->GetZaxis()->GetBinLowEdge(z)
+TBrowser d;
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,2,0)
+fomResult->GetMaximum()
+fomResult->GetMaximumBin()
+int x,y,z
+fomResult->GetBinXYZ(205,x,y,z)
+fomResult->GetXaxis()->GetBinLowEdge(x)
+fomResult->GetYaxis()->GetBinLowEdge(y)
+fomResult->GetZaxis()->GetBinLowEdge(z)
+TBrowser d
+fomResult-Draw("gbox2")
+fomResult->Draw("gbox2")
+fomResult->Draw("gcol")
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0)
+c.q
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0)
+int x,y,z
+fomResult->GetBinXYZ(fomResult->GetMaximumBin(),x,y,z)
+fomResult->GetXaxis()->GetBinLowEdge(x)
+fomResult->GetYaxis()->GetBinLowEdge(y)
+fomResult->GetZaxis()->GetBinLowEdge(z)
+TBrowser d;
+.q
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0,6e3)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0,6e3)
+int x,y,z
+fomResult->GetBinXYZ(fomResult->GetMaximumBin(),x,y,z)
+fomResult->GetMaximum()
+fomResult->GetXaxis()->GetBinLowEdge(x)
+fomResult->GetYaxis()->GetBinLowEdge(y)
+fomResult->GetZaxis()->GetBinLowEdge(z)
+TBrowser d;
+TBrowser h;
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0,10e3)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0,6e3)
+TBrowser d
+.q
+DigPSDAnalysis a;
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0,6e3)
+TBrowser d;
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0,6e3)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0,6e3)
+.q
+DigPSDAnalysis a;
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0,6e3)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0,6e3)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0,6e3)
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0,6e3)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0,6e3)
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0,6e3)
+.q
+.q
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,1,20,4,0,6e3)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,2,20,4,0,6e3)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,2,20,4,0,6e3)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,2,20,4,0,6e3)
+TBrowser d;
+fomResult->GetMaximum()
+fomResult->GetMaximumBin()
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+.q
+.q
+a.loadFile("testTail.root")
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,2,20,4,0,6e3)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,2,20,4,0,6e3)
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,2,20,4,0,6e3)
+fomResult->GetMaximum()
+int xyz
+int x,y,z
+fomResult->GetBinXYZ(fomResult->GetMaximumBin(),x,y,z)
+x
+y
+z
+fomResult->GetBinXYZ(fomResult->GetMaximumBin(),x,y,z);
+fomResult->GetXaxis()->getBinLowEdge(4)
+fomResult->GetXaxis()->GetBinLowEdge(4)
+fomResult->GetXaxis()->GetBinLowEdge(x)
+fomResult->GetYaxis()->GetBinLowEdge(y)
+fomResult->GetZaxis()->GetBinLowEdge(z)
+TBrowser d;
+.ls
+fomResult
+fomResult->GetZaxis()->GetBinLowEdge(z)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,2,20,4,0,6e3)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,17,400,20,2,20,4,0,6e3)
+fomResult->GetMaximum()
+int x,y,z
+fomResult->GetBinXYZ(fomResult->GetMaximumBin(),x,y,z);
+fomResult->GetZaxis()->GetBinLowEdge(z)
+fomResult->GetYaxis()->GetBinLowEdge(y)
+fomResult->GetXaxis()->GetBinLowEdge(x)
+TBrowser d;
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(9,200,0,400,28,400,20,1,20,2,0,6e3)
+int x,y,z
+fomResult->GetBinXYZ(fomResult->GetMaximumBin(),x,y,z);
+fomResult->GetZaxis()->GetBinLowEdge(z)
+fomResult->GetZaxis()->GetBinLowEdge(z)
+fomResult->GetYaxis()->GetBinLowEdge(y)
+fomResult->GetXaxis()->GetBinLowEdge(x)
+TBrowser d;
+a.drawCDF(1001,0,0)
+a.drawCDF(101,0,0)
+a.drawCDF(10,0,0)
+a.drawCDF(109,0,0)
+.q
+DigPSDAnalysis a;
+a.loadFile("testTail.root")
+a.makeTtoPPSDHists(4,200,0,400,24,400,20,4,20,4,1,6e3)
+int x,y,z
+fomResult->GetBinXYZ(fomResult->GetMaximumBin(),x,y,z);
+fomResult->GetZaxis()->GetBinLowEdge(z)
+fomResult->GetYaxis()->GetBinLowEdge(y)
+fomResult->GetXaxis()->GetBinLowEdge(x)
+TBrowser d;
+.L testCode.cpp 
+.L testCode.cpp 
+.q
+.L testCode.cpp 
+.q
+.L testCode.cpp 
+testSkew()
+.q
+.L testCode.cpp 
+.q.q
+.L testCode.cpp 
+.q
+.L testCode.cpp 
+testSkewError()
+.ls
+testHist->Draw()
+testHistSmeared->Draw()
+.q
+.L testCode.cpp 
+testSkewError()
+testHistSmeared->Draw()
+.q
+.L DSPParamManager.cpp 
+.q
+.L DSPParamManager.cpp 
+PSDMethod a = deltaT
+tailToPeak
+tailToTotal
+deltaT
+.L testCode.cpp 
+testSkewError()
+ls
+ls
+testHistSmeared->Draw()
+testHistSmeared->Draw()
+security -v set-keychain-settings -t 72000 login.keychain
+.q
+.q
+.L DSPParamManager.cpp 
+DSPParam a
+a.setPSDMethod(deltaT)
+a.setPSDParam({-10})
+a.setPSDMethod(TailToPeak)
+tailToPeak
+a.setPSDMethod(tailToPeak)
+a.setPSDParam({-10,24,220,400})
+a.setPSDParam({-10,24,12,220,400})
+a.setPSDMethod(tailToPeak)
+a.setPSDParam({-10,24,12,220,400})
+a.getPSDMethod()
+.q
+.L DSPParamManager.cpp 
+.q
+.L DSPParamManager.cpp 
+DSPParam a
+a.setPSDMethod(tailToPeak)
+a.setPSDParam({-10,24,12,220,400})
+.q
+.q
+TBrowser d;
+.q
+Detector a
+WaveformProcessor
+.q
+WaveformProcesser<uint16_t> a;
+.q
+.q
+.q
+.q
+ScatterPostProcessing a;
+.q
+WaveformProcesser<uint16_t> a;
+WaveformProcessor<uint16_t> a
+a.readParameterFile("exampleDSPFile.txt")
+a.getChannels()
+.q
+WaveformProcesser<uint16_t> a;
+WaveformProcessor<uint16_t> a
+a.readParameterFile("exampleDSPFile.txt")
+a.getChannels()
+.q
+WaveformProcessor<uint16_t> a
+a.readParameterFile("exampleDSPFile.txt")
+a.printState()
+.q
+SCDigitalDaqPostProcessing a;
+.q
+.L testCode.cpp 
+.q
+.L testCode.cpp 
+testWaveformProcessor()
+.q
+.L testCode.cpp 
+testWaveformProcessor()
+.q
+.L testCode.cpp 
+testWaveformProcessor()
+.q
+.L testCode.cpp 
+testWaveformProcessor()
+.q
+.L testCode.cpp 
+testWaveformProcessor()
+.q
+.L testCode.cpp 
+testWaveformProcessor()
+.q
+.L testCode.cpp 
+testWaveformProcessor()
+.q
+.L testCode.cpp 
+testWaveformProcessor()
+.q
+WaveformProcesser<uint16_t> a
+WaveformProcesser<uint16_t> a
+WaveformProcesser<int16_t> a
+uint16_t
+uint16_t b
+WaveformProcesser<int16_t> a
+WaveformProcesser<uint16_t> a
+.q
+WaveformProcessor<uint16_t> a
+a.readParameterFile("exampleDSPFile.txt")
+a.printState()
+.q
+.L testCode.cpp 
+testWaveformProcessor()
+testWaveformProcessor().q
+.q
+WaveformProcesser<uint16_t> a
+WaveformProcessor<uint16_t> a
+a.readParameterFile("exampleDSPFile.txt")
+a.printState()
+.q
+.L testCode.cpp 
+testWaveformProcessor()
+.ls
+TBrowser d;
+.q
+TFile f("testOut.root")
+.ls
+psdHist->Draw()
+psdHist->Draw("colz")
+.q
+TFile f("testOut.root")
+psdHist->Draw("colz")
+eventTree->StartViewer()
+tv__tree = (TTree *)0x7fbfe7cf5d20;
+tv__tree_list->Add(tv__tree);
+eventTree->Draw("m_amplitude:(m_amplitude-m_shape)/m_shape","","colz")
+eventTree->Draw("m_amplitude:(m_amplitude-m_shape)/m_shape","","colz")
+eventTree->Draw("(m_amplitude-m_shape)/m_shape:m_amplitude","","colz")
+ScatterPostProcessing a;
+ScatterPostProcessing a
+.q
+ScatterPostProcessing a
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.calibrateDSP()
+.q
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.calibrateDSP()
+eventTree->Draw("(m_amplitude-m_shape)/m_shape:m_amplitude","","colz")
+.Q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.calibrateDSP()
+r
+.q
+DigPSDAnalysis a;
+a.loadFile("tempPSDFile.root")
+a..q
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("tempPSDFile.root")
+a.calibrateDSP()
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("tempPSDFile.root")
+a.calibrateDSP()
+.q
+.q
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.calibrateDSP()
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.calibrateDSP()
+.q
+.q
+.q
+SCDigitalDaqPostProcessing a;
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("rawData/scatterExperimentTa16MeV_001.1.root")
+a.calibrateDSP()
+SCDigitalDaqPostProcessing a;
+a.loadFile("ETA_33MeVTa_BeamOnly_001.1.root")
+a.drawEvents(0,100,0)
+a.drawEvents(0,100,0)
+a.drawEvent(0,0,1)
+.q
+a.drawEvent(0,0,1)
+SCDigitalDaqPostProcessing a;
+a.loadFile("ETA_33MeVTa_BeamOnly_001.1.root")
+a.drawEvent(0,0,1)
+a.drawEvents(0,100,0)
+.q
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("ETA_33MeVTa_BeamOnly_001.1.root")
+a.processTreesForTailToPeakAnalysis("testPSDOut.root",50,2,100000)
+.q
+.q
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("ETA_33MeVTa_BeamOnly_001.1.root")
+a.processTreesForTailToPeakAnalysis("testPSDOut.root",50,2,100000)
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,100,0,300,24,400,40,4,25,4,0)
+TBrowser d;
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,50,0,300,16,150,12,4,25,1,3500)
+.q
+a.loadFile("testPSDOut.root")
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,50,0,300,16,150,12,4,25,1,3500)
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,50,0,300,16,150,12,4,25,2,3500)
+.q
+a.loadFile("testPSDOut.root")
+.q
+DigPSDAnalysis a;
+a.makeTtoPPSDHists(4,100,0,300,24,400,40,4,25,4,0)
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,100,0,300,24,400,40,4,25,4,0)
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,50,0,300,16,150,12,4,25,2,0,3500)
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,50,0,300,16,150,12,4,25,2,0,3500)
+TBrowser d;
+,q
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,20,0,300,16,160,12,4,10,2,0,500)
+TBrowser d;
+.q
+.q
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("ETA_33MeVTa_BeamOnly_001.1.root")
+a.getDeltaTPSD(0,100000)
+TBrowser d;
+SCDigitalDaqPostProcessing a;
+a.loadFile("scatterExperimentTa16MeV_001.1.root")
+a.getDeltaTPSD(0,100000)
+psdCh->Draw("colz")
+,q
+.q
+.ls
+SCDigitalDaqPostProcessing a;
+a.loadFile("ETA_33MeVTa_BeamOnly_001.1.root")
+a.developPileUpRejectionParameters(0,100000,0,21,5)
+.q
+.L processFile.cpp 
+.L processFile.cpp 
+.q
+.L processFile.cpp 
+testWaveformProcessor()
+.ls
+TBrowser d;
+.q
+.L processFile.cpp 
+testWaveformProcessor()
+TBrowser d;
+.q
+.L processFile.cpp 
+.q
+.q
+.L processFile.cpp 
+testWaveformProcessor()
+TBrowser dl
+.q
+.L processFile.cpp 
+testWaveformProcessor()
+.q
+.L processFile.cpp 
+testWaveformProcessor()
+TBrowser dl
+.q
+.q
+.L processFile.cpp 
+testWaveformProcessor()
+TBrowser d;
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,20,0,300,16,160,12,4,10,2,0,1500)
+TBrowser d;
+.q
+.L processFile.cpp 
+testWaveformProcessor()
+TBrowser d;
+.q
+.L processFile.cpp 
+testWaveformProcessor()
+TBrowser d
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,20,0,300,16,160,12,4,10,2,0,1500)
+TBrowser d;
+.q
+.q
+.L processFile.cpp 
+testWaveformProcessor()
+a.makeTtoPPSDHists(4,20,0,300,16,160,12,4,10,2,0,1500)
+TBrowser d;
+.q
+a.makeTtoPPSDHists(4,20,0,300,16,160,12,4,10,2,0,1500)
+.L processFile.cpp 
+testWaveformProcessor()
+TBrowser d;
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.drawCDF(0,0,1)
+a.drawCDF(1,0,1)
+a.drawCDF(i,0,1)
+int i = 2;
+a.drawCDF(i,0,1);i++;
+
+SCDigitalDaqPostProcessing a;
+a.loadFile("ETA_33MeVTa_BeamOnly_001.1.root")
+a.drawEvents(0,1000,0,10)
+SCDigitalDaqPostProcessing a;
+a.loadFile("ETA_33MeVTa_BeamOnly_001.1.root")
+a.drawEvents(0,1)
+a.drawEvent(0,1)
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("ETA_33MeVTa_BeamOnly_001.1.root")
+a.drawEvents(0,0)
+a.drawEvent(0,0)
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("ETA_33MeVTa_BeamOnly_001.1.root")
+a.processTreesForTailToPeakAnalysis("testPSDOut.root",50,2,1000000)
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,20,0,300,16,160,12,4,10,2,0,500)
+TBrowser d;
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(6,20,0,300,24,160,40,2,15,4,0,3000)
+TF1 *skew = new TF1("skew", ExtraMath::skewNormDistTF1Wrapper,0,100,4
+)
+.q.q
+TF1 *skew = new TF1("skew", ExtraMath::skewNormDistTF1Wrapper,0,100,4)
+.q
+TF1 *skew = new TF1("skew", ExtraMath::skewNormDistTF1Wrapper,0,100,4)
+ExtraMath
+ExtraMath::sk
+ExtraMath::skewNormDist(0.1,0,2,100,1)
+.q
+RootTF1Wrappers a;
+TF1* func = a.getSkewNormTF1();
+.q
+.q
+RootTF1Wrappers a;
+TF1* func = a.getSkewNormTF1();
+func->Draw()
+func->SetParameters(0.5,2,100,0)
+func->Draw()
+func->SetRange(-100,100)
+func->Draw()
+func->SetRange(-100,100)
+func->Draw()
+.q
+RootTF1Wrappers a;
+TF1* func = a.getSkewNormTF1();
+func->SetRange(-100,100)
+func->SetParameters(10,2,100,0)
+func->Draw()
+.q
+.q
+RootTF1Wrappers a;
+TF1* func = a.getSkewFOMTF1();
+func->SetParameters(10,0,100,100,4,4,-1,1)
+func->Draw()
+.q
+RootTF1Wrappers a;
+TF1* func = a.getSkewFOMTF1();
+func->SetParameters(10,0,100,100,4,4,-1,1)
+func->Draw()
+SCDigitalDAQPostProcessing a 
+a.loadFile("ETA_33MeVTa_BeamOnly_001.1.root")
+a.developPileUpRejectionParameters(0,10000,0,11,3)
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,50,0,300,16,150,12,4,25,2,0,3500)
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,50,0,300,16,150,12,4,25,2,0,3500)
+root
+.q
+DigPSDAnalysis a;
+a.makeTtoPPSDHists(4,50,0,300,16,150,12,4,25,2,0,3500)
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,50,0,300,16,150,12,4,25,2,0,3500)
+.1
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,50,0,300,16,150,12,4,25,2,0,3500)
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(4,50,0,300,16,150,12,4,25,2,0,3500)
+-1
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(6,50,0,300,20,150,12,4,25,2,0,3500)
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(6,50,0,300,20,150,12,4,25,2,0,3500)
+RootTF1Wrappers a;
+TF1* func = a.getSkewFOMTF1();
+func->SetParameters(10,0,100,100,4,4,-1,1)
+func->Draw()
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+int i = 0; 
+a.drawCDF(i,0,1); i++;
+a.drawTrace(i,0,0)
+a.drawTrace(i,0,1); i ++
+.q
+SCDigitalDaqPostProcessing a;
+a.loadFile("ETA_33MeVTa_BeamOnly_001.1.root")
+a.processTreesForTailToPeakAnalysis("testPSDOut.root",50,2,1000000)
+.q
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+int i = 0; 
+a.drawTrace(i,0,1)
+a.drawTrace(i,0,1)
+a.drawTrace(i,0,1); i++
+
+.q
+DigPSDAnalysis a;
+a.loadFile("testPSDOut.root")
+a.makeTtoPPSDHists(6,50,0,300,20,150,12,4,25,2,0,3500)
