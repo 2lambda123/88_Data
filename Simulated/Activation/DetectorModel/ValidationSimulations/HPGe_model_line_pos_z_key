@@ -1,0 +1,7 @@
+HPGe_model_line_pos_z
+
+line	(4)	&expand_worm_shorthand(2,2,'1',0.1)
+pos	(4)	&expand_worm_shorthand(1,5,'1',0.1)
+z	(2)	1,18
+
+Total of 32 cases.
