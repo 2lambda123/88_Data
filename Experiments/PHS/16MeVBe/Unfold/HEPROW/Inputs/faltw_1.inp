@@ -3,7 +3,7 @@ faltw_1.log                               name of protocol file
 1                                         multichannel file available
 0.0,11.7                                  energy range multich. file
 Inputs\stat_100_phs_01.phs                name of multichannel file
-1.00,21,0                                 neutron energy range, mede
+0.5,20.5,0                                 neutron energy range, mede
 Inputs\smearedResp_01_1.rsp               response matrix file
 1                                         1 range for energy calib. correction
 1.0,1.0                                   energy, calibration factor
