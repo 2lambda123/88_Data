@@ -1,17 +1,17 @@
-HPGe Detector with E=ARRAY(0x at pos = ####, ####, 18
+HPGe Detector with E=ARRAY(0x at pos =  0.0,  2.5, 18
 c ****************************************************************************
 c  Cell Cards
 c ****************************************************************************
     1     3    -2.7 -14 -8 2 15 imp:p=1  $Bottom Al Plate
-    2     4      -4.95 -2 15 -16 (3 :1 :-15 ) imp:p=1 $Edge of Dewer
-    3     4      -4.95 14 -4 -9 (16 :2 :-14 ) imp:p=1 $Ge Crystal
-    4     4      -4.95 14 -5 -6 (9 :4 :-14 ) imp:p=1 $Dead Layer
+    2     4      -5            -2 15 -16 (3 :1 :-15 ) imp:p=1 $Edge of Dewer
+    3     4      -5            14 -4 -9 (16 :2 :-14 ) imp:p=1 $Ge Crystal
+    4     4      -5            14 -5 -6 (9 :4 :-14 ) imp:p=1 $Dead Layer
     5     3    -2.7 5 14 -8 -7 imp:p=1  $Al Siding
     6     2 -0.9999 6 -7 -5 imp:p=1  $Mylar Insulation
     7     0         -10 -12 15 (8 :7 :-15 ) imp:p=1 $Vacuum Layer
     8     1   -1.85 -13 12 -11 imp:p=1 $Beryllium Window
     9     3    -2.7 -11 10 -12 15 imp:p=1 $Al Housing
-   13   206    -1.4 27 -29 -28 imp:p=1 $Mylar Shield on Source
+   13   206             -1.4          27 -29 -28 imp:p=1 $Mylar Shield on Source
    14   207   -0.94 -11 13 -26 imp:p=1 $Poly Shield On Detector
    15   205  -11.34 (-18 17 19 -21 -25 23 ):(19 34 -30 -17 -25 23 ): $Lead Case
             (-17 31 -21 34 -25 23 ):(-32 -17 34 23 30 -31 ):
@@ -24,20 +24,20 @@ c ****************************************************************************
 c ****************************************************************************
 c  Surface Cards
 c ****************************************************************************
-    1        cz 0.47
-    2        cz 0.54
+    1        cz 0.93 $ Hole cutout (originally 0.47)
+    2        cz 1.00 $ Hole cutout - edge of dead layer (originally 0.54)
     3        pz 9.58  $ Hole cutout - originally (9.58)
     4        cz 3.24497  $Inner Edge of Dead Layer Originally (3.24497)
     5        cz 3.245  $Outter Edge of Dead Layer Originally (3.245)
     6        pz 10.5  $Top of Dead Layer Originally (10.5)
     7        pz 10.505
     8        cz 3.32103  $Side wall - originally 3.32103
-    9        pz 10.49997  $Bottom of Dead Layer Originally (10.49997)
+    9        pz 10.474  $Bottom of Dead Layer Originally (10.49997)
    10        cz 3.645
    11        cz 3.795
    12        pz 10.905
    13        pz 10.955
-   14        pz 3.72  $Bottom of Germanium Crystal Originally (4.72)
+   14        pz 4.72  $Bottom of Germanium Crystal Originally (4.72)
    15        pz 0
    16        pz 9.65  $ Hole cutout dead layer - Originally (9.65)
    17        pz 40
@@ -60,7 +60,7 @@ c ****************************************************************************
 c  Data Cards
 c ****************************************************************************
 mode  p
-nps  1.8e+07
+nps  1.8e+06
 c ****************************************************************************
 c  Materials
 c ****************************************************************************
@@ -80,7 +80,7 @@ c ****************************************************************************
 c  Source
 c ****************************************************************************
 sdef erg= 0.661657 par=2 x= 0.0000 y= 2.5000
-     z=29.1205  wgt=0.851
+     z=29.1205
 c ****************************************************************************
 c  Tallies
 c ****************************************************************************
