@@ -1,0 +1,16 @@
+mik.log                                  name of printer file
+mik_out.flu                              new fluence file with new uncert.
+5000000,10,4,3.5                          trials, loops, thermalizations, delt
+0.5,1                                    temperature parameter,no covariance
+9
+1.91                                      right boundary of energy interval 2
+2.42                                      right boundary of energy interval 3
+2.93                                      right boundary of energy interval 4
+3.44                                      right boundary of energy interval 5
+3.95                                      right boundary of energy interval 6
+4.46                                      right boundary of energy interval 7
+4.97                                      right boundary of energy interval 8
+5.48                                      right boundary of energy interval 9
+5.99                                      right boundary of energy interval 10
+mik.gru                                  name of the file for group integrals
+ 
