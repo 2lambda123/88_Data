@@ -1,0 +1,933 @@
+#!/usr/bin/perl -w
+################################################################################
+##    The WORM     /     LA-CC-99-69     /     Version 1.6.6, 2007-12-12      ##
+##----------------------------------------------------------------------------##
+##               created by: Tom Jones, <tom.jones@pobox.com>                 ##
+##----------------------------------------------------------------------------##
+##          The latest version (along with documentation, tutorials,          ##
+##            and examples) can be found at http://worm.csirc.net             ##
+################################################################################
+
+################################################################################
+## This software and ancillary information (herein called  "SOFTWARE")        ##
+## called "The WORM" is made available under the terms described here.        ##
+## The SOFTWARE has been approved for release with associated LA-CC Number,   ##
+## LA-CC-99-69.                                                               ##
+##                                                                            ##
+## Unless otherwise indicated, this SOFTWARE has been authored by an employee ##
+## or employees of the University of California, operator of the Los Alamos   ##
+## National Laboratory under Contract No. W-7405-ENG-36 with the U.S.         ##
+## Department of Energy.  The U.S. Government has rights to use, reproduce,   ##
+## and distribute this SOFTWARE.  The public may copy, distribute, prepare    ##
+## derivative works and publicly display this SOFTWARE without charge,        ##
+## provided that this Notice and any statement of authorship are reproduced   ##
+## on all copies.  Neither the Government nor the University makes any        ##
+## warranty, express or implied, or assumes any liability or responsibility   ##
+## for the use of this SOFTWARE.                                              ##
+##                                                                            ##
+## If SOFTWARE is modified to produce derivative works, such modified         ##
+## SOFTWARE should be clearly marked, so as not to confuse it with the        ##
+## version available from LANL.                                               ##
+################################################################################
+
+################################################################################
+##                                                                            ##
+##  NOTE: These comments are somewhat out of date, so take then with a grain  ##
+##        of salt.  I'll try to update then as soon as possible.              ##
+##                                                                            ##
+################################################################################
+##     This file was designed to be viewed with your editor/terminal set to   ##
+##  at least 132 columns wide.  The first 80 columns are used for code, the   ##
+##  remaining 52 for comments.                                                ##
+##----------------------------------------------------------------------------##
+##     The WORM is composed of two parts, one is permanent and the other is   ##
+##  temporary.  These two parts are:                                          ##
+##                                                                            ##
+##       1. worm            "worm" is a perl program that does the majority   ##
+##                          of the work.  It parses your model and creates    ##
+##                          ".worm"                                           ##
+##                                                                            ##
+##       2. .worm           ".worm" is a temporary perl program that is       ##
+##                          created and executed by worm. It produces the     ##
+##                          input-decks described by your model. By default,  ##
+##                          this file is deleted after it is executed.        ##
+##                                                                            ##
+##  The program flow can be illustated in the following diagram:              ##
+##                                                                            ##
+##                 ####################                                       ##
+##                 #     The WORM     #   +--> model_xxx_in                   ##
+##                 #------------------#   |                                   ##
+##       model --> #                  # --+--> model_yyy_in                   ##
+##                 #  worm --> .worm  #   |                                   ##
+##                 #                  #   +--> model_zzz_in                   ##
+##                 ####################                                       ##
+##----------------------------------------------------------------------------##
+##     The model is a text file template containing embedded worm code.  This ##
+##  defines what your input decks will look like.  The worm code is enclosed  ##
+##  angle brackets ("less than" and "greater than" symbols) and has the       ##
+##  following form:                                                           ##
+##                                                                            ##
+##  < name = change | options >   -or-   < name = change \ options >          ##
+##                                                                            ##
+##      name - (optional) may contain any alphanumeric character or the       ##
+##             underscore, "_", character; however names must begin with a    ##
+##             letter or the underscore.                                      ##
+##         = - (required if a name is specified, otherwise optional)          ##
+##    change - (required) a comma separated list of changes.  changes can be  ##
+##             constants (numbers), variables (names), expressions (equations ##
+##             of constants, variables, operators, and functions), shorthand  ##
+##             lists, or any combination of these.                            ##
+##   options - (optional) options and format specification (see the WORM      ##
+##             manual for more information).                                  ##
+##                                                                            ##
+##  There can be multiple changes per line and numbers can be expressed in    ##
+##  either standard or scientific notation (e.g., 0.025, 2.5e-2, 1000000,     ##
+##  1e6).  Additionally, whitespace within worm code is ignored.              ##
+##----------------------------------------------------------------------------##
+##     The following is a brief outline of wormer.  For a more detailed       ##
+##  description, please read the source and accompanying comments (the        ##
+##  comments are a bit rough and the variable names may seem cryptic as they  ##
+##  are a hold-over from a conceptual/developmental precursor to the WORM).   ##
+##  They will be changed to something clearer in a future version/rewrite.    ##
+##                                                                            ##
+##       main::worm                                                           ##
+##          define default parameters                                         ##
+##          initialize some counters                                          ##
+##          parse model line-by-line for each piece of worm code              ##
+##             sub::parse                                                     ##
+##                extract name, changes, options & format                     ##
+##                expand the change specification                             ##
+##                expand the format specification                             ##
+##          sort equations/changes, check for circular references             ##
+##          create .worm                                                      ##
+##             define constants                                               ##
+##             define variables and create loops                              ##
+##             write input-decks using format derived from model              ##
+##             close the loops                                                ##
+##             define the format                                              ##
+##          execute and then delete .worm                                     ##
+################################################################################
+use POSIX qw(strftime);
+$now = time;
+$reserved = {
+    # constants and pre-defined variables
+    pi => {
+        constant => atan2(1,1) * 4,
+    },
+    e => {
+        constant => exp(1)
+    },
+    an => {
+        constant => 0.60221367,
+        description => "Avagadro's Number (as used to calculate atom densities in atom/barn-cm)",
+    },
+    aN => {
+        constant => 6.0221367e23,
+        description => "Avagadro's Number",
+    },
+    bit => {
+        constant => 1e-4,
+    },
+    dateANDtime => {
+        constant => "'".scalar(localtime $now)."'",
+    },
+    wday => {
+        constant => "'".strftime('%a', localtime $now)."'",
+    },
+    month => {
+        constant => "'".strftime('%b', localtime $now)."'",
+    },
+    mday => {
+        constant => "'".strftime('%e', localtime $now)."'",
+    },
+    time => {
+        constant => "'".strftime('%T', localtime $now)."'",
+    },
+    year => {
+        constant => "'".strftime('%Y', localtime $now)."'",
+    },
+    hour => {
+        constant => "'".strftime('%H', localtime $now)."'",
+    },
+    minute => {
+        constant => "'".strftime('%M', localtime $now)."'",
+    },
+    second => {
+        constant => "'".strftime('%S', localtime $now)."'",
+    },
+    date => {
+        constant => "'".strftime('%e-%b-%Y', localtime $now)."'",
+    },
+    cm => {
+        constant => 1,
+    },
+    mm => {
+        constant => 0.1,
+    },
+    m => {
+        constant => 100,
+    },
+    in => {
+        constant => 2.54,
+    },
+    ft => {
+        constant => 12*2.54,
+    },
+    yd => {
+        constant => 3*12*2.54,
+    },
+    mil => {
+        constant => 2.54/1000,
+    },
+    g => {
+        constant => 1,
+    },
+    kg => {
+        constant => 1000,
+    },
+    lb => {
+        constant => 453.59237,
+    },
+    oz => {
+        constant => 453.59237/16,
+    },
+    cc => {
+        constant => 1,
+    },
+    l => {
+        constant => 1000,
+    },
+    gal => {
+        constant => 3785.411784,
+    },
+    ml => {
+        constant => 1,
+    },
+    ozfl => {
+        constant => 3785.411784/128,
+    },
+    rad => {
+        constant => 1,
+    },
+    deg => {
+        constant => (atan2(1,1)*4)/180,
+    },
+    sec => {
+        constant => 1,
+    },
+    min => {
+        constant => 60,
+    },
+    hr => {
+        constant => 3600,
+    },
+    day => {
+        constant => 86400,
+    },
+    yr => {
+        constant => 31556925.9747,
+    },
+    # functions
+    sin => {
+    },
+    asin => {
+    },
+    sinh => {
+    },
+    cos => {
+    },
+    acos => {
+    },
+    cosh => {
+    },
+    tan => {
+    },
+    atan => {
+    },
+    tanh => {
+    },
+    ln => {
+    },
+    log => {
+    },
+    abs => {
+    },
+    rand => {
+    },
+    int => {
+    },
+};
+
+##################################################################################
+use Getopt::Std ;
+#---------------------------------------------------------------------############
+# default parameters                                                  # defaults # These values should probably go into a
+#---------------------------------------------------------------------#----------#   $HOME/.wormrc file.
+$default_precision = 5 ;                                              #    5     # The number of significant figures to display.
+$default_justification = "left"   ;                                   #   left   # left, center, right
+$list_endpoint_tolerance = 0.1;                                       #   0.1    # If the last point calculated for a shorthand
+                                                                      #          #   list specification is less than the specified
+                                                                      #          #   stop point by this percentage, the specified
+                                                                      #          #   stop point will be added to the list.
+$key_name_format = "long"  ;                                          #   long   # The "key" file and input-decks can have two
+$inputdeck_name_format = "long"  ;                                    #   long   #   different filename formats. "long" and "short"
+                                                                      #          #   "long" includes the changing values in the
+                                                                      #          #   filenames and "short" does not.
+$inputdeck_suffix = ".in" ;                                            #   _in    # The suffix to use on "long" format input-decks.
+$key_suffix = "key" ;                                                 #   _key   # The suffix to use on the "key" file.
+$delimiter = "_" ;                                                    #    _     # The character to use as a delimiter in filenames
+#---------------------------------------------------------------------############
+use vars qw($opt_v $opt_V $opt_h $opt_H $opt_n $opt_N) ;
+use vars qw($opt_k $opt_K $opt_w $opt_W $opt_x $opt_X) ;
+getopts('vVhHnNkKwWxXd:s:S:p:j:t:') || err_unknown_option();
+if ($opt_v && !$opt_V) {
+   print ".\n.   The WORM  [Version 1.6.6, 2007-12-12]\n.\n" ;
+   exit 0;
+}
+if ($opt_h && !$opt_H) { usage() }
+if ($opt_n) { $inputdeck_name_format = "short" }
+if ($opt_N) { $inputdeck_name_format = "long"  }
+if ($opt_k) { $key_name_format = "short" }
+if ($opt_K) { $key_name_format = "long"  }
+if ($opt_d && $opt_d eq "none") { $delimiter = "" }
+   elsif ($opt_d) { $delimiter = $opt_d }
+if ($opt_s && $opt_s eq "none") { $inputdeck_suffix = "" }
+   elsif ($opt_s) { $inputdeck_suffix = $opt_s }
+if ($opt_S && $opt_S eq "none") { $key_suffix = "" }
+   elsif ($opt_S) { $key_suffix = $opt_S }
+if ($opt_p) { $default_precision = $opt_p }
+if ($opt_j) { $default_justification = $opt_j }
+if ($opt_t) { $list_endpoint_tolerance = $opt_t }
+if ($#ARGV == -1) { usage() }
+#--------------------------------------------------------------------------------
+$inputdeck_suffix = "$inputdeck_suffix" ;
+$key_suffix = "$delimiter"."$key_suffix" ;
+if ($default_justification =~ /^right$/i) {                                      # Substitute ">" for right, "|" for center, and
+   $default_justification = ">" ;                                                #  "<" for anything else.
+} elsif ($default_justification =~ /^center$/i) {                                #
+   $default_justification = "|" ;                                                #
+} else {                                                                         #
+   $default_justification = "<" ;                                                #
+}                                                                                #
+if ($default_precision lt 1 || $default_precision =~ /[^0-9]/) {                 # If the default precision is set to less than 1
+   $default_precision = 15 ;                                                     #   or contains something other than a number, use
+}                                                                                #   5 for the full precision.
+$default_format = $default_justification x ($default_precision + 7) ;            # Create the default format using the precision
+                                                                                 #   and justication specified above.  Seven is
+                                                                                 #   added to the precision to make room for the
+                                                                                 #   sign and sci. not. if needed. Don't change it.
+if ($key_suffix eq $inputdeck_suffix && $inputdeck_suffix ne "") {               # If both the key and inputdeck suffices are ""
+   $inputdeck_suffix = "$delimiter"."in" ;                                       #   use "key" and "in" to prevent from destoying
+   $key_suffix = "$delimiter"."key" ;                                            #   each other when there would be only one input
+}                                                                                #   created.
+foreach $model (@ARGV) {
+open MODEL, "<$model" or die "Failed to open file '$model': $!\n";
+#--------------------------------------------------------------------------------#
+#   Initialize counters, etc.                                                    #
+#--------------------------------------------------------------------------------#
+$line = 0 ;                                                                      # Initialize $line (the line counter), $loop (the
+$codeline = 0;
+$fileline = 0;
+$perlcode = 0;
+$loop = 0 ;                                                                      #   loop, or number of changes, counter),
+$non_loop = 0 ;                                                                  #   $non_loop (arrays or single value changes) and
+$null = "" ;                                                                     #   $null (used to intialize other variables),
+$total_number_of_input_decks = 1 ;                                               #   $total_number_of_input_decks (the number of
+                                                                                 #   input-decks to be created).
+$::worm_package = 'worm_'.int(rand(1e6));
+undef (@list) ;
+undef (@code) ;
+undef (@list_name) ;
+undef (@name) ;
+undef (@list_options) ;
+undef (@input) ;
+undef (@mods) ;
+undef (%location) ;
+#--------------------------------------------------------------------------------#
+#   Parse and reformat lines                                                     #
+#--------------------------------------------------------------------------------#
+while (<MODEL>) {                                                                # Read in input file one line at a time, remove
+   chomp ;                                                                       #   the CR/LF at the end of the line
+   ++$fileline;
+   if ($_ =~ /^\s*<perl>\s*$/i) {
+      ++$perlcode ;
+      if ($perlcode > 1) {
+         err_nested_perl_tag($fileline);
+      }
+      next ;
+   } elsif ($_ =~ /^\s*<\/perl>\s*$/i) {
+      --$perlcode ;
+      if ($perlcode < 0) {
+         err_unmatched_perl_tag($fileline);
+      }
+      next ;
+   }
+   if ($perlcode == 1) {
+      $code[$codeline] = $_ ;
+      ++$codeline ;
+   } elsif ($perlcode == 0) {
+      $input[$line] = $_ ;
+      $mod_number = -1 ;                                                         # Initialize the modifications per line counter.
+#      $mods[$line] = ($input[$line]=~s/<.*?(?<!=)>|[@^]/parse($&)/ge) ;          # Store the number of changes per line in $mod[x]
+      $mods[$line] = ($input[$line]=~s/<(?:[^']*?(?:'[^']*')*[^']*?)*?(?<!=)>|[@^]/parse($&)/ge) ;          # Store the number of changes per line in $mod[x]
+                                                                                 #   and replace the change specification with the
+                                                                                 #   expanded format.
+      ++$line ;
+   } else {
+      err_unexpected_condition($fileline);
+   }
+}                                                                                #
+#--------------------------------------------------------------------------------#
+# Sort equations and variables, and check for circular references                #
+#--------------------------------------------------------------------------------#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#for ($i=0; $i<=$loop-1; ++$i) {print "$list_name[$i] = $list[$i]\n";}           # PRINT LISTS & NAMES PRE-SORT  |
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$sort_count = 0 ;                                                                # Initialize the sort_counter to 0.
+$unsorted_end = $#list ;                                                         # Set the unsorted_end of the list to the end of
+                                                                                 #   to the end of the list (ther entire list is
+                                                                                 #   unsorted).
+SORT: for ($i=$unsorted_end; $i>=0; --$i) {                                      # Loop through the unsorted list starting at the
+                                                                                 #   top.
+   $search_name = $list_name[$i] ;                                               # Create a search name which is the LHS of the
+   if ($search_name =~ /^[@%]/) { $search_name =~ s/[@%]// }                     #   equation. If the item is an array or hash,
+                                                                                 #   remove the leading "@" or "%".
+   for ($j=$i; $j>=0; --$j) {                                                    # Look at the RHS of all equations above the
+      if ($list[$j] =~ /\$($search_name)[,\)\+\-\*\/%\]\[}{;]+|\$($search_name)$/){ #   current one, and if any of these contain the
+         unshift @list_name, $list_name[$i] ;                                    #   LHS of the equation at the bottom of the
+         unshift @list, $list[$i] ;                                              #   unsorted list then the item at the bottom,
+         unshift @list_options, $list_options[$i] ;                              #   along with its RHS and associated options,
+         splice @list_name, $i+1, 1 ;                                            #   needs to be moved to the top of the list.
+         splice @list, $i+1, 1 ;                                                 #   The expressions in the "if" statement are to
+         splice @list_options, $i+1, 1 ;                                         #   to make sure that only complete names match
+                                                                                 #   each other ("mass" would not match "mass1").
+         ++$sort_count ;                                                         # If there was a match, then the sort_counter gets
+                                                                                 #   incremented.
+         if ($sort_count == $i+1) {                                              # If the sort_count is equal to one more than the
+               print ".\n.   ERROR: circular reference involving the following:\n." ;
+                  for my $x (0..$i) {                                            #   current position in the list, then there is a
+                     $list[$x] =~ s/\$//g ;                                      #   circular reference and execution of the prog.
+                     $list[$x] =~ s/&expand_worm_shorthand\((.*?),(.*?),'(.*?)',$list_endpoint_tolerance\)/remove_package_name($1).':'.remove_package_name($2).":$3"/ge;
+                     $list[$x] = join(', ', map(remove_package_name($_), split(/,/, $list[$x])));
+                     print "\n.   line $location{$list_name[$x]}: ", remove_package_name($list_name[$x]), " = $list[$x]" ;                  #   stops and an error message is displayed.
+                  }
+              print "\n.\n";
+              exit 1;
+            }
+         goto SORT ;                                                             # After rearraging the list, start the sort over.
+      }                                                                          #
+   }                                                                             #
+   --$unsorted_end ;                                                             # If you make it through the inner loop then the
+                                                                                 #   current item in the list does not have any
+                                                                                 #   dependencies above it.  The unsorted_end is
+   $sort_count = 0 ;                                                             #   decrmented and the sort_counter reset to zero.
+}                                                                                #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#print "\n";                                                                     #                               |
+#for ($i=0; $i<=$loop-1; ++$i) {print "$list_name[$i] = $list[$i]\n";}           # PRINT LISTS & NAMES POST-SORT |
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#--------------------------------------------------------------------------------#
+#   Create unique filenames for changes and key file header                      #
+#--------------------------------------------------------------------------------#
+$filename = "\"$model\"" ;                                                       #
+$key = $model ;                                                                  #
+if ($inputdeck_name_format =~ /^short$/i) {                                      # If the short input-deck name format is to be
+   $filename .= ".\$wormLOOPcount" ;                                             #   used then use this simpler, but still unique
+} else {                                                                         #   filename scheme, if not then use the following
+   for ($i=0; $i<=$#list; ++$i) {                                                # If an item is a multivalue change, or if the
+      if (($list[$i] =~ /,/ || $list_options[$i] =~ /n/i) &&                     #   options contain the "filename" flag, then
+         $list_name[$i] !~ /^[@%]/) {                                            #   the value of the variable needs to be included
+         if ($list[$i] =~ /"|\.\$|^\(::(?:dateANDtime|time|wday|month|date)\)$/){#   in the input deck filenames.  If the value is
+            $filename .= ".\"$delimiter\".\$$list_name[$i]" ;                    #   the result of concatenation or is a text value
+         } else {                                                                #   then don't use sprintf to format it, if not
+            $filename .=                                                         #   then it is a numerical value then sprintf
+       ".\"$delimiter\".(sprintf \"%.${default_precision}g\",\$$list_name[$i])"; #   should be used.  Additionally, these values
+         }                                                                       #   will be inclded in the key file so that it
+         $key .= "$delimiter".remove_package_name($list_name[$i]) ;              #   can be determined what the values in the
+      }                                                                          #   filenames represent.  The numerical values
+   }                                                                             #   are printed in the input deck filenames using
+}                                                                                #   the default_precision.
+if ($key_name_format =~ /^short$/i) {                                            # If $key_name_format = short then use the short
+   $key_name = $model ;                                                          #   filename format for the key file, if not
+} else {                                                                         #   use the long format.
+   $key_name = $key ;                                                            #
+}                                                                                #
+if ($key_name eq $model && $key_suffix eq "") {                                  # If $key_name is the same as the supplied input
+   $key_suffix = "_key" ;                                                        #   file and the key_suffix is "", use "_key" for
+}                                                                                #   the key_suffix to keep from destroying the
+                                                                                 #   supplied input file.
+if (!$opt_x || $opt_X) {
+   open LEGEND, ">$key_name"."$key_suffix" || die "can't create key file: $!" ;  # Open the key file and add the filename
+   print LEGEND "$key\n\n" ;                                                     #   legend/key.
+}
+#--------------------------------------------------------------------------------#
+# Open temporary file ".worm" for writing and give the owner read, write, and    #
+# execute privelges. Define constants and use POSIX for a few functions.         #
+#--------------------------------------------------------------------------------#
+open BUILDER, ">.worm" || die "can't create temporary file \".worm\": $!" ;      #
+chmod (0700, ".worm") ;                                                          #
+print BUILDER "#!/usr/bin/perl -w\n" ;                                           #
+print BUILDER "use strict;\n" ;
+print BUILDER "use POSIX qw(tan asin acos atan log10 sinh cosh tanh);\n" ;       #
+while (my($constant, $value) = each %{$reserved}) {
+    if (exists $value->{constant}) {
+        print BUILDER "use constant $constant => $value->{constant};\n";
+    }
+}
+#
+# include perl code sections
+#
+print BUILDER "# BEGIN code from WORM model\n";
+for ($i=0; $i<=$#code; ++$i) {
+   print BUILDER "$code[$i]\n" ;
+}
+print BUILDER "# END code from WORM model\n";
+#
+print BUILDER "my \$wormLOOPcount = 1;\n" ;                                      # Initialize .worm's loopcounter.
+print BUILDER <<'LOOP_EXPANDER';
+sub expand_worm_shorthand {
+    my ($start, $stop, $step, $list_endpoint_tolerance) = @_;
+    my $exclusive = $step =~ /^x/i;
+    if ($start == $stop) {
+        return $exclusive ? undef : $start;
+    }
+    my $min; my $max; my $inc;
+    if ($start < $stop) {
+        $min = $start;
+        $max = $stop;
+    } else {
+        $min = $stop;
+        $max = $start;
+    }
+    my (@expanded_list, $i);
+    if ($step =~ /^x?log/i) {                                                    # If $step contains "log" then perform a
+        $min = log($min) ;                                                       #   logarthmic interpolation.
+        $max = log($max);                                                        #
+        $inc = $step;
+        $inc =~ s/^x?log// ;                                                     #
+        $inc += 2 if $exclusive;
+        $inc =($max-$min)/($inc-1) ;                                             # Calculate the appropriate increment.
+        for ($i=$min; $i<=$max; $i+=$inc) {                                      # Expand the list.
+            push @expanded_list, exp($i);                                        #
+        }                                                                        #
+#        if (1-(exp($i-$inc))/exp($max) > $list_endpoint_tolerance/100){          # If the last point interpolated is below
+#            push @expanded_list, exp($max);                                      #   list_endpoint_tolerance % of the specified
+#        }                                                                        #   stop point then add it to the list.
+    } elsif ($step =~ /^x?lin/i) {                                               # If $step contains "lin" then perform a linear
+        $inc = $step;                                                            #   interpolation and calculate the appropriate
+        $inc =~ s/^x?lin// ;                                                     #   increment.                                 
+        $inc += 2 if $exclusive;
+        $inc = ($max-$min)/($inc-1);
+        for ($i=$min; $i<=$max; $i+=$inc) {                                      # Exapnd the list.
+            push @expanded_list, $i;                                             #
+        }                                                                        #
+#        if (1-($i-$inc)/$max > $list_endpoint_tolerance/100) {                   # If the last point interpolated is below
+#            push @expanded_list, $max                                            #   list_endpoint_tolerance % of the specified;
+#        }                                                                        #   stop point then add it to the list.
+    } else {                                                                     # If $step is a simple number, then use it.
+        $inc = $step;
+        $inc = abs($inc);
+        for ($i=$min; $i<=$max; $i+=$inc) {                                      # Exapnd the list.
+            push @expanded_list, $i;                                             #
+        }                                                                        #
+        if (1-($i-$inc)/$max > $list_endpoint_tolerance/100) {                   # If the last point interpolated is below
+            push @expanded_list, $max                                            #   list_endpoint_tolerance % of the specified;
+        }                                                                        #   stop point then add it to the list.
+    }
+    if ($exclusive) {
+        return @expanded_list[1..$#expanded_list-1]
+    } else {
+        return @expanded_list;
+    }   
+}
+LOOP_EXPANDER
+#--------------------------------------------------------------------------------#
+# Build loops                                                                    #
+#--------------------------------------------------------------------------------#
+for ($i=0; $i<=$#list; ++$i) {                                                   # The sorted loops/equations are now added to the
+                                                                                 #   temporary file ".worm".
+   if ($list_name[$i] =~ /^([@%])/) {                                            # If the item is an array, prepend a "" to it so
+      my $type = $1;
+      $list[$i]='"",'.$list[$i] if $type eq '@';                                 #   that it can be referenced starting with "1"
+      $list[$i] =~ s/;/,/g ;
+      $list[$i] =~ s/(?<=[\w}]\])(\[|\{)/->$1/g ;
+      $list_name[$i] =~ s/^[@%]//;
+      print BUILDER "\$$list_name[$i]=[($list[$i])];\n" if $type eq '@';         #   instead of "0".
+      print BUILDER "\$$list_name[$i]={($list[$i])};\n" if $type eq '%';         #   instead of "0".
+      ++$non_loop ;                                                              # Increment the non_loop counter.
+   } elsif ($list_name[$i] !~ /^[@%]/) {                                            # If the item is not an array, but is a list
+      if ($list[$i] =~ /,/) {                                                    #   (multivalue change) add it's name, number of
+         @list_items = split /,/, $list[$i] ;                                    #   items in it's list, and the list to the
+         $list_item_count = $#list_items + 1 ;                                   #   key file.
+         $total_number_of_input_decks *= $list_item_count ;                      #   Keep track of the total number of input-decks
+                                                                                 #   to be created.
+         if (!$opt_x || $opt_X) {
+            print LEGEND remove_package_name($list_name[$i]),
+                         "\t\($list_item_count\)\t$list[$i]\n";                  #   Also, use a "foreach" in ".worm".
+         }
+         $list[$i] =~ s/;/,/g ;
+         $list[$i] =~ s/(?<=[\w}]\])(\[|\{)/->$1/g ;
+         print BUILDER "foreach \$$list_name[$i]_index ($list[$i]) {\n" ;        #   If the options contains "i" or "I" the use
+         print BUILDER "   next unless defined \$$list_name[$i]_index;\n";
+         if ($list_options[$i] =~ /i/i) {                                        #   "int(...)" to force an integer value,
+            print BUILDER "   \$$list_name[$i]=int(\$$list_name[$i]_index);\n" ; #   otherwise just use the value.
+         } else {                                                                #
+            print BUILDER "   \$$list_name[$i]=\$$list_name[$i]_index;\n" ;      #
+         }                                                                       #
+      } else {                                                                   # If the item is not an array, but is a single
+         $list[$i] =~ s/;/,/g ;
+         $list[$i] =~ s/(?<=[\w}\]])(\[|\{)/->$1/g ;
+         if ($list_options[$i] =~ /i/i) {                                        #   value or expression, then simply use the
+            print BUILDER "\$$list_name[$i]=int($list[$i]);\n" ;                 #   value.  Again checking the options for the
+         } else {                                                                #   integer flag, and acting accordingly.
+            print BUILDER "\$$list_name[$i]=$list[$i];\n" ;                      #   Also, since it is not a mutlivalue change,
+         }                                                                       #   a "foreach" loop isn't necessary, and the
+         ++$non_loop ;                                                           #   non_loop counter should be decremented.
+      }                                                                          #
+   }                                                                             #
+}                                                                                #
+if (!$opt_x || $opt_X) {
+   print LEGEND "\nTotal of " ;                                                  # Add the total number of input-decks created to
+   print LEGEND "$total_number_of_input_decks cases.\n" ;                        #   the key file.
+}
+#--------------------------------------------------------------------------------#
+# Create files using INPUT_DECK format                                           #
+#--------------------------------------------------------------------------------#
+if ($loop-$non_loop == 0 && $inputdeck_name_format !~ /^short$/i &&              # If only one file is to be created and the format
+      $inputdeck_suffix eq "") {                                                 #   isn't "short" and the suffix is set to "", use
+   $inputdeck_suffix = ".in" ;                                                   #   "_in" for the suffix.
+}                                                                                #
+print BUILDER "my \$filename = $filename.\"$inputdeck_suffix\";\n" ;             #
+print BUILDER "open INPUT_DECK, \">\$filename\";\n" ;                            #
+print BUILDER "select((select(INPUT_DECK),\$==$line)[0]);\n" ;                   # set the format page length to model file length
+print BUILDER "write INPUT_DECK;\n" ;                                            #
+#--------------------------------------------------------------------------------#
+# Close loops                                                                    #
+#--------------------------------------------------------------------------------#
+print BUILDER "++\$wormLOOPcount;\n" ;                                           # Increment .worm's loop counter.
+$loop_end = "}" x ($loop-$non_loop) ;                                            # Add the correct number of "}" to close the
+print BUILDER "$loop_end\n" ;                                                    #   loops.
+#--------------------------------------------------------------------------------#
+# Define format based upon template file (that's the one that was supplied as    #
+# an argument to this program)                                                   #
+#--------------------------------------------------------------------------------#
+print BUILDER "format INPUT_DECK =\n" ;                                          # The format section of ".worm" is now going to be
+#use Data::Dumper;
+#print STDERR Dumper \@input;
+for ($i=0; $i<=$#input; ++$i) {                                                  #   defined for each line of the worm model,
+   if ($input[$i] !~ /^#/) {                                                     #   unless the kill character (#) is the first
+                                                                                 #   character on the line.
+      print BUILDER "$input[$i]\n" ;                                             # The line from the worm model (with the change
+#print STDERR "$input[$i]\n";
+#print STDERR "$mods[$i]\n";
+      if ($mods[$i]) {                                                           #   specification replaced by the expanded format)
+         my $line_hash_count=0;
+         for ($j=0; $j<=$mods[$i]-1; ++$j) {                                     #   is added to the format.  If the line contains
+            if ($j < $mods[$i]-1) {                                              #   a change(s) then it is followed by another
+               if ($name[$i][$j] =~ /^@/) {                                      #   line that contains the value to be inserted
+                  print BUILDER "\"@\"," ;                                       #   into the expanded format field. If the change
+               } elsif ($name[$i][$j] =~ /^%/) {
+                  $line_hash_count++;
+                  # do nothing!
+               } elsif ($unexpanded_format[$i][$j] eq "") {                      #   is not the last one for the line then it is
+                  print BUILDER "(sprintf \"%.$precision[$i][$j]g\"," ;          #   followed by a comma.  If no format was
+                  print BUILDER "\$$name[$i][$j])," ;                            #   specified or if a scientific notation format
+               } elsif ($unexpanded_format[$i][$j] =~ /^[1-9]+[0-9]*s$/i) {      #   was specified, then use the "sprintf" function
+                  print BUILDER "(sprintf \"%.$precision[$i][$j]e\"," ;          #   is used to properly format the value. Also,
+                  print BUILDER "\$$name[$i][$j])," ;                            #   if an array is to be printed, "@" is added to
+               } else {                                                          #   the value line to compensate for the fact that
+                  print BUILDER "\$$name[$i][$j]," ;                             #   "@" and "^" shouldn't be used the format
+               }                                                                 #   section except to begin fields.
+            } else {                                                             # If the modification is the only or last one for
+               if ($name[$i][$j] =~ /^@/) {                                      #   a line then do exactly the same mess as above
+                  print BUILDER "\"@\"\n" ;                                      #   but add a CR/LF after the value instead of a
+               } elsif ($name[$i][$j] =~ /^%/) {
+                  $line_hash_count++;
+                  print BUILDER "\n" if ($line_hash_count != $mods[$i]);
+               } elsif ($unexpanded_format[$i][$j] eq "") {                      #   comma.
+                  print BUILDER "(sprintf \"%.$precision[$i][$j]g\"," ;          #
+                  print BUILDER "\$$name[$i][$j])\n" ;                           #
+               } elsif ($unexpanded_format[$i][$j] =~ /^[1-9]+[0-9]*s$/i) {      #
+                  print BUILDER "(sprintf \"%.$precision[$i][$j]e\"," ;          #
+                  print BUILDER "\$$name[$i][$j])\n" ;                           #
+               } else {                                                          #
+                  print BUILDER "\$$name[$i][$j]\n" ;                            #
+               }                                                                 #
+            }                                                                    #
+         }                                                                       #
+      }                                                                          #
+   }                                                                             #
+}                                                                                #
+print BUILDER ".\n" ;                                                            # Close the format section by placing a single "."
+close BUILDER ;                                                                  #   on a line by itself.
+system "perl -w .worm" ;
+if (!$opt_w || $opt_W) { unlink ".worm" }
+}
+##################################################################################
+
+##################################################################################
+sub parse {                                                                      #
+#use Data::Dumper;
+#print STDERR $_[0],"\n";
+#--------------------------------------------------------------------------------#
+   ++$mod_number ;                                                               # Increment the modifications per line counter
+   $mod[$line][$mod_number] = shift(@_) ;                                        # Store the first value (there should only be one)
+                                                                                 #   of the subroutine argument array in $mod[x][y]
+if ($mod[$line][$mod_number] !~ /^[@^]$/) {
+   $mod[$line][$mod_number] =~ s/\s//g ;                                         # Get rid of white space.
+   $mod[$line][$mod_number] =~ s/^<//;                                           # Remove the leading "<"
+#--------------------------------------------------------------------------------#
+#   Extract/Create $name                                                         #
+#--------------------------------------------------------------------------------#
+   $null =~ s/.*// ;                                                             # Initialize $& to ""
+   $mod[$line][$mod_number] =~ /^.+?=/ ;                                          # If the modification starts with one or more
+   $name[$line][$mod_number] = $& ;                                              #   characters followed by "=", then a variable
+                                                                                 #   name is specified and will be stored in
+                                                                                 #   $name[x][y]
+   chop $name[$line][$mod_number] ;                                              # Remove the trailing "=" from $name[x][y]
+   if ($& !~ /=(?!>)/) {                                                         # If the modification doesn't contain "=" (except when
+                                                                                 #   when part of '=>') then
+      $name[$line][$mod_number] = "temp".$line."x".$mod_number ;                 #   a variable name isn't specified and a name in
+   }                                                                             #   the form tempNxM is created, where N=line #
+                                                                                 #   and M=modification number (remember, counting
+                                                                                 #   starts with 0).
+   my $normalized_name = $name[$line][$mod_number];
+   $normalized_name =~ s/^[@%]//;
+   $name[$line][$mod_number] = package_variable($name[$line][$mod_number]);
+   if (exists $reserved->{$normalized_name}) {
+      err_reserved_name($normalized_name, $fileline);
+   }
+   if (exists $location{$normalized_name}) {
+      err_redefined_var($normalized_name, $fileline);
+   } else {
+      $location{$normalized_name} = $fileline;
+   }
+#--------------------------------------------------------------------------------#
+#   Extract the unexpanded change/modification                                   #
+#--------------------------------------------------------------------------------#
+   $null =~ s/.*// ;                                                             # Initialize $& to "" again.
+   $mod[$line][$mod_number] =~ /=.+?(?:[\\|]|(?<!=)>)/ ;                         # Assign everything between "=" and either "\",
+   $change[$line][$mod_number] = $& ;                                            #   or "|" to $change[x][y]
+   if ($& !~ /=(?!>)/) {                                                         # If the modification doesn't contain "=" then
+      $mod[$line][$mod_number] =~ /.+?[\\|>]/ ;                                  #   assign everything up to either "\", "|", or
+      $change[$line][$mod_number] = $& ;                                         #   ">" to $change[x][y]
+   }                                                                             #
+   $change[$line][$mod_number] =~ s/=>/;/g;                                      # seems like the easiet way to allow '=>' as a
+                                                                                 #   separator in function calls
+   $change[$line][$mod_number] =~ s/[<=\\|>]//g ;                                # Remove "<", "=", "\", "|", and ">" from
+                                                                                 #   $change[x][y]
+#--------------------------------------------------------------------------------#
+#   Extract options and the unexpanded format                                    #
+#--------------------------------------------------------------------------------#
+   $null =~ s/.*// ;                                                             # Initialize $& to "" again.
+   $mod[$line][$mod_number] =~ /[\\|].+?>/ ;                                     # Assign everything between either "\" or "|" and
+   $optionsANDformat[$line][$mod_number] = $& ;                                  #   ">" to $optionsANDformat[x][y]
+   $options[$line][$mod_number] = $optionsANDformat[$line][$mod_number] ;        #
+   $format[$line][$mod_number] = $optionsANDformat[$line][$mod_number] ;         #
+   $options[$line][$mod_number] =~ s/[^in]//ig ;                                 # Remove everything other than "i", "I", "n", or
+                                                                                 #   "N" from $options[x][y]
+   $format[$line][$mod_number] =~ s/[\\|>in,]//ig ;                              # Remove "\", "|", ">", "i", "I", "n", and "N"
+                                                                                 #   from $format[x][y]
+   $unexpanded_format[$line][$mod_number] = $format[$line][$mod_number] ;        #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#print "\t$optionsANDformat[$line][$mod_number]\t$options[$line][$mod_number]" ; #                          |
+#print "\t$format[$line][$mod_number]\n" ;                                       # PRINT OPTIONS AND FORMAT |
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#--------------------------------------------------------------------------------#
+#   Expand the change into a list.  Shorthand notation is expanded and           #
+#   expressions are put into a list format.  Varaibles and constants in the      #
+#   expressions are prefaced with a "$", while functions are not.                #
+#--------------------------------------------------------------------------------#
+   if ($change[$line][$mod_number] =~ /[^0-9,\.]/ ) {                            # If $change[x][y] contains something other than
+                                                                                 #   numbers or a decimal point then needs to be
+                                                                                 #   expanded.
+      $expanded_list = "" ;                                                      # Initalize/clear-out $expanded_list
+      foreach $list_item (split /,/,  $change[$line][$mod_number]) {             # Split $change[x][y] into a list using "," as
+                                                                                 #   a separator, then loop for each list_item.
+         if ($list_item =~ /:/ ) {                                               # If $list_item contains ":", then it is a
+                                                                                 #   shorthand specification.
+            ($start, $stop, $step) = split (/:/, $list_item) ;                   # Split $list_item into $start, $stop, $step
+            if ($start !~ /./ || $stop !~ /./ || !valid_list_step($step)) {
+               err_invalid_shorthand($list_item, $fileline);
+            }
+            $start = expand_dependency($start);
+            $stop = expand_dependency($stop);
+            $expanded_list .= "&expand_worm_shorthand($start,$stop,'$step',$list_endpoint_tolerance),";
+         } else {                                                                # If $list_item doesn't contain ":" then it must
+                                                                                 #   be an expression (which I called a
+                                                                                 #   "dependency" when originally wrote this).
+            @dependency = split /([\+\-\*\/%\^\(\)\[\]{}\.;])/, $list_item ;     # Split $list_item using "+", "-", "*", "/", "%",
+                                                                                 #   "^", "(", ")", "[", "]" and "." as separators
+                                                                                 #   The "()" just inside the "/.../" mean that
+                                                                                 #   that the separators should be retained in the
+                                                                                 #   list so that "a+b-c" becomes "a,+,b,-,c"
+                                                                                 #   instead of "a,b,c".
+            for ($i=0; $i<=$#dependency; ++$i) {                                 # Loop through each item in the dependency array
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#print "$dependency[$i] ";                                                       # PRINT LIST ITEMS              |
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+               $expanded_list .= expand_dependency($dependency[$i]);
+            }                                                                    #
+            $expanded_list .= "," ;                                              # Add a comma to the expanded list.
+         }                                                                       #
+      }                                                                          #
+      chop $expanded_list ;                                                      # Remove the last comma from the expanded_list.
+      $change[$line][$mod_number] = $expanded_list ;                             # Change $change[x][y] to $expanded_list.
+   }                                                                             #
+#--------------------------------------------------------------------------------#
+#   Expand the supplied format specification or use the default_format           #
+#--------------------------------------------------------------------------------#
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#print "$format[$line][$mod_number] ";                                           # PRINT FORMAT - PRE-EXPANSION  |
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   if ($format[$line][$mod_number] =~ /^[1-9]+[0-9]*\.[1-9]+[0-9]*$/) {          # If the format is of the form "N.M",
+      @format_elements = split /\./, $format[$line][$mod_number] ;               #   expand it to ####.#### (where N = number of #
+      $format[$line][$mod_number] =                                              #   before the decimal point and M = number of #
+         "#"x$format_elements[0]."."."#"x$format_elements[1] ;                   #   after the decimal point).
+   } elsif ($format[$line][$mod_number] =~ /^[1-9]+[0-9]*[#lcrs]$/i) {           # If the format is of the form N#, Nl, Nc, or Nr,
+      @format_elements = split /([#lcrs])/i, $format[$line][$mod_number] ;       #   expand it to #####, lllll, ccccc, rrrrr
+      if ($format_elements[1] =~ /s/i ) {                                        #   (where N = the number of #, l, c, or r). If
+         $precision[$line][$mod_number] = $format_elements[0] - 1 ;              #   the format is Ns, add 7 to N and expand
+         $format_elements[0] += 7 ;                                              #   to sssssssss to leave room for the "e", the
+      }                                                                          #   exponent, and the signs. Also in the case of
+      $format[$line][$mod_number] = $format_elements[1] x $format_elements[0] ;  #   sci. notation, set $precision[x][y] = N-1.
+   } elsif ($format[$line][$mod_number] =~ /^f$/i) {                             # If the format is "f" of "F" (full precision)
+      $format[$line][$mod_number] =  "$default_justification" x 22 ;             #   report the value to Perl's normal full
+                                                                                 #   precision (~16 significant figures).
+   } elsif ($format[$line][$mod_number] =~ /^[1-9]+[0-9]*$/) {                   # If the format is a single number > 0 then
+      $format[$line][$mod_number] =                                              #   use the default justification with N
+         $default_justification x $format[$line][$mod_number]                    #   significant figures.
+   } else {                                                                      # Create "special" default formats.
+      if ($change[$line][$mod_number] =~  /"|\.\$|^\(::dateANDtime\)$/) {        # If the change contains """ or ".$" or is
+         $format[$line][$mod_number] = "$default_justification" x 24 ;           #   "dateANDtime" use 24L.
+         $unexpanded_format[$line][$mod_number] = "24l" ;                        #
+      } elsif ($change[$line][$mod_number] =~  /^\(::time\)$/) {                 # If the change is "time" use 8L.
+         $format[$line][$mod_number] = "$default_justification" x 8 ;            #
+         $unexpanded_format[$line][$mod_number] = "8l" ;                         #
+      } elsif ($change[$line][$mod_number] =~  /^\(::date\)$/) {
+         $format[$line][$mod_number] = "$default_justification" x 11 ;
+         $unexpanded_format[$line][$mod_number] = "11l" ;
+      } elsif ($change[$line][$mod_number] =~  /^\(::(?:wday|month)\)$/) {       # If the change is "wday" or "month" use 3L.
+         $format[$line][$mod_number] = "$default_justification" x 3 ;            #
+         $unexpanded_format[$line][$mod_number] = "3l" ;                         #
+      } elsif ($change[$line][$mod_number] =~                                    # If the change is "mday" or "hour" or "minute" or
+            /^\(::(?:mday|hour|minute|second)\)$/) {                         #   "second" use 2L.
+         $format[$line][$mod_number] = "$default_justification" x 2 ;            #
+         $unexpanded_format[$line][$mod_number] = "2l" ;                         #
+      } elsif ($change[$line][$mod_number] =~  /^\(::year\)$/) {                 # If the change is "year" use 4L.
+         $format[$line][$mod_number] = "$default_justification" x 4 ;            #
+         $unexpanded_format[$line][$mod_number] = "4l" ;                         #
+      } else {                                                                   #
+         $format[$line][$mod_number] = $default_format ;                         # If no format was specified, or if the format
+         $precision[$line][$mod_number] = $default_precision ;                   #   specification was incorrect, use the default
+         $unexpanded_format[$line][$mod_number] = "" ;                           #   format and precision.
+      }                                                                          #
+   }                                                                             #
+   if ($name[$line][$mod_number] =~ /^[@%]/) {                                   # If the item is an array then ignore the format
+      $format[$line][$mod_number] =                                              #   and use <name=expanded change/list>,
+         "<".$mod[$line][$mod_number] ;                                          #   otherwise swap "<" for "l", "|" for "c",
+   } else {                                                                      #   ">" for "r", and "<" for "s"; and replace the
+      $format[$line][$mod_number] =~ tr/lcrsLCRS/<|><<|></ ;                     #   first character of $format[x][y] with "@".
+      $format[$line][$mod_number] =~ s/^./@/ ;                                   #
+   }                                                                             #
+} else {
+   $change[$line][$mod_number] = "'".$mod[$line][$mod_number]."'";
+   $name[$line][$mod_number] = 'temp'.$line.'x'.$mod_number;
+   $name[$line][$mod_number] = package_variable($name[$line][$mod_number]);
+   $options[$line][$mod_number] = '';
+   $format[$line][$mod_number] = '@';
+   $unexpanded_format[$line][$mod_number] = $format[$line][$mod_number] ;
+}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#print "$format[$line][$mod_number]\n";                                          # PRINT FORMAT - POST-EXPANSION |
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#--------------------------------------------------------------------------------#
+#   Store some values for use in the Equation Sorter and Loop Builder            #
+#--------------------------------------------------------------------------------#
+   $list[$loop] = $change[$line][$mod_number] ;                                  #
+   $list_name[$loop] = $name[$line][$mod_number] ;                               #
+   $list_options[$loop] = $options[$line][$mod_number] ;                         #
+   ++$loop ;                                                                     #
+#--------------------------------------------------------------------------------#
+#   Return to main program                                                       #
+#--------------------------------------------------------------------------------#
+   return $format[$line][$mod_number] ;                                          #
+}                                                                                #
+##################################################################################
+
+##################################################################################
+sub usage {                                                                      #
+    die ".\n.   USAGE:  worm [OPTION]... FILE...\n.\n" ;                         #
+}                                                                                #
+##################################################################################
+
+sub valid_list_step {
+    my $step = shift;
+    my $return = 0;
+    if (
+        ($step =~ /^(x?)(?:log|lin)([1-9]+\d*)$/i && ($1 || $2 != 1)) ||
+        ($step =~ /^[-+]?\d+(?:\.\d*)?$/ && $step != 0)
+    ) {
+        $return = 1;
+    } 
+    return $return;
+}
+
+sub expand_dependency {                                                          # If the item is a reserved constant, precede
+    my $dep = shift;                                                             #   the name with a '::' to explicitly reference
+    if (exists $reserved->{$dep} && exists $reserved->{$dep}->{constant}) {      #   the main package (this prevents a clash with
+        $dep = "(::$dep)";                                                       #   perl's 'm' operator). (add parens to avoid
+                                                                                 #   ambiguity associated with constants following
+                                                                                 #   a minus sign)
+    } elsif ($dep =~ /^[A-Za-z_]+/ && not exists $reserved->{$dep}) {            # If the item is a valid name (contains only 'A-Z',
+       $dep = package_variable($dep);
+       $dep = "\$".$dep ;                                                        #   'a-z', or '_') and is not a reserved name,`
+    }                                                                            #   prepend a '$'.
+    if ($dep eq "^") { $dep = "**" }                                             # Substitute my function and operator notation for
+    elsif ($dep eq "ln") { $dep = "log" }                                        #   Perl's
+    elsif ($dep eq "log") { $dep = "log10" }
+    return $dep;
+}
+
+sub remove_package_name {
+    my $name = shift;
+    $name =~ s/^[@%]?$::worm_package\:\://;
+    return $name;
+}
+
+sub package_variable {
+    my $name = shift;
+    return $name =~ m/^([@%])(.*)/ ? $1.$::worm_package.'::'.$2 : $::worm_package.'::'.$name;
+}
+
+sub err_nested_perl_tag {
+    die ".\n.   ERROR (line ", shift, "): perl code blocks can not be nested.\n.\n";
+}
+
+sub err_unmatched_perl_tag {
+    die ".\n.   ERROR (line ", shift, "): unmatched closing perl tag.\n.\n";
+}
+
+sub err_unexpected_condition {
+    die ".\n.   ERROR (line ", shift, "): this should not happen.\n.\n";
+}
+
+sub err_unknown_option {
+    die ".\n.   Valid options are:\n.   (not yet implemented)\n.\n";
+}
+
+sub err_redefined_var {
+    my ($name, $line) = @_;
+    die ".\n.   ERROR (line $line): attempt to redefine '$name' which was previously defined on line $location{$name}.\n.\n";
+}
+
+sub err_reserved_name {
+    my ($name, $line) = @_;
+    die ".\n.   ERROR (line $line): '$name' is a reserved name.\n.\n";
+}
+
+sub err_invalid_shorthand {
+    my ($list_spec, $line) = @_;
+    die ".\n.   ERROR (line $line): '$list_spec' is not valid list shorthand.\n.\n";
+}
+
