@@ -1,0 +1,26 @@
+unf.log                                 name of printer file
+unf.flu                                 new fluence file with new uncert.
+19
+1.655                                      right boundary of energy interval 2
+1.91                                      right boundary of energy interval 3
+2.165                                      right boundary of energy interval 4
+2.42                                      right boundary of energy interval 5
+2.675                                      right boundary of energy interval 6
+2.93                                      right boundary of energy interval 7
+3.185                                      right boundary of energy interval 8
+3.44                                      right boundary of energy interval 9
+3.695                                      right boundary of energy interval 10
+3.95                                      right boundary of energy interval 11
+4.205                                      right boundary of energy interval 12
+4.46                                      right boundary of energy interval 13
+4.715                                      right boundary of energy interval 14
+4.97                                      right boundary of energy interval 15
+5.225                                      right boundary of energy interval 16
+5.48                                      right boundary of energy interval 17
+5.735                                      right boundary of energy interval 18
+5.99                                      right boundary of energy interval 19
+6.245                                      right boundary of energy interval 20
+unf.gru                                 name of the file for group integrals
+0                                       1 additional file for integrating
+1.0                                     CHI**2=1.0 used as model
+ 
