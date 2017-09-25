@@ -41,13 +41,13 @@ Simulated/Activation/33MeVTa/BeamOnly/NormFoils/ADVANTG/*
 
 ## MCNP
 *runt*
+meshtal
 *.silo
 *.json
-meshtal
-wwinp
 inp
 inpn.sav
 outmc
 outp
+wwinp
 oved
 inpcrash
