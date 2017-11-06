@@ -1,0 +1,303 @@
+To use the WORM type:
+
+   worm [OPTION...] MODEL...
+
+OPTIONS
+=======
+    The following options are supported:
+
+    -h   help.  Display brief help information (currently, don't
+         expect much, if any thing).
+
+    -H   Do not display the help information.  This overrides the
+         -h option. (default)
+
+    -k   short keyfile name.  Use the short key name format.
+
+    -K   long keyfile name.  Use the long key name format. (default)
+
+    -n   short input-deck name.  Use the short input-deck name format.
+
+    -N   long input-deck name.  Use the long input-deck name format. (default)
+
+    -w   keep ".worm".  Do not delete the temporary file ".worm".  This is
+         useful for debugging your model, sometimes.
+
+    -W   delete ".worm".  Delete the temporary file ".worm". (default)
+
+    -x   no keyfile.  Do not create a keyfile.
+
+    -X   keyfile.  Create a keyfile. (default)
+
+    -d CHARACTER(S)
+         delimiter.  Use the supplied character(s) as a delimiter in the
+         input-deck filenames. (default="_")
+
+    -j [left, center, right]
+         justification.  The justification to use when none is specified.
+         (default="left")
+
+    -p NUMBER
+         precision.  The precision (# of significant figures) to use when
+         none are specified.  (default="5")
+
+    -r NUMBER
+         reminder probability.  The percentage of time the WORM will nag you
+         to send email to wormkeeper.lanl.gov. (default="5")
+
+    -s CHARACTER(S)
+         input-deck suffix.  The character(s) to use as a suffix on the 
+         input-decks that the WORM creates. (default="in")
+
+    -S CHARACTER(S)
+         keyfile suffix.  The character(s) to use as a suffix on the 
+         keyfile. (default="key")
+
+    -t NUMBER
+         list endpoint tolerance...
+
+MODEL
+=====
+  General Specification
+     The model is a text file template containing embedded worm code.  This
+  defines what your input decks will look like.  The worm code is enclosed
+  angle brackets ("less than" and "greater than" symbols) and has the
+  following form:
+
+      < name = change | options >   -or-   < name = change \ options >
+
+      name - (optional) may contain any alphanumeric character or the
+             underscore, "_", character; however names must begin with a
+             letter or the underscore.
+         = - (required if a name is specified, otherwise optional)
+    change - (required) a comma separated list of changes.  changes can be
+             constants (numbers), variables (names), expressions (equations
+             of constants, variables, operators, and functions), shorthand
+             lists, or any combination of these.
+   options - (optional) options and format specification (see below for
+             information).
+
+  There can be multiple changes per line and numbers can be expressed in
+  either standard or scientific notation (e.g., 0.025, 2.5e-2, 1000000,
+  1e6).  Additionally, whitespace within worm code is ignored.
+
+  Lines that have a pound sign (#) in the first column will not be echoed
+  in the input-deck(s) that are created.
+
+
+  Built-in Constants
+  ==================
+           pi = 3.14159...  (defined as atan(1)*4)
+            e = 2.71828...  (defined as exp(1))
+           an = 0.60221367
+           aN = 6.0221367e23
+          bit = 0.0001  (a small number, as in a little bit)
+
+    Unit conversion factors (e.g., 2*in -> 5.08, 1*kg -> 1000)
+    ----------------------------------------------------------
+           cm = 1                           g = 1
+           mm = 0.1                        kg = 1000
+            m = 100                        lb = 453.59237
+           in = 2.54                       oz = 28.349523125   
+           ft = 30.48                       
+           yd = 91.44                     rad = 1
+          mil = 0.00254                   deg = 0.0017453... (pi/180)
+                                                
+           cc = 1                         sec = 1
+            l = 1000                      min = 60
+           ml = 1                          hr = 3600
+          gal = 3785.411784               day = 86400
+         ozfl = 29.5735295625              yr = 31556925.9747
+
+    The following aren't strictly constants (since their 
+    values change) but are handy predefined variables:
+    -----------------------------------------------------
+  dateANDtime = the current date and time     (e.g., Wed May 26 16:20:41 1999)
+         time = the current time              (e.g., 16:20:41)
+         date = the current date              (e.g., 26-May-1999)
+         wday = the current day of the week
+        month = the current month
+         mday = the current day of the month
+         hour = the hour component of the current time
+       minute = the minute component of the current time
+       second = the second component of the current time
+         year = the current year
+  
+
+  Operators
+  =========
+  +  addition
+  -  subtraction
+  *  multiplication
+  /  division
+  ^  exponentiation
+  %  modulus (the remainder after division, for example 7%5=2)
+  .  concatenation
+  
+
+  Functions
+  =========
+   cos(),  sin(),  tan()  - argument in radians
+  acos(), asin(), atan()  - answer in radians
+  cosh(), sinh(), tanh()  - hyperbolic functions
+             log(), ln()  - logarithm base 10 & base e
+                   abs()  - absolute value
+                   int()  - the integer portion of a number
+                  rand()  - random number between 0 and the supplied argument
+                      ()  - parentheses can be used to group things
+
+
+  List Shorthand
+  ==============
+      x:y:z  - x to y in increments of z (1:4:0.5 = 1, 1.5, 2, 2.5, 3, 3.5, 4)
+   x:y:linz  - z linearly interpolated points between x and y, inclusive
+               (1:2:lin4 = 1, 1.333333, 1.666667, 2).
+   x:y:logz  - z logarithmically interpolated points between x and y,
+               inclusive (1:10000:log5 = 1, 10, 100, 1000, 10000)
+
+
+  Options
+  =======
+
+    Miscellaneous
+    -------------
+    i  - force integer (1.0001 = 1, 1.5 = 1)
+    n  - include value in filename (all multiple entry changes are included
+         in filename by default)
+
+    Format Specification
+    --------------------
+       N.M  - a numeric field with N digits before the decimal point and
+              M digits after 
+         N  - a numeric integer field with N digits
+         f  - full precision (~16 significant figures)
+        Ns  - a numeric field expressed in scientific notation with N 
+              significant figures
+        N#  - an integer numeric field N characters long
+        Nl  - a left justified text field N characters long
+        Nc  - a centered text field N characters long
+        Nr  - a right justified text field  N characters long
+  
+        NOTE:  N and M are integers > 0
+
+
+  Arrays
+  ======
+  Names preceded by "@" are considered arrays.
+
+  <@radius=2,5,7,1,0.5>
+  
+    radius[1] = 2
+    radius[5] = 0.5
+
+  Consider the following purely hypothetical example:
+  
+   Assume we had a collection of 5 hemishells of masses and 
+   thicknesses specified in the tables below:
+  
+     Mass (g)       Thickness (cm)
+     --------       --------------
+       3000              1.75
+       2050              3.50
+       4750              1.00
+       1500              0.55
+       5400              2.25
+  
+  The following arrays would specify this collection:
+  
+        <@mass= 3000 , 2050 , 4750 , 1500 , 5400 >
+   <@thickness= 1.75 , 3.50 , 1.00 , 0.55 , 2.25 >
+    
+  You could use an index variable such as the following:
+
+   <hemi=1:5:1>
+
+  to specify the hemishells individually, for example:
+
+   <mass[hemi]> <thickness[hemi]>
+
+  When hemi = 1, you would get:
+
+    3000 1.75
+
+  and if hemi = 5:
+
+    5400 2.25
+
+
+  Subroutines
+  ===========
+  You can define your own fucntions/operators by using standard perl
+  subroutines.  In your WORM code, subroutine names are prefaced by
+  an ampersand ("&").  Consider the following example where it is desired
+  that a value of "10" be used for all values less than "10".
+
+    <number=0:20:5>
+    <value=&TEST(number)>
+
+    <perl>
+    sub TEST
+    {
+    if ($_[0] < 10) {
+       return 10 ;
+    } else {
+       return $_[0] ;
+    }
+    }
+    </perl>
+
+  This would create the following 5 input-decks:
+
+    ::::::::::::::
+    q_0_in
+    ::::::::::::::
+    0
+    10
+
+    ::::::::::::::
+    q_10_in
+    ::::::::::::::
+    10
+    10
+
+    ::::::::::::::
+    q_15_in
+    ::::::::::::::
+    15
+    15
+
+    ::::::::::::::
+    q_20_in
+    ::::::::::::::
+    20
+    20
+
+    ::::::::::::::
+    q_5_in
+    ::::::::::::::
+    5
+    10
+
+  Note that your subroutine definitions must start with "<perl>" on
+  a line by itself.  Similarly, it must end with "</perl>" on a line
+  by itself.
+
+  Subroutines that are called with multiple arguments need to have them
+  separated with semicolons ";" instead of commas.  For example:
+
+    <number=0:20:5>
+    <value=&TEST(number;10)>
+
+    <perl>
+    sub TEST
+    {
+    if ($_[0] < $_[1]) {
+       return $_[1] ;
+    } else {
+       return $_[0] ;
+    }
+    }
+    </perl>
+
+  This suroutine results in the same input decks as the previous example,
+  but in this case the test value could be a variable.
