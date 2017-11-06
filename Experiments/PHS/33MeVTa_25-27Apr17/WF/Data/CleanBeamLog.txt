@@ -1,0 +1,92 @@
+starting file at time t = 1493205493 seconds
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.0.root
+saving trees at time t =  1493205599 seconds
+starting file at time t = 1493205610 seconds
+system was dead for 10467ms
+total dead time is now 10467ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.1.root
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.1.root
+saving trees at time t =  1493205713 seconds
+starting file at time t = 1493205717 seconds
+system was dead for 4037ms
+total dead time is now 14504ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.2.root
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.2.root
+saving trees at time t =  1493205818 seconds
+starting file at time t = 1493205829 seconds
+system was dead for 11133ms
+total dead time is now 25637ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.3.root
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.3.root
+saving trees at time t =  1493205932 seconds
+starting file at time t = 1493205946 seconds
+system was dead for 13579ms
+total dead time is now 39216ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.4.root
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.4.root
+saving trees at time t =  1493206047 seconds
+starting file at time t = 1493206056 seconds
+system was dead for 9174ms
+total dead time is now 48390ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.5.root
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.5.root
+saving trees at time t =  1493206159 seconds
+starting file at time t = 1493206169 seconds
+system was dead for 10266ms
+total dead time is now 58656ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.6.root
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.6.root
+saving trees at time t =  1493206272 seconds
+starting file at time t = 1493206284 seconds
+system was dead for 11156ms
+total dead time is now 69812ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.7.root
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.7.root
+saving trees at time t =  1493206384 seconds
+starting file at time t = 1493206391 seconds
+system was dead for 7393ms
+total dead time is now 77205ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.8.root
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.8.root
+saving trees at time t =  1493206491 seconds
+starting file at time t = 1493206496 seconds
+system was dead for 5354ms
+total dead time is now 82559ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.9.root
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.9.root
+saving trees at time t =  1493206598 seconds
+starting file at time t = 1493206605 seconds
+system was dead for 7286ms
+total dead time is now 89845ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.10.root
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.10.root
+saving trees at time t =  1493206708 seconds
+starting file at time t = 1493206715 seconds
+system was dead for 7497ms
+total dead time is now 97342ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.11.root
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.11.root
+saving trees at time t =  1493206817 seconds
+starting file at time t = 1493206823 seconds
+system was dead for 6795ms
+total dead time is now 104137ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.12.root
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.12.root
+saving trees at time t =  1493206925 seconds
+starting file at time t = 1493206932 seconds
+system was dead for 6590ms
+total dead time is now 110727ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.13.root
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.13.root
+saving trees at time t =  1493207032 seconds
+starting file at time t = 1493207036 seconds
+system was dead for 3995ms
+total dead time is now 114722ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.14.root
+stopping /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.14.root
+saving trees at time t =  1493207136 seconds
+starting file at time t = 1493207140 seconds
+system was dead for 4194ms
+total dead time is now 118916ms
+now writing /home/jb_admin/data/33MeVTa_25-27Apr/Data/CleanBeam_001.15.root
+saving trees at time t =  1493207236 seconds
