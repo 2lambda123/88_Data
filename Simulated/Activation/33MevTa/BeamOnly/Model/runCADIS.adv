@@ -19,11 +19,11 @@ denovo_quad_num_polar     4
 denovo_x_blocks    16
 denovo_y_blocks    10
 
-mesh_x                    -200   300   500   850  1000
-mesh_x_ints                   10    20    70    6  
+mesh_x                    -200   300   500  540  542  543  545  850  1000
+mesh_x_ints                   10    20     8    2   10    2   71    6  
 
-mesh_y                    -170   -10   40   290  
-mesh_y_ints                   16     20   25      
+mesh_y                    -170   -10  -5   5  40   290  
+mesh_y_ints                   16     2   10  14  25      
 
-mesh_z                    -225  -15   15   225 
-mesh_z_ints                   21   12   21  
+mesh_z                    -225  -15  -2.5  2.5  15   225 
+mesh_z_ints                   21   5      5    5   21  
