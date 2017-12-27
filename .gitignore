@@ -7,6 +7,7 @@
 ##Large Data Structures
 *.root
 *ls*.dat
+*IRDFFv105*
 
 ##Root Junk
 *cpp.d
