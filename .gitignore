@@ -6,7 +6,7 @@
 
 ##Large Data Structures
 *.root
-*.dat
+*ls*.dat
 
 ##Root Junk
 *cpp.d
