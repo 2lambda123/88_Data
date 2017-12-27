@@ -7,7 +7,7 @@
 ##Large Data Structures
 *.root
 *ls*.dat
-*.xsd
+Simulated/Activation/33MeVTa/BeamOnly/Model/IRDFFv105
 
 ##Root Junk
 *cpp.d
