@@ -7,7 +7,7 @@
 ##Large Data Structures
 *.root
 *ls*.dat
-Simulated/Activation/33MeVTa/BeamOnly/Model/IRDFFv105
+*IRDFFv105
 
 ##Root Junk
 *cpp.d
@@ -23,7 +23,6 @@ Experiments/Activation/oldExamples
 /Simulated/PHS/exUMG/*
 Simulated/PHS/33MeVTa/BeamOnly/Model/ADVANTG/*
 Simulated/PHS/33MeVTa/ETA/Model/ADVANTG/*
-Simulated/Activation/33MeVTa/BeamOnly/Model/ADVANTG/*
 Simulated/Activation/33MeVTa/ETA/Model/ADVANTG/*
 Simulated/Activation/33MeVTa/BeamOnly/NormFoils/ADVANTG/*
 
