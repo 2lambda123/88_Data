@@ -24,7 +24,7 @@ Experiments/Activation/oldExamples
 Simulated/PHS/33MeVTa/BeamOnly/Model/ADVANTG/*
 Simulated/PHS/33MeVTa/ETA/Model/ADVANTG/*
 Simulated/Activation/33MeVTa/ETA/Model/ADVANTG/*
-Simulated/Activation/33MeVTa/BeamOnly/NormFoils/ADVANTG/*
+Simulated/Activation/33MeVTa/BeamOnly/CorrFactorFoils/ADVANTG/*
 
 ## Executables
 *.exe
