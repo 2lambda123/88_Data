@@ -138,7 +138,7 @@ NPS 1E9
 PHYS:n 100 0 0 J J J 0 -1 J J J 0 0 
 MPHYS ON
 LCA 8J 1 1
-RAND GEN=2 STRIDE=15
+RAND GEN=2
 c PRINT
 c VOID
 c ****************************************************************************

@@ -2,11 +2,11 @@ Vault Neutron Beamline w/ 33MeV Deuterons on Ta w/ Activation Foils - Full ETA
 c ****************************************************************************
 c  Cell Cards  
 c ****************************************************************************
-1 1 -2.35     -1 2 3 22             IMP:n=1 ELPT:n       $ Vault Wall
-2 8 -0.001205 -2 10 12 14 16 20     IMP:n=1 ELPT:n       $ Left Tunnel
-3 2 -1.6      -3 20                 IMP:n=1 ELPT:n       $ Right Tunnel (sand)
-4 8 -0.001205 -4 20 41              IMP:n=1 ELPT:n       $ Cave 0-1
-5 8 -0.001205 -5                    IMP:n=1 ELPT:n       $ Cave 0-1
+1 1 -2.35     -1 2 3 22             IMP:n=1              $ Vault Wall
+2 8 -0.001205 -2 10 12 14 16 20     IMP:n=1              $ Left Tunnel
+3 2 -1.6      -3 20                 IMP:n=1              $ Right Tunnel (sand)
+4 8 -0.001205 -4 20 41              IMP:n=1              $ Cave 0-1
+5 8 -0.001205 -5                    IMP:n=1              $ Cave 0-1
 7 8 -0.001205 (-7 64                                     $ Inc Cave 0-2
               503 505 506                                $ Exc ETA
               700 710 712 714 715 716 717 720 721):      $ Exc Mount
@@ -14,99 +14,99 @@ c ****************************************************************************
               (7 33 -34 -24 26 42 -43):(7 34 -35 -24 27 42 -43): 
               (7 35 -37 -24 28 42 -43):(7 37 -38 -24 25 42 -43) 
                                                          $ Inc Curved space
-                                    IMP:n=1 ELPT:n       $ Cave 0-2
-8 8 -0.001205 -8 20 70 #71 #72      IMP:n=1 ELPT:n       $ Vault
-9 0           -21                   IMP:n=1 ELPT:n       $ Inside beam pipe
-10 3 -7.874   -10 11                IMP:n=1 ELPT:n       $ Quad Yoke 1
-11 3 -7.874   -12 13                IMP:n=1 ELPT:n       $ Quad Yoke 2
-12 5 -3.116   -14 15                IMP:n=1 ELPT:n       $ Quad Magnet 1
-13 5 -3.116   -16 17                IMP:n=1 ELPT:n       $ Quad Magnet 2
-15 0          -15 20                IMP:n=1 ELPT:n       $ Inside Quad 1
-16 0          -17 20                IMP:n=1 ELPT:n       $ Inside Quad 2
-20 4 -2.7     -20 21                IMP:n=1 ELPT:n 1E-5  $ Beam pipe
-22 8 -0.001205 -22 20               IMP:n=1 ELPT:n       $ Front of sand bags
-30 1 -2.35    -30 1 4 5 60 62 64    IMP:n=1 ELPT:n       $ Cave Walls/Floor
+                                    IMP:n=1              $ Cave 0-2
+8 8 -0.001205 -8 20 70 #71 #72      IMP:n=1              $ Vault
+9 0           -21                   IMP:n=1              $ Inside beam pipe
+10 3 -7.874   -10 11                IMP:n=1              $ Quad Yoke 1
+11 3 -7.874   -12 13                IMP:n=1              $ Quad Yoke 2
+12 5 -3.116   -14 15                IMP:n=1              $ Quad Magnet 1
+13 5 -3.116   -16 17                IMP:n=1              $ Quad Magnet 2
+15 0          -15 20                IMP:n=1              $ Inside Quad 1
+16 0          -17 20                IMP:n=1              $ Inside Quad 2
+20 4 -2.7     -20 21                IMP:n=1              $ Beam pipe
+22 8 -0.001205 -22 20               IMP:n=1              $ Front of sand bags
+30 1 -2.35    -30 1 4 5 60 62 64    IMP:n=1              $ Cave Walls/Floor
 31 1 -2.35    (-31 7 32 -33 23):(-31 7 33 -34 23 -26):
               (-31 7 34 -35 25 -27):(-31 7 35 -37 25 -28):
               (-31 7 37 -25):(-31 7 35 -37 -25 29):
               (-31 7 34 -35 -25 29):(-31 7 36 -34 -25 29):
               (-31 7 25) #7
-                                    IMP:n=1 ELPT:n       $ Cave 02 Walls/Floor
-40 4 -2.7     -41 40 20             IMP:n=1 ELPT:n 1E-6  $ Beam Box
-41 8 -0.001205 -40 20               IMP:n=1 ELPT:n 1E-6  $ Inside Collimator
+                                    IMP:n=1              $ Cave 02 Walls/Floor
+40 4 -2.7     -41 40 20             IMP:n=1              $ Beam Box
+41 8 -0.001205 -40 20               IMP:n=1              $ Inside Collimator
 60 3 -7.874   (-60 61):(-62 63 66):(-64 65):(-66 67)     $ Cave 0-1/0-2 Wall
-                                    IMP:n=1 ELPT:n       $ Cave 0-1/0-2 Wall
-61 9 -11.34  (-61):(-63 66):(-65)   IMP:n=1 ELPT:n       $ Cave 0-1/0-2 Wall
-66 8 -0.001205 -67                  IMP:n=1 ELPT:n       $ Cave 0-1/0-2 Hole
+                                    IMP:n=1              $ Cave 0-1/0-2 Wall
+61 9 -11.34  (-61):(-63 66):(-65)   IMP:n=1              $ Cave 0-1/0-2 Wall
+66 8 -0.001205 -67                  IMP:n=1              $ Cave 0-1/0-2 Hole
 c Target
-70 10 -16.4  -70                    IMP:n=1 ELPT:n       $ Ta target
-71 4  -2.7   -71 72 70              IMP:n=1 ELPT:n       $ Aluminum Holder
-72 6  -8.96  -73 74 -75 76          IMP:n=1 ELPT:n       $ Copper backing
+70 10 -16.4  -70                    IMP:n=1              $ Ta target
+71 4  -2.7   -71 72 70              IMP:n=1              $ Aluminum Holder
+72 6  -8.96  -73 74 -75 76          IMP:n=1              $ Copper backing
 c ETA
 501 501  -2.65000e+00  502 -503 #520 #521 
-                       vol=457.93   IMP:n=1 ELPT:n       $ Front Cone
+                       vol=457.93   IMP:n=1              $ Front Cone
 502 501  -2.65000e+00  504 -505 #522 #523 #525 #527 #529 #531 
-                       vol=1124.75  IMP:n=1 ELPT:n       $ Main Body
-503 501  -2.65000e+00  -506         IMP:n=1 ELPT:n       $ Back cover
-504 503  -6.51100e+00  -508         IMP:n=1 ELPT:n       $Zr foil
-505 504  -8.90800e+00  -509         IMP:n=1 ELPT:n       $Ni foil
-506 505  -7.31000e+00  -510         IMP:n=1 ELPT:n       $In foil
-508 508  -1.93000e+01  -512         IMP:n=1 ELPT:n       $Au foil
-510 509  -1.87248e+01  -514         IMP:n=1 ELPT:n       $HEU foil
-512 502  -2.71000e+00  -516 #510    IMP:n=1 ELPT:n       $TOAD
-513 506  -2.70000e+00  -517         IMP:n=1 ELPT:n       $Al foil
+                       vol=1124.75  IMP:n=1              $ Main Body
+503 501  -2.65000e+00  -506         IMP:n=1              $ Back cover
+504 503  -6.51100e+00  -508         IMP:n=1              $Zr foil
+505 504  -8.90800e+00  -509         IMP:n=1              $Ni foil
+506 505  -7.31000e+00  -510         IMP:n=1              $In foil
+508 508  -1.93000e+01  -512         IMP:n=1              $Au foil
+510 509  -1.87248e+01  -514         IMP:n=1              $HEU foil
+512 502  -2.71000e+00  -516 #510    IMP:n=1              $TOAD
+513 506  -2.70000e+00  -517         IMP:n=1              $Al foil
 515 8    -0.001205     -519 #504 #505 
                        #506 #508 #510 #512 #513   
-                                    IMP:n=1 ELPT:n       $Foil Slot
+                                    IMP:n=1              $Foil Slot
 516 510  -1.11800e+01  519 620 -520 627 -628 622 -623
-                                    IMP:n=1 ELPT:n       $Drawer Filler
+                                    IMP:n=1              $Drawer Filler
 517 501  -2.65000e+00 (519 620 -504 624 -625 626 -629 #516):
                       (-621 519 -620 #516)   
-                                    IMP:n=1 ELPT:n       $Drawer
+                                    IMP:n=1              $Drawer
 518 511  -2.28000e+00 (522 -523 #516 #517)  
-                       vol=62.51    IMP:n=1 ELPT:n       $vert - Si_1
+                       vol=62.51    IMP:n=1              $vert - Si_1
 519 511  -2.28000e+00 (524 -525)
-                                    IMP:n=1 ELPT:n       $vert - Si_2
-520 512  -1.88700e+01  -526         IMP:n=1 ELPT:n       $W layer
-521 514  -9.80000e+00  -527         IMP:n=1 ELPT:n       $Bi_1 layer
-522 514  -9.80000e+00  -528         IMP:n=1 ELPT:n       $Bi_2 layer
+                                    IMP:n=1              $vert - Si_2
+520 512  -1.88700e+01  -526         IMP:n=1              $W layer
+521 514  -9.80000e+00  -527         IMP:n=1              $Bi_1 layer
+522 514  -9.80000e+00  -528         IMP:n=1              $Bi_2 layer
 523 514  -9.80000e+00  -529 530 519 #516 #517 #518
-                         vol=351.2  IMP:n=1 ELPT:n       $Bi_3A
+                         vol=351.2  IMP:n=1              $Bi_3A
 524 514  -9.78000e+00  -531 519 #516 #517 #518
-                         vol=164.8  IMP:n=1 ELPT:n      $Bi_3B
+                         vol=164.8  IMP:n=1              $Bi_3B
 525 514  -9.80000e+00  -532 533 #519 
-                         vol=252.01 IMP:n=1 ELPT:n       $Bi_4A
+                         vol=252.01 IMP:n=1              $Bi_4A
 526 514  -9.80000e+00  -534 #519    
-                         vol=161.81 IMP:n=1 ELPT:n       $Bi_4B
+                         vol=161.81 IMP:n=1              $Bi_4B
 527 513  -6.40000e+00  -535 536 #519
-                         vol=188.31 IMP:n=1 ELPT:n       $PrA
+                         vol=188.31 IMP:n=1              $PrA
 528 513  -6.40000e+00  -537 #519    
-                         vol=120.17 IMP:n=1 ELPT:n       $PrB
+                         vol=120.17 IMP:n=1              $PrB
 529 516  -1.38000e+00  -538 539 #519 #527
-                                    IMP:n=1 ELPT:n      $Mylar Wrapper
+                                    IMP:n=1             $Mylar Wrapper
 530 516  -1.38000e+00  -540 #519 #528 
-                         vol=950.72 IMP:n=1 ELPT:n       $Mylar Wrapper
+                         vol=950.72 IMP:n=1              $Mylar Wrapper
 531 515  -2.49000e+00  -541 542 #519
-                         vol=1489.89 IMP:n=1 ELPT:n      $B4CA
+                         vol=1489.89 IMP:n=1             $B4CA
 532 515  -2.49000e+00  -543 #519 
-                         vol=950.72 IMP:n=1 ELPT:n       $B4CB
+                         vol=950.72 IMP:n=1              $B4CB
 533 8    -0.001205     (-502 526 527):(-504 528 519 #516 #517 #518 #519 #523
                        #524 #525 #526 #527 #528 #529 #530 #531 #532)   
-                                    IMP:n=1 ELPT:n       $ETA fill
+                                    IMP:n=1              $ETA fill
 c ETA Support Structure
 700 4  -2.7      -700 701 702 703 704   
-                                    IMP:n=1 ELPT:n       $Table Frame
-701 8  -1.205E-3 -701:-702:-703     IMP:n=1 ELPT:n       $Air in Frame
-702 15 -0.65     -704               IMP:n=1 ELPT:n       $Wood Table Top
-710 4  -2.7      -710 711           IMP:n=1 ELPT:n       $Al Support #1
-711 8  -1.205E-3 -711               IMP:n=1 ELPT:n       $Air in Al Support #1
-712 4  -2.7      -712 713           IMP:n=1 ELPT:n       $Al Support #1
-713 8  -1.205E-3 -713               IMP:n=1 ELPT:n       $Air in Al Support #1
-714 15 -0.65     -714 716 717       IMP:n=1 ELPT:n       $Wood Block #1
-715 15 -0.65     -715 716 717       IMP:n=1 ELPT:n       $Wood Block #2
-716 8  -1.205E-3 -716:-717          IMP:n=1 ELPT:n       $Air in Al Support #1
-720 15 -0.65     -720               IMP:n=1 ELPT:n       $Mount Stabalizer
-721 15 -0.65     -721 722 505       IMP:n=1 ELPT:n       $Mount 
+                                    IMP:n=1              $Table Frame
+701 8  -1.205E-3 -701:-702:-703     IMP:n=1              $Air in Frame
+702 15 -0.65     -704               IMP:n=1              $Wood Table Top
+710 4  -2.7      -710 711           IMP:n=1              $Al Support #1
+711 8  -1.205E-3 -711               IMP:n=1              $Air in Al Support #1
+712 4  -2.7      -712 713           IMP:n=1              $Al Support #1
+713 8  -1.205E-3 -713               IMP:n=1              $Air in Al Support #1
+714 15 -0.65     -714 716 717       IMP:n=1              $Wood Block #1
+715 15 -0.65     -715 716 717       IMP:n=1              $Wood Block #2
+716 8  -1.205E-3 -716:-717          IMP:n=1              $Air in Al Support #1
+720 15 -0.65     -720               IMP:n=1              $Mount Stabalizer
+721 15 -0.65     -721 722 505       IMP:n=1              $Mount 
 c
 999 0         (30 31 8):(-31 -23 32 -36):(-31 -29 36 -37)
                                     IMP:n=0              $Cold, Cruel World
@@ -277,7 +277,7 @@ c
 716  WED 528.8 -0.3 -25.2  0  5.0 0  0 0 4.3  19.6 0 0  $ Wood Block Cutout #1
 717  WED 528.8 -0.3 -25.2  0 -5.0 0  0 0 4.3  19.6 0 0  $ Wood Block Cutout #2
 c
-720  RPP 532.6 544.0  -5.1  3.6   -16.7 -14.0  $ Mount Stabalizer
+720  RPP 532.6 544.0  -5.1  3.6   -16.7 -14.001 $ Mount Stabalizer
 721  RPP 544.0 547.6  -19.0 19.0  -16.7 -2.9   $ Mount 
 722  RCC 544.0 0 3.0  3.6 0 0  17              $ Mount Cutout
 
@@ -285,12 +285,12 @@ c ****************************************************************************
 c  Data Cards  
 c ****************************************************************************
 MODE n
-NPS 1E9
-PHYS:n 100 0 0 J J J 0 -1 J J J 0 0 
+NPS 2E8
+PHYS:n 60 0 0 J J J 0 -1 J J J 0 0 
 MPHYS ON
 LCA 8J 1 1
-RAND GEN=2 STRIDE=15
-c PRINT
+RAND GEN=2
+PRINT
 c VOID
 c ****************************************************************************
 c  Materials  
@@ -511,8 +511,8 @@ c  Source
 c ****************************************************************************
 c Source is a surface source placed at end of beam pipe
 SDEF POS=370.0 0 0  VEC=1 0 0  DIR=1 AXS=1 0 0 EXT=0 RAD=D1 ERG=D2
-SI1 0 4.445
-SP1 0 1
+SI1 0 0.01 4.445
+SP1 0 0 1
 c Source is from unfold of the foil activation beam spectrum measurement
 SI2 H 0         1.0000e-09 1.0000e-08 2.3000e-08 5.0000e-08 7.6000e-08
      1.1500e-07 1.7000e-07 2.5500e-07 3.8000e-07 5.5000e-07 8.4000e-07
