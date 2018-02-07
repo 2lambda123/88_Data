@@ -1,13 +1,14 @@
 88" 33MeV Deuteron breakup on Ta, Clean Beam
-  140    6    1    0    1     <-- KG    KA    IPNT  IACT  KQT  (5I5)
+  140    7    1    0    1     <-- KG    KA    IPNT  IACT  KQT  (5I5)
 0.005  10.0  0.005  0.001     <-- ACVX  FCHN  FCVX  FS         (free format)
 1.0    0  0  7866.0  1.0      <-- AK1   NORML ILOG  TIME  ACNM (free fmt: R,I,I,R,R)
-AL27P    1.414E-20 0.020                       BFX
-AL27A    1.925E-20 0.010                       BFX
-NI582    3.677E-21 0.015                       BFX
-IN115N   8.670E-20 0.005                       BFX
-AU1972   3.093E-19 0.012                       BFX
-AU197G   8.478E-20 0.017            AUNG  3.70 BFX
+AL27P    1.459E-20 0.040                       BFX
+AL27A    1.755E-20 0.020                       BFX
+NI582    3.596E-21 0.023                       BFX
+IN115N   8.741E-20 0.015                       BFX
+AU1972   3.128E-19 0.019                       BFX
+AU197G   8.574E-20 0.022            AUNG  3.70 BFX
+IN115G   9.254E-20 0.018            INNG  40.2 BFX
 Flux Uncertainty From MCNP Calculations
  140                          <-- NGP  (I4) 
  1.0000e+00 2.5930e-01 1.8140e-01 1.0920e-01 1.7370e-01 1.1820e-01 1.5140e-01 
