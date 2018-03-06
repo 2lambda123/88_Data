@@ -8,6 +8,7 @@
 *.root
 *ls*.dat
 *IRDFFv105
+*mtal
 
 ##Root Junk
 *cpp.d
