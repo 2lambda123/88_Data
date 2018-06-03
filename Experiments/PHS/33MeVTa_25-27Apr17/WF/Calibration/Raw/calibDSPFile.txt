@@ -1,0 +1,30 @@
+# # makes line a comment
+# //# starts global deffinitions for the processing
+# the next line should begin with the number of samples for the baseline
+#   tracker, then the clipping value
+# /# starts deffinition of parameters for a new channel
+# next line should be a channel number
+# next line should be a psd method {0,1,2,3} for {tailToPeak,tailToTotal,deltaT,none}
+#    followed by the correct number of parameters on the same line
+# next line 0 / 1 should be the first character of the next line defining whether there
+#    are pile up rejection parameters
+# next line should be a time method {0,1,2} for {leadingEdge,constantFraction,none}
+#    followed by the correct number of parameters on the same line
+# the following example defines a full set of parameters for two channels
+//#
+16 0
+/#
+0
+0 -50 12 30 14 150
+1 7 15
+1 15 2 0.5
+/#
+2
+0 -50 12 30 14 150
+1 7 15
+1 15 2 0.5
+/#
+4
+0 -50 12 30 14 150
+1 7 15
+1 15 2 0.5
