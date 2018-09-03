@@ -7,7 +7,7 @@ AL27A    1.983E-20 0.017                       BFX
 NI582    3.740E-21 0.014                       BFX
 IN115N   8.790E-20 0.013                       BFX
 AU1972   2.814E-19 0.019                       BFX
-AU197G   7.770E-20 0.025            AUNG  3.70 BFX
+AU197G   5.114E-20 0.028            AUNG  3.70 BFX
 IN115G   9.318E-20 0.013            INNG  40.2 BFX
 Flux Uncertainty From MCNP Calculations
  140                          <-- NGP  (I4) 
