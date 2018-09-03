@@ -2,13 +2,13 @@
   140    7    1    0    1     <-- KG    KA    IPNT  IACT  KQT  (5I5)
 0.005  10.0  0.005  0.001     <-- ACVX  FCHN  FCVX  FS         (free format)
 1.0    0  0  7866.0  1.0      <-- AK1   NORML ILOG  TIME  ACNM (free fmt: R,I,I,R,R)
-AL27P    2.293E-20 0.061                       BFX
+AL27P    2.293E-20 0.030                       BFX
 AL27A    1.983E-20 0.017                       BFX
-NI582    3.740E-21 0.028                       BFX
+NI582    3.740E-21 0.014                       BFX
 IN115N   8.790E-20 0.013                       BFX
-AU1972   2.814E-19 0.038                       BFX
+AU1972   2.814E-19 0.019                       BFX
 AU197G   7.770E-20 0.025            AUNG  3.70 BFX
-IN115G   9.289E-20 0.042            INNG  40.2 BFX
+IN115G   9.318E-20 0.013            INNG  40.2 BFX
 Flux Uncertainty From MCNP Calculations
  140                          <-- NGP  (I4) 
  1.0000e+00 2.5930e-01 1.8140e-01 1.0920e-01 1.7370e-01 1.1820e-01 1.5140e-01 
